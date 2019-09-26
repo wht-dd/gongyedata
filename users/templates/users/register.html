@@ -1,0 +1,35 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<head>
+	<title>Login One</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{{STATIC_URL}}css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="{{STATIC_URL}}css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="{{STATIC_URL}}css/templatemo_style.css" rel="stylesheet" type="text/css">	
+</head>
+<body class="templatemo-bg-gray">
+	<div class="container">
+		<div class="col-md-12">
+			<h1 class="margin-bottom-15">新用户注册</h1>
+			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form" action="#" method="post">				
+		        <div class="form-group">
+		          <div class="col-xs-12">		            
+                <form method="post" action="{% url 'users:register' %}" class="form"> 
+                  {% csrf_token %} 
+                  {% bootstrap_form form %} 
+                  {% buttons %} 
+                      <button name="submit" class="btn btn-primary" style="margin-left:200px;">注册</button>
+                  {% endbuttons %} 
+                  <input type="hidden" name="next" value="{% url 'Industrial_Logs:index' %}" /> 
+               </form>     
+		          </div>              
+		        </div>
+		        <hr>
+		    </form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<head>
+	<title>Login One</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{{STATIC_URL}}css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="{{STATIC_URL}}css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="{{STATIC_URL}}css/templatemo_style.css" rel="stylesheet" type="text/css">	
+</head>
+<body class="templatemo-bg-gray">
+	<div class="container">
+		<div class="col-md-12">
+			<h1 class="margin-bottom-15">欢迎使用洛阳工业大数据平台</h1>
+			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form" action="#" method="post">				
+		        <div class="form-group">
+		          <div class="col-xs-12">		            
+						<form method="post" action="{% url 'users:login' %}" class="form">
+							{% csrf_token %}
+							{% bootstrap_form form %}
+							<button name="submit" class="btn btn-primary " style="margin-left:180px;">登录</button>
+							<input type="hidden" name="next" value="{% url 'Industrial_Logs:index' %}" />
+							
+						</form>
+		          </div>              
+		        </div>
+
+		        <hr>
+		      </form>
+		      <div class="text-center">
+		      	<a href="{% url 'users:register' %}" class="templatemo-create-new">注册新的账户<i class="fa fa-arrow-circle-o-right"></i></a>	
+		      </div>
+
+	</div>
+</body>
+</html>
