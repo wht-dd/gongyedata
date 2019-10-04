@@ -3,8 +3,8 @@
 import os
 import sys
 
-
 def main():
+    """主程序"""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Industrial_Platform.settings')
     try:
         from django.core.management import execute_from_command_line
