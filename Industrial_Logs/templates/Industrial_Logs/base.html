@@ -61,7 +61,7 @@
         </li>
 
         {% if user.is_authenticated %} 
-        <li class="nav-item"><a class="nav-link">Hello, {{ user.username }}.</a></li> 
+        <li class="nav-item"><a class="nav-link">您好, {{ user.username }}.</a></li> 
         <li class="nav-item"><a class="nav-link" href="{% url 'users:logout' %}">退出系统</a></li> 
         {% else %}
         <li class="nav-item"><a class="nav-link" href="{% url 'users:register' %}">注册</a></li> 
