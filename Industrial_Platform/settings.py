@@ -25,7 +25,7 @@ SECRET_KEY = ')$^o1pkz)u0xmm@2#r4!3t9rv^ti6w)9or!$)*-saweo@9j1-%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'Industrial_Platform.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'industrialdb',
-        'USER': 'root',
-        'PASSWORD': 'Mydb',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'NAME': 'django003',
+        'USER': 'user003',
+        'PASSWORD': '123456',
+        'HOST': '211.84.112.23',
+        'PORT': '8050',
     }
 }
 

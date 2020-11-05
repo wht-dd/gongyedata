@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            background-size: 100% 100%;
+            font-weight: bold;
+            font-family: 苹方;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #17213e, #000000, #006970, #007c5f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .main {
+            width: 1200px;
+            height: 768px;
+            position: relative;
+            margin: auto;
+        }
+        
+        h1 {
+            color: chocolate
+        }
+        
+        div {
+            border: 0px solid white;
+            margin: 1px;
+        }
+        
+        .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #00A09A;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 14px;
+            padding: 10px;
+            width: 120px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+        
+        .button span:after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -10px;
+            transition: 0.5s;
+        }
+        
+        .button:hover span {
+            padding-right: 25px;
+        }
+        
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+        
+        .layer {
+            position: relative;
+            width: 100%;
+        }
+        
+        #layer01 img {
+            text-align: center;
+            display: block;
+            height: 35px;
+            padding-top: 35px;
+            margin: auto;
+        }
+        
+        #layer02>div {
+            height: 100%;
+            float: left;
+            position: relative;
+        }
+        
+        .layer02-data {
+            position: absolute;
+            width: auto;
+            height: 100px;
+            color: white;
+            top: 45px;
+            left: 65px;
+        }
+        
+        .layer03-panel {
+            height: 100%;
+            position: relative;
+            float: left;
+        }
+        
+        .layer03-left-label {
+            position: absolute;
+        }
+        
+        #layer03_left_label01 {
+            top: 10px;
+            left: 10px;
+            color: white;
+            height: 20px;
+            width: 200px;
+            font-weight: bold;
+        }
+        
+        #layer03_left_label02 {
+            right: 10px;
+            top: 10px;
+            color: #036769;
+            height: 20px;
+            width: 200px;
+        }
+        
+        .layer03-left-chart {
+            position: relative;
+            float: left;
+            height: 100%;
+        }
+        
+        #layer03_right_label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            height: 20px;
+            width: 100px;
+        }
+        
+        .layer03-right-chart {
+            position: relative;
+            float: left;
+            height: 100%;
+            width: 32%;
+        }
+        
+        .layer03-right-chart-label {
+            color: white;
+            text-align: center;
+            position: absolute;
+            bottom: 60px;
+            width: 100%;
+        }
+        
+        .layer04-panel {
+            position: relative;
+            float: left;
+            height: 100%;
+            width: 48%;
+        }
+        
+        .layer04-panel-label {
+            width: 100%;
+            height: 15%;
+            color: white;
+            padding-top: 5px;
+        }
+        
+        .layer04-panel-chart {
+            width: 100%;
+            height: 85%;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../static/dist/js/echarts-4.2.1.min.js"></script>
+    <script src="../../../static/dist/js/monitor.js"></script>
+    <script src="../../../static/dist//js/jquery-1.10.2.js"></script>
+    <script src="../../../static/js/fullscreen.js"></script>
+    <script language="javascript">
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            drawLayer02Label($("#layer02_01 canvas").get(0), "接入终端数量", 80, 200);
+            drawLayer02Label($("#layer02_02 canvas").get(0), "当前温度数据", 80, 300);
+            drawLayer02Label($("#layer02_03 canvas").get(0), "当前湿度数据", 80, 400);
+            drawLayer02Label($("#layer02_04 canvas").get(0), "总存储数据", 50, 200);
+            drawLayer02Label($("#layer02_05 canvas").get(0), "当前任务个数", 40, 200);
+            drawLayer02Label($("#layer02_06 canvas").get(0), "当前集群数", 50, 200);
+
+            renderLegend();
+
+            //饼状图
+            renderChartBar01();
+            //renderChartBar02();
+
+            //存储
+            renderLayer03Right();
+
+            //30天日均线流量趋势
+            renderLayer04Left();
+
+            //集群性能
+            renderLayer04Right();
+        });
+    </script>
+    <title>工业大数据采集</title>
+</head>
+
+<body>
+    <button id='btn' class="button" style="vertical-align:middle"><span>全屏</span></button>
+    <button id='quite' class="button" style="vertical-align:middle"><span>退出全屏</span></button>
+    <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;position: relative;top: 8px;font-size: 43px;">洛阳工业大数据平台</h1>
+    <div id="content" class="main">
+
+        <div id="layer02" class="layer" style="height:15%;">
+            <div id="layer02_01" style="width:20%;">
+                <div class="layer02-data">
+                    <span style="font-size:26px;">{{ss}}</span>
+                    <span style="font-size:16px;">台</span>
+                </div>
+                <canvas width="200" height="100"></canvas>
+            </div>
+            <div id="layer02_02" style="width:20%;">
+                <div class="layer02-data">
+                    <span style="font-size:26px;">{{aa1}}</span>
+                    <span style="font-size:16px;">℃</span>
+                </div>
+                <canvas width="200" height="100"></canvas>
+            </div>
+            <div id="layer02_03" style="width:21%;">
+                <div class="layer02-data">
+                    <span style="font-size:26px;">{{aa2}}</span>
+                    <span style="font-size:16px;">%rh</span>
+                </div>
+                <canvas width="200" height="100"></canvas>
+            </div>
+            <div id="layer02_04" style="width:12%;">
+                <div class="layer02-data">
+                    <span style="font-size:24px;">50</span>
+                    <span style="font-size:16px;">PB</span>
+                </div>
+                <canvas width="120" height="100"></canvas>
+            </div>
+            <div id="layer02_05" style="width:12%;">
+                <div class="layer02-data">
+                    <span style="font-size:26px;">25</span>
+                    <span style="font-size:16px;">个</span>
+                </div>
+                <canvas width="120" height="100"></canvas>
+            </div>
+            <div id="layer02_06" style="width:12%;">
+                <div class="layer02-data">
+                    <span style="font-size:26px;">5</span>
+                    <span style="font-size:16px;">个</span>
+                </div>
+                <canvas width="120" height="100"></canvas>
+            </div>
+        </div>
+        <div id="layer03" class="layer" style="height:40%">
+            <div id="layer03_left" style="width:48%;left: -50px" class="layer03-panel">
+                <div id="layer03_left_label01" class="layer03-left-label">接入机型占比</div>
+
+                <div id="layer03_left_01" class="layer03-left-chart" style="width:16%;">
+                    <canvas width="100" height="200" style="margin:30px 0 0 20px;"></canvas>
+                </div>
+                <div id="layer03_left_02" class="layer03-left-chart" style="width:80%;"></div>
+
+            </div>
+            <div id="layer03_right" style="width:50%;right: -50px;" class="layer03-panel">
+                <div id="layer03_right_label">存储</div>
+                <div id="layer03_right_chart01" class="layer03-right-chart">
+                    <canvas width="130" height="150" style="margin:40px 0 0 20px;"></canvas>
+                    <div class="layer03-right-chart-label">Hdfs</div>
+                </div>
+                <div id="layer03_right_chart02" class="layer03-right-chart">
+                    <canvas width="130" height="150" style="margin:40px 0 0 20px;"></canvas>
+                    <div class="layer03-right-chart-label">Rdbms</div>
+                </div>
+                <div id="layer03_right_chart03" class="layer03-right-chart">
+                    <canvas width="130" height="150" style="margin:40px 0 0 20px;"></canvas>
+                    <div class="layer03-right-chart-label">Rdies</div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div id="layer04" class="layer" style="height:30%;left: -50px">
+            <div id="layer04_left" class="layer04-panel">
+                <div id="layer04_left_label" class="layer04-panel-label">30天日均线流量趋势</div>
+                <div id="layer04_left_chart" class="layer04-panel-chart"></div>
+            </div>
+            <div id="layer04_right" class="layer04-panel" style="right: -100px;">
+                <div id="layer04_right_label" class="layer04-panel-label">
+                    <span>集群性能/</span><span style="color:#00A09A;">近一个小时</span>
+                </div>
+                <div id="layer04_right_chart" class="layer04-panel-chart"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function fullScreen(el) {
+        var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen,
+            wscript;
+
+        if (typeof rfs != "undefined" && rfs) {
+            rfs.call(el);
+            return;
+        }
+
+        if (typeof window.ActiveXObject != "undefined") {
+            wscript = new ActiveXObject("WScript.Shell");
+            if (wscript) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    }
+
+    function exitFullScreen(el) {
+        var el = document,
+            cfs = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullScreen,
+            wscript;
+
+        if (typeof cfs != "undefined" && cfs) {
+            cfs.call(el);
+            return;
+        }
+
+        if (typeof window.ActiveXObject != "undefined") {
+            wscript = new ActiveXObject("WScript.Shell");
+            if (wscript != null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    }
+
+    var btn = document.getElementById('btn');
+    var content = document.getElementById('content');
+    btn.onclick = function() {
+        //fullScreen(content);
+        fullScreen1();
+    }
+    var quite = document.getElementById('quite');
+    quite.onclick = function() {
+        exitFullScreen();
+    }
+
+
+
+    //
+
+    function fullScreen1() {
+        var el = document.documentElement;
+        var rfs = el.requestFullScreen || el.webkitRequestFullScreen ||
+            el.mozRequestFullScreen || el.msRequestFullScreen;
+        if (typeof rfs != "undefined" && rfs) {
+            rfs.call(el);
+        } else if (typeof window.ActiveXObject != "undefined") {
+            //for IE，这里其实就是模拟了按下键盘的F11，使浏览器全屏
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript != null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    }
+</script>
+
+</html>

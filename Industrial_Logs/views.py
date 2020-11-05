@@ -1,10 +1,12 @@
-from django.shortcuts import render
+﻿import json
+import datetime
+from django.shortcuts import render,HttpResponse
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
-
+from .models import gydb
 from .models import Topic
+from .models import DevTem,DeviceInfo,TemHum
 from .forms import TopicForm, EntryForm, Entry
 @login_required
 # Create your views here.
@@ -12,12 +14,76 @@ def index(request):
     """学习笔记的主页"""
     return render(request, 'Industrial_Logs/index.html')
 
+
+
 @login_required
 def topics(request):
     """显示所有的主题"""
     topics = Topic.objects.filter(owner=request.user).order_by('date_added')
-    context = {'topics': topics}
+    ss = DeviceInfo.objects.count()
+    aa=TemHum.objects.last()
+    aa1=aa.temperature
+    aa2=aa.humidity
+    context = {'topics': topics,'ss': ss,'aa1':aa1,'aa2':aa2}
     return render(request, 'Industrial_Logs/topics.html', context)
+
+@login_required
+def fullscreen(request):
+    """显示所有的主题"""
+    fullscreen = Topic.objects.filter(owner=request.user).order_by('date_added')
+    ss = DeviceInfo.objects.count()
+    aa=TemHum.objects.last()
+    aa1=aa.temperature
+    aa2=aa.humidity
+    context = {'fullscreen': fullscreen,'ss': ss,'aa1':aa1,'aa2':aa2}
+    return render(request, 'Industrial_Logs/fullscreen.html', context)
+
+@login_required
+# Create your views here.
+def realtem_hum(request):
+    return render(request, 'Industrial_Logs/realtem_hum.html')
+
+
+@login_required
+# Create your views here.
+def data_collection(request):
+    return render(request, 'Industrial_Logs/data_collection.html')
+
+
+@login_required
+# Create your views here.
+def realdev_tem(request):
+    return render(request, 'Industrial_Logs/realdev_tem.html')
+
+def get_dev_temp(request):
+    date=datetime.datetime.now().strftime('%Y-%m-%d')
+    result=DevTem.objects.filter(date=date).order_by('-time').first()
+    dic={}
+    dic["City"]=result.city
+    dic["Region"]=result.region
+    dic["Date"]=result.date
+    dic["Time"]=result.time
+    dic["dev_tem"]=result.dev_tem
+    dic["Dencode"]=result.dencode
+    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+
+
+@login_required
+def cgq(request):
+    """显示所有的主题"""
+    # cgq = Topic.objects.filter(owner=request.user).order_by('date_added')
+    t = gydb.objects.all()[:30]
+    tx = []
+    ty = []
+    tt = []
+    i = 1
+    for t1 in t:
+        tx.append(float(t1.ambient))
+        ty.append(float(t1.coolant))
+        # tt.append(str(t1.RecentTime)[:19])
+        tt.append(str(i))
+        i += 1
+    return render(request, 'Industrial_Logs/cgq.html', {'tt': tt, 'tx': tx, 'ty': json.dumps(ty)})
 
 @login_required
 def topic(request, topic_id):
@@ -28,6 +94,9 @@ def topic(request, topic_id):
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'Industrial_Logs/topic.html', context)
+
+
+
 
 @login_required
 def new_topic(request):
@@ -87,3 +156,18 @@ def edit_entry(request, entry_id):
                                             args=[topic.id]))
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'Industrial_Logs/edit_entry.html', context)
+
+def url(request):
+    t = gydb.objects.all()[:30]
+    tx = []
+    ty = []
+    tt = []
+    i = 1
+    for t1 in t:
+        tx.append(float(t1.ambient))
+        ty.append(float(t1.coolant))
+        # tt.append(str(t1.RecentTime)[:19])
+        tt.append(str(i))
+        i += 1
+    return render(request, 'Industrial_Logs/show.html', {'tt': tt, 'tx': tx, 'ty': json.dumps(ty)})
+

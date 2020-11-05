@@ -1,18 +1,35 @@
-{% extends "Industrial_Logs/base.html" %} 
+{% extends "Industrial_Logs/base.html" %} {% block header %}{% endblock header %} {% block content %}
 
-{% block header %} 
-  <div class='jumbotron'> 
-    <h1>欢迎来到洛阳工业大数据分析平台！</h1> 
-  </div> 
-{% endblock header %}
 
-{% block content %} 
-  <h2> 
-    <a href="{% url 'users:register' %}">Register an account</a> to make 
-    your own Learning Log, and list the topics you're learning about. 
-  </h2> 
-  <h2> 
-  Whenever you learn something new about a topic, make an entry 
-  summarizing what you've learned. 
-  </h2> 
+
+<div class='jumbotron'>
+    <img style="height: 90px;width: 90px;top: 70px;position: absolute;" src="static/dist/img/screen1.png">
+    <h1 style="text-align: center;font-family:Arial, Helvetica, sans-serif;">欢迎来到洛阳工业大数据分析平台！</h1>
+
+
+
+    <div class="box">
+        <div class="content">
+            <div class="wall-of-buttons">
+                <a href="{% url 'users:login' %}" class="large blue button">欢迎登录</a>
+
+                <a href="{% url 'Industrial_Logs:realtem_hum' %}" class="large blue button">数据预览</a>
+
+                <a href="{% url 'users:register' %}" class="large blue button">还没注册？</a>
+
+                <br />
+
+            </div>
+
+            <br>
+
+        </div>
+    </div>
+    <img style="height: 290px;width: 290px;top: 332px;left: 686px;position: absolute;" src="static/dist/img/screen2.png">
+    <br>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <div style="text-align: right;">
+        <h2>—————洛阳理工学院工业大数据团队</h2>
+    </div>
+</div>
 {% endblock content %}

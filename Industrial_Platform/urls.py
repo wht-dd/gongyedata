@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # 显示所有的主题
     url(r'^topics/$', views.topics, name='topics'),
+    url(r'^topics/fullscreen$', views.fullscreen, name='fullscreen'),
     # 特定主题的详细页面
     url(r'^topics/(?P<topic_id>\d+)/$', views.topic, name='topic'),
     # 用于添加新条目的页面

@@ -1,0 +1,98 @@
+{% extends "Industrial_Logs/base.html" %} {% block header %} {% endblock header %} {% block content %}
+
+<div id="realdevtem" class="chart-container" style="top:20px;left:200px;width:1000px; height:650px;"></div>
+<script type="text/javascript">
+    window.onload = function() {
+        //获取dom容器
+        var myChart = echarts.init(document.getElementById('realdevtem'));
+        //指定图表的配置项和数据
+
+        var devdata;
+        var disdata = [];
+
+        function get_dev_temp() {
+            $.get("/get_dev_temp", function(data) {
+                devdata = JSON.parse(data);
+            });
+        }
+        get_dev_temp();
+
+
+
+        option = {
+            title: {
+                text: '设备温度实时数据'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            xAxis: {
+                name: '时间（s）',
+                type: 'time',
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                name: '温度(℃)',
+                type: 'value',
+                boundaryGap: [0, '100%'],
+                splitLine: {
+                    show: false
+                }
+            },
+
+            series: [{
+                name: '设备温度数据',
+                type: 'line',
+                showSymbol: false,
+                hoverAnimation: false,
+                data: disdata
+            }]
+        }
+
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+
+
+        setInterval(function() {
+            get_dev_temp();
+            var date = devdata.Date
+            var time = devdata.Time;
+            var temp = devdata.dev_tem;
+            var temdata = date + " " + time
+            console.log(temdata);
+            console.log(temp);
+            console.log(disdata.length);
+            if (disdata.length > 20) {
+                disdata.shift();
+                disdata.push({
+                    name: temdata,
+                    value: [temdata, temp]
+                });
+                myChart.setOption({
+                    series: [{
+                        data: disdata
+                    }]
+                });
+            } else {
+                disdata.push({
+                    name: temdata,
+                    value: [temdata, temp]
+                });
+                myChart.setOption({
+                    series: [{
+                        data: disdata
+                    }]
+                });
+            }
+
+        }, 20000);
+    }
+</script>
+{% endblock content %}

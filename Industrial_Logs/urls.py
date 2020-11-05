@@ -1,4 +1,5 @@
-"""定义learning_logs的URL模式"""
+﻿"""定义learning_logs的URL模式"""
+from django.urls import path
 from django.conf.urls import url
 from . import views
 app_name = 'Industrial_Logs'
@@ -7,6 +8,7 @@ urlpatterns = [
     # 主页
     url(r'^$', views.index, name='index'),
     url(r'^topics/$', views.topics, name='topics'),
+    url(r'^cgq/$', views.cgq, name='cgq'),
     url(r'^topics/(?P<topic_id>\d+)/$', views.topic, name='topic'),
     # 用于添加新主题的网页
     url(r'^new_topic/$', views.new_topic, name='new_topic'),
@@ -15,4 +17,9 @@ urlpatterns = [
     # 用于编辑条目的页面
     url(r'^edit_entry/(?P<entry_id>\d+)/$', views.edit_entry,
         name='edit_entry'),
+    url(r'^realtem_hum/$', views.realtem_hum, name='realtem_hum'),
+    url(r'^data_collection/$', views.data_collection, name='data_col'),
+    url(r'^realdev_tem/$', views.realdev_tem, name='realdev_tem'),
+    path('get_dev_temp',views.get_dev_temp),
+    path('12/', views.url),
 ]
