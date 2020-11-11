@@ -4,7 +4,7 @@
 开发洛阳工业大数据平台
 
 #### 软件架构
-django mysql
+django mysql html
 
 #### 安装教程
 
