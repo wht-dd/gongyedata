@@ -14,6 +14,13 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- 我的css和js -->
     <link href="{{STATIC_URL}}css/playground.css" media="all" rel="stylesheet" type="text/css" />
+    <style>
+        #container{
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+    </style>
 
 </head>
 
@@ -29,8 +36,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{STATIC_URL}}dist/js/echarts-4.2.1.min.js"></script>
     <script src="{{STATIC_URL}}dist/js/monitor.js"></script>
-    <script src="../../../static/js/fullscreen.js"></script>
-    <script src="../../../static/js/echarts.min.js"></script>
+{#    <script src="{{STATIC_URL}}js/fullscreen.js"></script>#}
+{#    <script src="{{STATIC_URL}}js/localFullScreen.js"></script>#}
+    <script src="{{STATIC_URL}}js/echarts.min.js"></script>
     <script type="text/javascript">
         $(function() {
             drawLayer02Label($("#layer02_01 canvas").get(0), "接入终端数量", 80, 200);
@@ -133,7 +141,7 @@
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     仪表盘
-                                    <span class="right badge badge-danger" onClick="xs()">显示</span>
+                                    <span class="right badge badge-danger" id="btn" onclick="btnClick();" >显示</span>
                                 </p>
                             </a>
                         </li>
@@ -220,7 +228,7 @@
         <div class="content-wrapper">
             <!-- Main content -->
             <div class="content">
-                <div class="container-fluid">
+                <div id="container" onclick="fullScreen(this);" class="container-fluid">
                     {% block header %} {% endblock header %} {%block content%} {%endblock%}
                 </div>
                 <!-- /.container-fluid -->
@@ -233,10 +241,25 @@
             <!-- To the right -->
 
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2019 All rights reserved.
+            <strong>Copyright &copy; 2020 All rights reserved.</strong>
     </footer>
   </div>
   <!-- ./wrapper -->
+<script>
+        function btnClick() {
+    　　var elem = document.getElementById("container");
+    　　fullScreen(elem);
+        }
+    function fullScreen(element) {
+        if(element.requestFullScreen) {
+            element.requestFullScreen();
+        }else if(element.webkitRequestFullScreen ) {
+            element.webkitRequestFullScreen();
+        }else if(element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        }
+    }
+    </script>
 </body>
 
 </html>

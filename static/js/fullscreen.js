@@ -1,3 +1,3 @@
 function xs() {
-    window.open('fullscreen')
+    window.open("fullscreen")
 }
