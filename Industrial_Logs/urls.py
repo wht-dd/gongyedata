@@ -20,6 +20,9 @@ urlpatterns = [
     url(r'^realtem_hum/$', views.realtem_hum, name='realtem_hum'),
     url(r'^data_collection/$', views.data_collection, name='data_col'),
     url(r'^realdev_tem/$', views.realdev_tem, name='realdev_tem'),
+    # 添加  2020.11.11
+    url(r'^BME280/$', views.BME280, name='BME280'),
+    url(r'^SDS011/$', views.SDS011, name='SDS011'),
     path('get_dev_temp',views.get_dev_temp),
     path('12/', views.url),
 ]
