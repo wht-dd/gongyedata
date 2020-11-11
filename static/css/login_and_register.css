@@ -1,0 +1,35 @@
+.templatemo-bg-gray{
+    background-image: url(../img/bg.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+.templatemo-bg-gray .margin-bottom-15{
+    padding-top: 30px;
+    color: aliceblue;
+    font-weight: 500;
+    letter-spacing: 5px;
+}
+.templatemo-container {
+    background-color: rgba(45, 45, 97, 0.1);
+    width: 450px;
+    color: aliceblue;
+    padding: 20px 30px 10px;
+	border:1px solid #142436;
+    border-radius: 10px;
+    box-shadow: 0px 25px 25px 5px #12122e;	
+    position: relative;
+}
+.templatemo-bg-gray .login_body{
+    margin-top: 100px;
+    padding: 20px 30px 20px;
+}
+.templatemo-container button{
+    width:100px;
+    margin-left: 155px;
+    margin-bottom: 0px;
+    letter-spacing: 5px;
+}
+.templatemo-bg-gray .register_body .form-group .help-block{
+    display: none;
+}
