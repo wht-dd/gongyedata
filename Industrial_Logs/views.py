@@ -14,7 +14,15 @@ def index(request):
     """学习笔记的主页"""
     return render(request, 'Industrial_Logs/index.html')
 
+@login_required
+# Create your views here.
+def BME280(request):
+    return render(request, 'Industrial_Logs/BME280.html')
 
+@login_required
+# Create your views here.
+def SDS011(request):
+    return render(request, 'Industrial_Logs/SDS011.html')
 
 @login_required
 def topics(request):

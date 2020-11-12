@@ -122,7 +122,7 @@
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style='top: 0px; ! important;'>
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
                 <img src="{{STATIC_URL}}dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -149,16 +149,26 @@
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    设备信息
+                                    传感器信息
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:topics' %}" class="nav-link ">
+                                    <a href="{% url 'Industrial_Logs:BME280' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>采集设备</p>
+                                        <p>BME280</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{% url 'Industrial_Logs:SDS011' %}" class="nav-link ">
+                                        <!-- 添加active类菜单高亮 -->
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>SDS011</p>
                                     </a>
                                 </li>
 
@@ -168,32 +178,117 @@
                                     <a href="{% url 'Industrial_Logs:realtem_hum' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>传感器</p>
+                                        <p>两者占比关系</p>
                                     </a>
                                 </li>
 
                             </ul>
                         </li>
+
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    系统管理
+                                    Hadoop平台信息
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>用户管理</p>
+                                        <p>原始数据容量</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                        <!-- 添加active类菜单高亮 -->
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>预处理后容量</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                        <!-- 添加active类菜单高亮 -->
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>HDFS的状态</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                        <!-- 添加active类菜单高亮 -->
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Namenode</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                        <!-- 添加active类菜单高亮 -->
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Datanode</p>
                                     </a>
                                 </li>
 
                             </ul>
+
                         </li>
+
+                        <li class="nav-item has-treeview menu-open" >
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    历史数据信息
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                        <!-- 添加active类菜单高亮 -->
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>时间-压力/温湿度/PM</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                        <!-- 添加active类菜单高亮 -->
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>压力/温湿度-PM</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                        <!-- 添加active类菜单高亮 -->
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>压力-温湿度</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+{#                        <li class="nav-item has-treeview menu-open">#}
+{#                            <a href="#" class="nav-link ">#}
+{#                                <i class="nav-icon fas fa-tachometer-alt"></i>#}
+{#                                <p>#}
+{#                                    系统管理#}
+{#                                    <i class="right fas fa-angle-left"></i>#}
+{#                                </p>#}
+{#                            </a>#}
+{##}
+{#                            <ul class="nav nav-treeview">#}
+{#                                <li class="nav-item">#}
+{#                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">#}
+{#                                        <!-- 添加active类菜单高亮 -->#}
+{#                                        <i class="far fa-circle nav-icon"></i>#}
+{#                                        <p>用户管理</p>#}
+{#                                    </a>#}
+{#                                </li>#}
+{##}
+{#                            </ul>#}
+{#                        </li>#}
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
