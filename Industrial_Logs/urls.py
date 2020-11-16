@@ -25,4 +25,7 @@ urlpatterns = [
     url(r'^SDS011/$', views.SDS011, name='SDS011'),
     path('get_dev_temp',views.get_dev_temp),
     path('12/', views.url),
+
+    #2020年11月16日
+    path('getBme280Sof', views.getBme280Sof),
 ]

@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import gydb
 from .models import Topic
-from .models import DevTem,DeviceInfo,TemHum
+from .models import DevTem,DeviceInfo,TemHum,Bme280Sof
 from .forms import TopicForm, EntryForm, Entry
 @login_required
 # Create your views here.
@@ -179,3 +179,15 @@ def url(request):
         i += 1
     return render(request, 'Industrial_Logs/show.html', {'tt': tt, 'tx': tx, 'ty': json.dumps(ty)})
 
+@login_required
+def getBme280Sof(request):
+    result=Bme280Sof.objects.filter().first()
+    dic={}
+    dic["pressure"]=result.pressure
+    dic["temperature"]=result.temperature
+    dic["humidity"]=result.humidity
+    dic["timestamp"]=result.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+    dic["location"]=result.location
+    dic["sensor_id"]=result.sensor_id
+    print(dic)
+    return HttpResponse(json.dumps(dic,ensure_ascii=False))

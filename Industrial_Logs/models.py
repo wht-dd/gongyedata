@@ -92,3 +92,17 @@ class TemHum(models.Model):
     class Meta:
         managed = False
         db_table = 'Tem_Hum'
+
+class Bme280Sof(models.Model):
+    sensor_id = models.IntegerField(blank=True, null=True)
+    location = models.IntegerField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    lon = models.FloatField(blank=True, null=True)
+    timestamp = models.DateTimeField(blank=True, null=True)
+    pressure = models.FloatField(blank=True, null=True)
+    temperature = models.FloatField(blank=True, null=True)
+    humidity = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bme280sof'
