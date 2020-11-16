@@ -106,3 +106,17 @@ class Bme280Sof(models.Model):
     class Meta:
         managed = False
         db_table = 'bme280sof'
+
+class Sds011Sof(models.Model):
+    sensor_id = models.IntegerField(blank=True, null=True)
+    location = models.IntegerField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    lon = models.FloatField(blank=True, null=True)
+    timestamp = models.DateTimeField(blank=True, null=True)
+    p1 = models.FloatField(db_column='P1', blank=True, null=True)  # Field name made lowercase.
+    p2 = models.FloatField(db_column='P2', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'sds011sof'
+
