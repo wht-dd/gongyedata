@@ -1,4 +1,4 @@
-function chartBME280_1() {
+function chartBME280_1(data) {
     var myChart = echarts.init(document.getElementById("chart_BME280_1"));
     function randomData() {
     now = new Date(+now + oneDay);
@@ -102,20 +102,8 @@ setInterval(function () {
 
 }
 
-function chartBME280_2(){
+function chartBME280_2(data){
     var myChart = echarts.init(document.getElementById("chart_BME280_2"));
-    var base = +new Date(1968, 9, 3);
-var oneDay = 24 * 3600 * 1000;
-var date = [];
-
-var data = [Math.random() * 300];
-
-for (var i = 1; i < 20000; i++) {
-    var now = new Date(base += oneDay);
-    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-}
-
 option = {
     tooltip: {
         trigger: 'axis',
@@ -125,7 +113,7 @@ option = {
     },
     title: {
         left: 'center',
-        text: '大数据量面积图',
+        text: '温度/时间',
         textStyle: {
                 color: '#ffffff'
         },
@@ -142,7 +130,7 @@ option = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: date,
+        data: data.timestamp,
         axisLabel: {
             show: true,
             textStyle: {
@@ -208,7 +196,7 @@ option = {
                     color: 'rgb(255, 70, 131)'
                 }])
             },
-            data: data
+            data: data.temperature
         }
     ]
 };

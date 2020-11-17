@@ -11,8 +11,21 @@
     </div>
     <script>
     $(function () {
-        chartBME280_1();
-        chartBME280_2();
+        $.ajax({
+				url: "/getBme280Sof",
+				type: "POST",
+                async: false,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+				    console.log(data);
+				   chartBME280_1(data);
+                    chartBME280_2(data);
+
+            }
+			}
+        )
+
     })
     </script>
 {% endblock content %}
