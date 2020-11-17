@@ -1,9 +1,18 @@
 {% extends "Industrial_Logs/base.html" %} 
 {% load bootstrap3 %}
 {% block header %}
-  <h2>Add a new topic:</h2>
 {% endblock header %}
-
 {% block content %}
-    <p style="color: blue">BME280图表显示 </p>
+    <script src="{{STATIC_URL}}dist/js/bme280.js"></script>
+    <div id="back" class="main" style="height:90%;">
+        <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">数据信息</h1>
+        <div style="border:2px solid #666;width:51%;height: 40%;float:left" id="chart_BME280_1"  class="chart-container"></div>
+        <div style="border:2px solid #666;width:51%;height: 40%;float:left" id="chart_BME280_2" class="chart-container"></div>
+    </div>
+    <script>
+    $(function () {
+        chartBME280_1();
+        chartBME280_2();
+    })
+    </script>
 {% endblock content %}

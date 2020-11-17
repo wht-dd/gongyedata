@@ -27,43 +27,20 @@
 <body class="hold-transition sidebar-mini">
 
     <!-- jQuery -->
-    <script src="{{STATIC_URL}}plugins/jquery/jquery.min.js"></script>
+{#    <script src="{{STATIC_URL}}plugins/jquery/jquery.min.js"></script>#}
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
     <!-- Bootstrap 4 -->
     <script src="{{STATIC_URL}}plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{STATIC_URL}}dist/js/adminlte.min.js"></script>
     <!-- 设备 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="{{STATIC_URL}}dist/js/echarts-4.2.1.min.js"></script>
-    <script src="{{STATIC_URL}}dist/js/monitor.js"></script>
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.min.js" type="text/javascript" charset="utf-8"></script>#}
+{#    <script src="{{STATIC_URL}}dist/js/echarts-4.2.1.min.js"></script>#}
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+{#    <script src="{{STATIC_URL}}dist/js/monitor.js"></script>#}
 {#    <script src="{{STATIC_URL}}js/fullscreen.js"></script>#}
 {#    <script src="{{STATIC_URL}}js/localFullScreen.js"></script>#}
-    <script src="{{STATIC_URL}}js/echarts.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            drawLayer02Label($("#layer02_01 canvas").get(0), "接入终端数量", 80, 200);
-            drawLayer02Label($("#layer02_02 canvas").get(0), "当前温度数据", 80, 300);
-            drawLayer02Label($("#layer02_03 canvas").get(0), "当前湿度数据", 80, 400);
-            drawLayer02Label($("#layer02_04 canvas").get(0), "总存储数据", 50, 200);
-            drawLayer02Label($("#layer02_05 canvas").get(0), "当前任务个数", 40, 200);
-            drawLayer02Label($("#layer02_06 canvas").get(0), "当前集群数", 50, 200);
-
-            renderLegend();
-
-            //饼状图
-            renderChartBar01();
-            //renderChartBar02();
-
-            //存储
-            renderLayer03Right();
-
-            //30天日均线流量趋势
-            renderLayer04Left();
-
-            //集群性能
-            renderLayer04Right();
-        });
-    </script>
+{#    <script src="{{STATIC_URL}}js/echarts.min.js"></script>#}
 
     <div class="wrapper">
         <!-- Navbar -->
@@ -124,7 +101,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style='top: 0px; ! important;'>
             <!-- Brand Logo -->
-            <a href="/" class="brand-link">
+            <a href="/" class="brand-link" style="padding-bottom: 20px; padding-top: 23px;">
                 <img src="{{STATIC_URL}}dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light"><strong>Industrial Platform</strong></span>
             </a>
@@ -153,29 +130,29 @@
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+{#                            <ul class="nav nav-treeview">#}
+{#                                <li class="nav-item">#}
+{#                                    <a href="{% url 'Industrial_Logs:BME280' %}" class="nav-link ">#}
+{#                                        <!-- 添加active类菜单高亮 -->#}
+{#                                        <i class="far fa-circle nav-icon"></i>#}
+{#                                        <p>BME280</p>#}
+{#                                    </a>#}
+{#                                </li>#}
+{##}
+{#                            </ul>#}
+{#                            <ul class="nav nav-treeview">#}
+{#                                <li class="nav-item">#}
+{#                                    <a href="{% url 'Industrial_Logs:SDS011' %}" class="nav-link ">#}
+{#                                        <!-- 添加active类菜单高亮 -->#}
+{#                                        <i class="far fa-circle nav-icon"></i>#}
+{#                                        <p>SDS011</p>#}
+{#                                    </a>#}
+{#                                </li>#}
+{##}
+{#                            </ul>#}
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:BME280' %}" class="nav-link ">
-                                        <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>BME280</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:SDS011' %}" class="nav-link ">
-                                        <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>SDS011</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realtem_hum' %}" class="nav-link ">
+                                    <a href="{% url 'Industrial_Logs:Sensor_Proportion' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>两者占比关系</p>
@@ -244,14 +221,14 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                    <a href="{% url 'Industrial_Logs:BME280' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>时间-压力/温湿度/PM</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                    <a href="{% url 'Industrial_Logs:SDS011' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>压力/温湿度-PM</p>
@@ -299,7 +276,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                    <a href="{% url 'Industrial_Logs:realTemAndHum' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>温湿度实时数据</p>

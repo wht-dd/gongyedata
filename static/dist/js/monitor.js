@@ -1,3 +1,4 @@
+
 function drawLayer02Label(canvasObj, text, textBeginX, lineEndX) {
     var colorValue = '#04918B';
 
@@ -441,3 +442,6 @@ function getLatestDays(num) {
     }
     return returnDays;
 }
+
+
+

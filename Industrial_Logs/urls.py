@@ -23,6 +23,8 @@ urlpatterns = [
     # 添加  2020.11.11
     url(r'^BME280/$', views.BME280, name='BME280'),
     url(r'^SDS011/$', views.SDS011, name='SDS011'),
+    url(r'^Sensor_proportion/$', views.Sensor_Proportion, name='Sensor_Proportion'),
+    url(r'^realTemAndHum/$', views.realTemAndHum, name='realTemAndHum'),
     path('get_dev_temp',views.get_dev_temp),
     path('12/', views.url),
 

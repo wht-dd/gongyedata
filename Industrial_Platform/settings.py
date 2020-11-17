@@ -67,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.static'#静态资源加载
+                'django.template.context_processors.static'  # 静态资源加载
             ],
         },
     },
@@ -88,6 +88,14 @@ DATABASES = {
         'HOST': '211.84.112.23',
         'PORT': '8050',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'django003',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -129,8 +137,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL = '/users/login/'
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'static'),
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
 ]
 # django-bootstrap3的设置
 # BOOTSTRAP3 = {

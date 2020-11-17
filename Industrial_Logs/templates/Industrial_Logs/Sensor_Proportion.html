@@ -1,0 +1,17 @@
+{% extends "Industrial_Logs/base.html" %}
+{% load bootstrap3 %}
+{% block header %}
+{% endblock header %}
+{% block content %}
+    <script src="{{STATIC_URL}}dist/js/OtherCharts.js"></script>
+    <div id="back" class="main" style="height:90%;">
+        <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">传感器比例信息</h1>
+        <div style="border:2px solid #666;width:100%;height: 80%;float:left" id="sensor_proportion_1"  class="chart-container"></div>
+
+    </div>
+    <script>
+    $(function () {
+        proportion()
+    })
+    </script>
+{% endblock content %}

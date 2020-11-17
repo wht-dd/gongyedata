@@ -26,6 +26,16 @@ def SDS011(request):
     return render(request, 'Industrial_Logs/SDS011.html')
 
 @login_required
+# Create your views here.
+def Sensor_Proportion(request):
+    return render(request, 'Industrial_Logs/Sensor_Proportion.html')
+
+@login_required
+# Create your views here.
+def realTemAndHum(request):
+    return render(request, 'Industrial_Logs/real_TemAndHum.html')
+
+@login_required
 def topics(request):
     """显示所有的主题"""
     topics = Topic.objects.filter(owner=request.user).order_by('date_added')

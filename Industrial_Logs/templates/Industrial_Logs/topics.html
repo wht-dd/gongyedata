@@ -1,5 +1,6 @@
 {% extends "Industrial_Logs/base.html" %} {% block header %} {% endblock header %} {% block content %}
-<div id="back" class="main">
+    <script src="{{STATIC_URL}}dist/js/monitor.js"></script>
+<div id="back" class="main" style="height:90%;">
 
     <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 40px;">洛阳工业大数据平台</h1>
 
@@ -85,5 +86,30 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+            drawLayer02Label($("#layer02_01 canvas").get(0), "接入终端数量", 80, 200);
+            drawLayer02Label($("#layer02_02 canvas").get(0), "当前温度数据", 80, 300);
+            drawLayer02Label($("#layer02_03 canvas").get(0), "当前湿度数据", 80, 400);
+            drawLayer02Label($("#layer02_04 canvas").get(0), "总存储数据", 50, 200);
+            drawLayer02Label($("#layer02_05 canvas").get(0), "当前任务个数", 40, 200);
+            drawLayer02Label($("#layer02_06 canvas").get(0), "当前集群数", 50, 200);
 
+            renderLegend();
+
+            //饼状图
+            renderChartBar01();
+            //renderChartBar02();
+
+            //存储
+            renderLayer03Right();
+
+            //30天日均线流量趋势
+            renderLayer04Left();
+
+            //集群性能
+            renderLayer04Right();
+
+    })
+    </script>
 {% endblock content %}
