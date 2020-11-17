@@ -6,8 +6,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import gydb
 from .models import Topic
-from .models import DevTem,DeviceInfo,TemHum,Bme280Sof
+from .models import DevTem,DeviceInfo,TemHum, Bme280Sof, Sds011Sof
 from .forms import TopicForm, EntryForm, Entry
+from django.db import connection
 @login_required
 # Create your views here.
 def index(request):
@@ -180,14 +181,63 @@ def url(request):
     return render(request, 'Industrial_Logs/show.html', {'tt': tt, 'tx': tx, 'ty': json.dumps(ty)})
 
 @login_required
-def getBme280Sof(request):
-    result=Bme280Sof.objects.filter().first()
-    dic={}
-    dic["pressure"]=result.pressure
-    dic["temperature"]=result.temperature
-    dic["humidity"]=result.humidity
-    dic["timestamp"]=result.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-    dic["location"]=result.location
-    dic["sensor_id"]=result.sensor_id
-    print(dic)
+def getBme280Sof(request,sensorid=2266,rows=30):
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 30)
+        sensorid = request.POST.get('sensor_id', 2266)
+    # result=Bme280Sof.objects.raw("select * from bme280sof limit %s",params=[rows])
+    with connection.cursor() as cur:
+        cur.execute("""
+        select sensor_id,date_format(`timestamp`,'%%Y-%%m-%%d') days,AVG(pressure) pressure,AVG(temperature) temperature,AVG(humidity) humidity
+        from bme280sof 
+        where sensor_id = %s 
+        GROUP BY `days` ORDER BY `days` desc  limit %s;
+        """, params=[sensorid, rows])
+        result = cur.fetchall()
+
+        dic={}
+        dic["pressure"] = list()
+        dic["temperature"] = list()
+        dic["humidity"] = list()
+        dic["timestamp"] = list()
+        dic["sensor_id"] = list()
+        for row in result:
+            dic["pressure"].append(row[2])
+            dic["temperature"].append(row[3])
+            dic["humidity"].append(row[4])
+            dic["timestamp"].append(row[1])
+            dic["sensor_id"].append(row[0])
+        # print(dic)
+    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+
+
+
+
+@login_required
+def getSds011Sof(request, sensorid=1471, rows=30):
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 30)
+        sensorid = request.POST.get('sensor_id', 1471)
+
+    with connection.cursor() as cur:
+        cur.execute("""
+        select sensor_id,date_format(`timestamp`,'%%Y-%%m-%%d') days,AVG(p1) p1,AVG(p2) p2 
+        from sds011sof 
+        where sensor_id = %s 
+        GROUP BY `days` 
+        ORDER BY `days` 
+        desc  limit %s;
+        """, params=[sensorid, rows])
+        result = cur.fetchall()
+        dic={}
+        dic["p1"] = list()
+        dic["p2"] = list()
+        dic["timestamp"] = list()
+        dic["sensor_id"] = list()
+        for row in result:
+            dic["p1"].append(row[2])
+            dic["p2"].append(row[3])
+            dic["timestamp"].append(row[1])
+            dic["sensor_id"].append(row[0])
+    # print(dic)
     return HttpResponse(json.dumps(dic,ensure_ascii=False))

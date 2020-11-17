@@ -26,6 +26,8 @@ urlpatterns = [
     path('get_dev_temp',views.get_dev_temp),
     path('12/', views.url),
 
-    #2020年11月16日
+    #2020年11月16日    仅获取数据
     path('getBme280Sof', views.getBme280Sof),
+    #2020年11月17日    仅获取数据
+    path('getSds011Sof', views.getSds011Sof),
 ]
