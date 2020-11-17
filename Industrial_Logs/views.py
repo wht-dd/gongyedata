@@ -190,6 +190,8 @@ def url(request):
         i += 1
     return render(request, 'Industrial_Logs/show.html', {'tt': tt, 'tx': tx, 'ty': json.dumps(ty)})
 
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 @login_required
 def getBme280Sof(request,sensorid=2266,rows=30):
     if request.method == 'POST':
@@ -222,7 +224,7 @@ def getBme280Sof(request,sensorid=2266,rows=30):
 
 
 
-
+@csrf_exempt
 @login_required
 def getSds011Sof(request, sensorid=1471, rows=30):
     if request.method == 'POST':
