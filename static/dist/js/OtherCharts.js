@@ -3,8 +3,8 @@ function proportion() {
     var myChart = echarts.init(document.getElementById("sensor_proportion_1"));
     option = {
     title: {
-        text: '传感器所占比例',
-        subtext: '纯属虚构',
+        text: '传感器各类型占比',
+        subtext: '',
         left: 'center',
         textStyle: {
             color: '#ffffff'
@@ -29,11 +29,11 @@ function proportion() {
             radius: '55%',
             center: ['50%', '60%'],
             data: [
-                {value: 335, name: '温度传感器'},
-                {value: 310, name: '湿度传感器'},
-                {value: 234, name: '压力传感器'},
-                {value: 135, name: 'PM2.5传感器'},
-                {value: 154, name: 'PM10传感器'}
+                {value: 454, name: '温度传感器'},
+                {value: 454, name: '湿度传感器'},
+                {value: 454, name: '压力传感器'},
+                {value: 494, name: 'PM2.5传感器'},
+                {value: 494, name: 'PM10传感器'}
             ],
             emphasis: {
                 itemStyle: {
