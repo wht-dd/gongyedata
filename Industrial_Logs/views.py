@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import gydb
 from .models import Topic
-from .models import DevTem,DeviceInfo,TemHum, Bme280Sof, Sds011Sof
+from .models import DevTem,DeviceInfo,TemHum, Bme280Sof, Sds011Sof,SensorCount
 from .forms import TopicForm, EntryForm, Entry
 from django.db import connection
 @login_required
@@ -28,7 +28,14 @@ def SDS011(request):
 @login_required
 # Create your views here.
 def Sensor_Proportion(request):
-    return render(request, 'Industrial_Logs/Sensor_Proportion.html')
+    result = SensorCount.objects.all()
+    dict = {}
+    dict["kind"] = list()
+    dict["count"] = list()
+    for row in result:
+        dict["kind"].append(row.kind)
+        dict['count'].append(row.count)
+    return render(request, 'Industrial_Logs/Sensor_Proportion.html', context=dict)
 
 @login_required
 # Create your views here.
@@ -193,14 +200,14 @@ def url(request):
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 @login_required
-def getBme280Sof(request,sensorid=2266,rows=30):
+def getBme280Sof(request,sensorid=2266,rows=3000):
     if request.method == 'POST':
-        rows = request.POST.get('rows', 30)
+        rows = request.POST.get('rows', 3000)
         sensorid = request.POST.get('sensor_id', 2266)
     # result=Bme280Sof.objects.raw("select * from bme280sof limit %s",params=[rows])
     with connection.cursor() as cur:
         cur.execute("""
-        select sensor_id,date_format(`timestamp`,'%%Y-%%m-%%d') days,AVG(pressure) pressure,AVG(temperature) temperature,AVG(humidity) humidity
+        select sensor_id,date_format(`timestamp`,'%%Y-%%m-%%d %%H:%%i:%%S') days,AVG(pressure) pressure,AVG(temperature) temperature,AVG(humidity) humidity
         from bme280sof 
         where sensor_id = %s 
         GROUP BY `days` ORDER BY `days` desc  limit %s;

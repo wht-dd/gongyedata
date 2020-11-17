@@ -1,5 +1,6 @@
 // 传感器比例饼图
 function proportion() {
+
     var myChart = echarts.init(document.getElementById("sensor_proportion_1"));
     option = {
     title: {
@@ -28,7 +29,8 @@ function proportion() {
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],
-            data: [
+            data:
+                [
                 {value: 454, name: '温度传感器'},
                 {value: 454, name: '湿度传感器'},
                 {value: 454, name: '压力传感器'},

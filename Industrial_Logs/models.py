@@ -120,3 +120,12 @@ class Sds011Sof(models.Model):
         managed = False
         db_table = 'sds011sof'
 
+class SensorCount(models.Model):
+    # id = models.AutoField()
+    kind = models.CharField(max_length=20, blank=True, null=True)
+    count = models.IntegerField(blank=True, null=True)
+    percent = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'sensor_count'
