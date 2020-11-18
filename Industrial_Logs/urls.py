@@ -24,12 +24,17 @@ urlpatterns = [
     url(r'^BME280/$', views.BME280, name='BME280'),
     url(r'^SDS011/$', views.SDS011, name='SDS011'),
     url(r'^Sensor_proportion/$', views.Sensor_Proportion, name='Sensor_Proportion'),
+    url(r'^PTH_PM/$', views.PTH_PM, name='PTH_PM'),
+    url(r'^P_TH/$', views.P_TH, name='P_TH'),
     url(r'^realTemAndHum/$', views.realTemAndHum, name='realTemAndHum'),
     path('get_dev_temp',views.get_dev_temp),
+
     path('12/', views.url),
 
     #2020年11月16日    仅获取数据
     path('getBme280Sof', views.getBme280Sof),
     #2020年11月17日    仅获取数据
     path('getSds011Sof', views.getSds011Sof),
+
+
 ]
