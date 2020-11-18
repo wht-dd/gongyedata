@@ -37,6 +37,12 @@ def Sensor_Proportion(request):
         dict['count'].append(row.count)
     return render(request, 'Industrial_Logs/Sensor_Proportion.html', context=dict)
 
+
+@login_required
+# 温湿度-pm
+def PTH_PM(request):
+    return render(request, 'Industrial_Logs/PTH_PM.html')
+
 @login_required
 # Create your views here.
 def realTemAndHum(request):
@@ -69,7 +75,6 @@ def fullscreen(request):
 def realtem_hum(request):
     return render(request, 'Industrial_Logs/realtem_hum.html')
 
-
 @login_required
 # Create your views here.
 def data_collection(request):
@@ -80,6 +85,11 @@ def data_collection(request):
 # Create your views here.
 def realdev_tem(request):
     return render(request, 'Industrial_Logs/realdev_tem.html')
+
+@login_required
+# 压力-温湿度页面
+def P_TH(request):
+    return render(request, 'Industrial_Logs/P_TH.html')
 
 def get_dev_temp(request):
     date=datetime.datetime.now().strftime('%Y-%m-%d')
@@ -259,4 +269,38 @@ def getSds011Sof(request, sensorid=1471, rows=30):
             dic["timestamp"].append(row[1])
             dic["sensor_id"].append(row[0])
     # print(dic)
+    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+
+
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+@login_required
+def getSensor_information(request,sensorid=2266,rows=3000):
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 3000)
+        sensorid = request.POST.get('sensor_id', 2266)
+    # result=Bme280Sof.objects.raw("select * from bme280sof limit %s",params=[rows])
+    with connection.cursor() as cur:
+        cur.execute("""
+        select sensor_id,date_format(`timestamp`,'%%Y-%%m-%%d %%H:%%i:%%S') days,AVG(pressure) pressure,AVG(temperature) temperature,AVG(humidity) humidity
+        from bme280sof 
+        where sensor_id = %s 
+        GROUP BY `days` ORDER BY `days` desc  limit %s;
+        """, params=[sensorid, rows])
+        result = cur.fetchall()
+
+        dic={}
+        dic["pressure"] = list()
+        dic["temperature"] = list()
+        dic["humidity"] = list()
+        dic["timestamp"] = list()
+        dic["sensor_id"] = list()
+        for row in result:
+            dic["pressure"].append(row[2])
+            dic["temperature"].append(row[3])
+            dic["humidity"].append(row[4])
+            dic["timestamp"].append(row[1])
+            dic["sensor_id"].append(row[0])
+        # print(dic)
     return HttpResponse(json.dumps(dic,ensure_ascii=False))

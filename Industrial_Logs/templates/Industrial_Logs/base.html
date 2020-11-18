@@ -25,6 +25,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+    <!-- map -->
 
     <!-- jQuery -->
 {#    <script src="{{STATIC_URL}}plugins/jquery/jquery.min.js"></script>#}
@@ -159,7 +160,9 @@
                                     </a>
                                 </li>
 
+
                             </ul>
+
                         </li>
 
                         <li class="nav-item has-treeview menu-open">
@@ -228,14 +231,14 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:SDS011' %}" class="nav-link ">
+                                    <a href="{% url 'Industrial_Logs:PTH_PM' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>压力/温湿度-PM</p>
+                                        <p>温湿度-PM</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                    <a href="{% url 'Industrial_Logs:P_TH' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>压力-温湿度</p>
