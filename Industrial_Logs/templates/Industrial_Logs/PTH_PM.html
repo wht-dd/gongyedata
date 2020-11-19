@@ -10,8 +10,19 @@
     </div>
     <script>
     $(function () {
-        PTH_PM_1();
-        PTH_PM_2();
+        $.ajax({
+				url: "/getPTH_PM",
+				type: "POST",
+                async: false,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log(data);
+				    PTH_PM_1(data);
+                    PTH_PM_2();
+				}
+        });
+
 
     })
     </script>

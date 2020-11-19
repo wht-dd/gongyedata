@@ -1,4 +1,4 @@
-function PTH_PM_1() {
+function PTH_PM_1(data) {
     var myChart1 = echarts.init(document.getElementById("PTH_PM_1"));
 option = {
     legend: {
@@ -6,7 +6,7 @@ option = {
     },
     tooltip: {
         trigger: 'axis',
-        formatter: 'PM浓度:{b}μg/m³<br>温度:{c}°C'
+        formatter: 'PM浓度:{c}μg/m³<br>温度:{b}°C'
     },
     grid: {
         left: '3%',
@@ -14,21 +14,21 @@ option = {
         bottom: '3%',
         containLabel: true
     },
-    xAxis: {
-        name:'温度',
+    yAxis: {
+        name:'pm浓度',
         type: 'value',
         axisLabel: {
-            formatter: '{value} °C'
+            formatter: '{value} μg/m³'
         }
     },
-    yAxis: {
+    xAxis: {
         type: 'category',
         axisLine: {onZero: false},
         axisLabel: {
-            formatter: '{value}μg/m³ '
+            formatter: '{value}℃ '
         },
         boundaryGap: false,
-        data: ['-10', '10', '20', '30', '40', '50', '60', '70', '80']
+        data: data.temperature
     },
     series: [
         {
@@ -37,11 +37,11 @@ option = {
             smooth: true,
             lineStyle: {
                 width: 3,
-                shadowColor: 'rgba(0,0,0,0.4)',
+                shadowColor: 'rgba(255,255,255,0.4)',
                 shadowBlur: 10,
                 shadowOffsetY: 10
             },
-            data:[15, -50, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
+            data:data.p2
         },
         {
             name: 'pm2.5',
@@ -49,11 +49,11 @@ option = {
             smooth: true,
             lineStyle: {
                 width: 3,
-                shadowColor: 'rgba(0,0,0,0.4)',
+                shadowColor: 'rgba(255,255,255,0.4)',
                 shadowBlur: 10,
                 shadowOffsetY: 10
             },
-            data:[1, -20, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
+            data:data.p1
         }
     ]
 };
