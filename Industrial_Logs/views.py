@@ -9,6 +9,8 @@ from .models import Topic
 from .models import DevTem,DeviceInfo,TemHum, Bme280Sof, Sds011Sof,SensorCount
 from .forms import TopicForm, EntryForm, Entry
 from django.db import connection
+from django.views.decorators.csrf import csrf_exempt
+
 @login_required
 # Create your views here.
 def index(request):
@@ -34,8 +36,9 @@ def Sensor_Proportion(request):
     dict["count"] = list()
     for row in result:
         dict["kind"].append(row.kind)
-        dict['count'].append(row.count)
-    return render(request, 'Industrial_Logs/Sensor_Proportion.html', context=dict)
+        dict['count'].append({"value":row.count,"name":row.kind})
+    # print(dict)
+    return render(request, 'Industrial_Logs/Sensor_Proportion.html', dict)
 
 
 @login_required
@@ -207,7 +210,6 @@ def url(request):
         i += 1
     return render(request, 'Industrial_Logs/show.html', {'tt': tt, 'tx': tx, 'ty': json.dumps(ty)})
 
-from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 @login_required
 def getBme280Sof(request,sensorid=2266,rows=3000):
@@ -273,7 +275,6 @@ def getSds011Sof(request, sensorid=1471, rows=30):
 
 
 
-from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 @login_required
 def getSensor_information(request,sensorid=2266,rows=3000):
