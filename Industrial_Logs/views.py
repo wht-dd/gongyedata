@@ -37,7 +37,6 @@ def Sensor_Proportion(request):
     for row in result:
         dict["kind"].append(row.kind)
         dict['count'].append({"value":row.count,"name":row.kind})
-    # print(dict)
     return render(request, 'Industrial_Logs/Sensor_Proportion.html', dict)
 
 

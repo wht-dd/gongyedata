@@ -29,8 +29,7 @@ function proportion(datax,datay) {
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],
-            data:datay
-                ,
+            data:datay,
             emphasis: {
                 itemStyle: {
                     shadowBlur: 10,
