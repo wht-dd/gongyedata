@@ -1,150 +1,60 @@
 function PTH_PM_1() {
     var myChart1 = echarts.init(document.getElementById("PTH_PM_1"));
-var base = +new Date(2020, 10, 3);
-var oneDay = 24 * 3600 * 1000;
-var valueBase = Math.random() * 300;
-var valueBase2 = Math.random() * 50;
-var data = [];
-var data2 = [];
-
-for (var i = 1; i < 10; i++) {
-    var now = new Date(base += oneDay);
-    var dayStr = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-');
-
-    valueBase = Math.round((Math.random() - 0.5) * 20 + valueBase);
-    valueBase <= 0 && (valueBase = Math.random() * 300);
-    data.push([dayStr, valueBase]);
-
-    valueBase2 = Math.round((Math.random() - 0.5) * 20 + valueBase2);
-    valueBase2 <= 0 && (valueBase2 = Math.random() * 50);
-    data2.push([dayStr, valueBase2]);
-}
-
 option = {
-    animation: false,
-    title: {
-        left: 'center',
-        text: '温度与pm10/pm2.5的关系',
-        subtext: '   ',
-    },
     legend: {
-        top: 'bottom',
-        data: ['意向']
+        data: ['pm10','pm2.5']
     },
     tooltip: {
-        triggerOn: 'none',
-        position: function (pt) {
-            return [pt[0], 130];
-        }
+        trigger: 'axis',
+        formatter: 'PM浓度:{b}μg/m³<br>温度:{c}°C'
     },
-    toolbox: {
-        left: 'center',
-        itemSize: 25,
-        top: 55,
-        feature: {
-            dataZoom: {
-                yAxisIndex: 'none'
-            },
-            restore: {}
-        }
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
     },
     xAxis: {
-        type: 'time',
-        // boundaryGap: [0, 0],
-        axisPointer: {
-            value: '2016-10-7',
-            snap: true,
-            lineStyle: {
-                color: '#004E52',
-                opacity: 0.5,
-                width: 2
-            },
-            label: {
-                show: true,
-                formatter: function (params) {
-                    return echarts.format.formatTime('yyyy-MM-dd', params.value);
-                },
-                backgroundColor: '#004E52'
-            },
-            handle: {
-                show: true,
-                color: '#004E52'
-            }
-        },
-        splitLine: {
-            show: false
+        name:'温度',
+        type: 'value',
+        axisLabel: {
+            formatter: '{value} °C'
         }
     },
     yAxis: {
-        type: 'value',
-        axisTick: {
-            inside: true
-        },
-        splitLine: {
-            show: false
-        },
+        type: 'category',
+        axisLine: {onZero: false},
         axisLabel: {
-            inside: true,
-            formatter: '{value}\n'
+            formatter: '{value}μg/m³ '
         },
-        z: 10
+        boundaryGap: false,
+        data: ['-10', '10', '20', '30', '40', '50', '60', '70', '80']
     },
-    grid: {
-        top: 110,
-        left: 15,
-        right: 15,
-        height: 160
-    },
-    dataZoom: [{
-        type: 'inside',
-        throttle: 50
-    }],
     series: [
         {
             name: 'pm10',
-            type: 'line',
+            type: 'scatter',
             smooth: true,
-            symbol: 'circle',
-            symbolSize: 5,
-            sampling: 'average',
-            itemStyle: {
-                color: '#8ec6ad'
+            lineStyle: {
+                width: 3,
+                shadowColor: 'rgba(0,0,0,0.4)',
+                shadowBlur: 10,
+                shadowOffsetY: 10
             },
-            stack: 'a',
-            areaStyle: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                    offset: 0,
-                    color: '#8ec6ad'
-                }, {
-                    offset: 1,
-                    color: '#ffe'
-                }])
-            },
-            data: data
+            data:[15, -50, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
         },
         {
-            name: 'PM2.5',
-            type: 'line',
+            name: 'pm2.5',
+            type: 'scatter',
             smooth: true,
-            stack: 'a',
-            symbol: 'circle',
-            symbolSize: 5,
-            sampling: 'average',
-            itemStyle: {
-                color: '#d68262'
+            lineStyle: {
+                width: 3,
+                shadowColor: 'rgba(0,0,0,0.4)',
+                shadowBlur: 10,
+                shadowOffsetY: 10
             },
-            areaStyle: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                    offset: 0,
-                    color: '#d68262'
-                }, {
-                    offset: 1,
-                    color: '#ffe'
-                }])
-            },
-            data: data2
+            data:[1, -20, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
         }
-
     ]
 };
 
