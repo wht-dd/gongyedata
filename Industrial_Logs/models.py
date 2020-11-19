@@ -129,3 +129,20 @@ class SensorCount(models.Model):
     class Meta:
         managed = False
         db_table = 'sensor_count'
+
+class BmeSds(models.Model):
+    sensor_id_bme = models.BigIntegerField(blank=True, null=True)
+    location = models.BigIntegerField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    lon = models.FloatField(blank=True, null=True)
+    timestamp = models.DateTimeField(blank=True, null=True)
+    pressure = models.FloatField(blank=True, null=True)
+    temperature = models.FloatField(blank=True, null=True)
+    humidity = models.FloatField(blank=True, null=True)
+    sensor_id_sds = models.BigIntegerField(blank=True, null=True)
+    p1 = models.FloatField(db_column='P1', blank=True, null=True)  # Field name made lowercase.
+    p2 = models.FloatField(db_column='P2', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'bme_sds'
