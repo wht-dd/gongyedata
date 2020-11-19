@@ -38,6 +38,8 @@ urlpatterns = [
     #2020年11月19日    获取关联数据
     path('getBmeSds', views.getBmeSds),
     path('getPTH_PM', views.getPTH_PM),
+    path('getHPM', views.getHPM),
+    path('getPPM', views.getPPM),
 
 
 ]

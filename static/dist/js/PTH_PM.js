@@ -41,7 +41,7 @@ option = {
                 shadowBlur: 10,
                 shadowOffsetY: 10
             },
-            data:data.p2
+            data:data.p1
         },
         {
             name: 'pm2.5',
@@ -53,7 +53,7 @@ option = {
                 shadowBlur: 10,
                 shadowOffsetY: 10
             },
-            data:data.p1
+            data:data.p2
         }
     ]
 };
@@ -63,7 +63,7 @@ option = {
 }
 
 
-function PTH_PM_2() {
+function PTH_PM_2(data) {
     var myChart2 = echarts.init(document.getElementById("PTH_PM_2"));
 option = {
     title: {
@@ -85,7 +85,7 @@ option = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+        data: data.humidity
     },
     yAxis: {
         type: 'value',
@@ -124,7 +124,7 @@ option = {
             name: 'pm10',
             type: 'line',
             smooth: true,
-            data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+            data: data.p1,
             markArea: {
                 data: [ [{
                     name: '峰值',
@@ -143,7 +143,7 @@ option = {
             name: 'pm2.5',
             type: 'line',
             smooth: true,
-            data: [250, 253, 145, 254, 125, 146, 123,231,225,283,123,123,182,222,253,253,378,223,231,78],
+            data: data.p2,
             markArea: {
                 data: [ [{
                     name: '峰值',
