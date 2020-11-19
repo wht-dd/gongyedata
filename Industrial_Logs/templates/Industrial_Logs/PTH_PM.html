@@ -5,15 +5,34 @@
     <div id="back" class="main" style="height:90%;">
         <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">温湿度-pm</h1>
         <div style="border:2px solid #666;width:40%;height: 80%;float:left" id="PTH_PM_1"  class="chart-container"></div>
-        {{ dict }}
         <div style="border:2px solid #666;width:40%;height: 80%;float:left" id="PTH_PM_2"  class="chart-container"></div>
-        {{ dict }}
 
     </div>
     <script>
     $(function () {
-        PTH_PM_1();
-        PTH_PM_2();
+        $.ajax({
+				url: "/getPTH_PM",
+				type: "POST",
+                async: false,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log(data);
+				    PTH_PM_1(data);
+				}
+        });
+        $.ajax({
+				url: "/getHPM",
+				type: "POST",
+                async: false,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+				    console.log(data);
+                    PTH_PM_2(data);
+				}
+        });
+
 
     })
     </script>

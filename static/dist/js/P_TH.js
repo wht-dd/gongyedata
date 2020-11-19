@@ -1,4 +1,4 @@
-function P_TH_1() {
+function P_TH_1(data) {
     var myChart1 = echarts.init(document.getElementById("P_TH_1"));
 var colors = ['#5793f3', '#d14a61', '#675bba'];
 
@@ -39,7 +39,7 @@ option = {
                     }
                 }
             },
-            data: ['2020-1', '2020-2', '2020-3', '2020-4', '2020-5', '2020-6', '2020-7', '2020-8', '2020-9', '2020-10', '2020-11', '2020-12']
+            data: data.pressure
         },
         {
             type: 'category',
@@ -60,7 +60,7 @@ option = {
                     }
                 }
             },
-            data: ['2020-1', '2020-2', '2020-3', '2020-4', '2020-5', '2020-6', '2020-7', '2020-8', '2020-9', '2020-10', '2020-11', '2020-12']
+            data: data.pressure
         }
     ],
     yAxis: [
@@ -74,13 +74,13 @@ option = {
             type: 'line',
             xAxisIndex: 1,
             smooth: true,
-            data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380,],
+            data: data.p1,
         },
         {
             name: '2016 降水量',
             type: 'line',
             smooth: true,
-            data: [250, 253, 145, 254, 125, 146, 123,231,225,283,123,]
+            data: data.p2
         }
     ]
 };

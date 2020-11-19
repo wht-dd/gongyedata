@@ -244,9 +244,9 @@ def getBme280Sof(request,sensorid=2266,rows=3000):
 
 @csrf_exempt
 @login_required
-def getSds011Sof(request, sensorid=1471, rows=30):
+def getSds011Sof(request, sensorid=1471, rows=3000):
     if request.method == 'POST':
-        rows = request.POST.get('rows', 30)
+        rows = request.POST.get('rows', 3000)
         sensorid = request.POST.get('sensor_id', 1471)
 
     with connection.cursor() as cur:
@@ -303,4 +303,109 @@ def getSensor_information(request,sensorid=2266,rows=3000):
             dic["timestamp"].append(row[1])
             dic["sensor_id"].append(row[0])
         # print(dic)
+    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+
+@csrf_exempt
+@login_required
+def getBmeSds(request, rows=3000):
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 3000)
+
+    with connection.cursor() as cur:
+        cur.execute("""
+        select date_format(`timestamp`,'%%Y-%%m-%%d') days,AVG(p1) p1,AVG(p2) p2 ,avg(pressure) pressure,avg(temperature) temperature,avg(humidity) humidity 
+        from bme_sds  
+        GROUP BY `days` 
+        ORDER BY `days` desc  
+        limit %s;
+        """, params=[rows])
+        result = cur.fetchall()
+        dic={}
+        dic["p1"] = list()
+        dic["p2"] = list()
+        dic["timestamp"] = list()
+        dic["pressure"] = list()
+        dic["temperature"] = list()
+        dic["humidity"] = list()
+        for row in result:
+            dic["pressure"].append(row[3])
+            dic["temperature"].append(row[4])
+            dic["humidity"].append(row[5])
+            dic["p1"].append(row[1])
+            dic["p2"].append(row[2])
+            dic["timestamp"].append(row[0])
+    # print(dic)
+    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+
+@csrf_exempt
+@login_required
+def getPTH_PM(request, rows=5000):
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 5000)
+
+    with connection.cursor() as cur:
+        cur.execute("""
+       select temperature,AVG(p1) p1,AVG(p2) p2  
+       from bme_sds 
+       where temperature >= -10 
+       GROUP BY temperature 
+       ORDER BY temperature 
+        limit %s;
+        """, params=[rows])
+        result = cur.fetchall()
+        dic={}
+        dic["p1"] = list()
+        dic["p2"] = list()
+        dic["temperature"] = list()
+        for row in result:
+            dic["temperature"].append(row[0])
+            dic["p1"].append(row[1])
+            dic["p2"].append(row[2])
+    # print(dic)
+    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+
+@csrf_exempt
+@login_required
+def getHPM(request, rows=3000):
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 3000)
+
+    with connection.cursor() as cur:
+        cur.execute("""
+        select humidity,AVG(p1) p1,AVG(p2) p2  from bme_sds GROUP BY humidity ORDER BY humidity  
+        limit %s;
+        """, params=[rows])
+        result = cur.fetchall()
+        dic={}
+        dic["p1"] = list()
+        dic["p2"] = list()
+        dic["humidity"] = list()
+        for row in result:
+            dic["humidity"].append(row[0])
+            dic["p1"].append(row[1])
+            dic["p2"].append(row[2])
+    # print(dic)
+    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+
+@csrf_exempt
+@login_required
+def getPPM(request, rows=3000):
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 3000)
+
+    with connection.cursor() as cur:
+        cur.execute("""
+        select pressure,AVG(p1) p1,AVG(p2) p2  from bme_sds where pressure>=0 GROUP BY pressure ORDER BY pressure 
+        limit %s;
+        """, params=[rows])
+        result = cur.fetchall()
+        dic={}
+        dic["p1"] = list()
+        dic["p2"] = list()
+        dic["pressure"] = list()
+        for row in result:
+            dic["pressure"].append(row[0])
+            dic["p1"].append(row[1])
+            dic["p2"].append(row[2])
+    # print(dic)
     return HttpResponse(json.dumps(dic,ensure_ascii=False))
