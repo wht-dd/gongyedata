@@ -208,7 +208,7 @@ option = {
     myChart.setOption(option);
 }
 
-function chartBME280_3() {
+function chartBME280_3(data) {
     var myChart = echarts.init(document.getElementById("chart_BME280_3"));
 
 option = {
@@ -244,7 +244,7 @@ option = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+        data: data.timestamp,
         axisLabel: {
             show: true,
             textStyle: {
@@ -297,7 +297,7 @@ option = {
             name: 'PM2.5',
             type: 'line',
             stack: '总量',
-            data: [120, 132, 101, 134, 90, 230, 210],
+            data: data.p1,
             lineStyle:{
                 color:'#ff0002',
 
@@ -307,7 +307,7 @@ option = {
             name: 'PM10',
             type: 'line',
             stack: '总量',
-            data: [220, 182, 191, 234, 290, 330, 310],
+            data: data.p2,
             lineStyle:{
                 color:'yellow',
             }

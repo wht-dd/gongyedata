@@ -24,7 +24,18 @@
 				    chartBME280_2(data);
 				}
         });
-        chartBME280_3();
+        $.ajax({
+				url: "/getSds011Sof",
+				type: "POST",
+                async: false,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+				    console.log(data);
+				    chartBME280_3(data);
+				}
+        });
+
 
     })
     </script>
