@@ -278,7 +278,7 @@ option = {
         bottom: 10,
         type: 'inside',
         start: 0,
-        end: 10
+        end: 50
     }, {
         start: 0,
         end: 10,

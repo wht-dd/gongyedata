@@ -65,7 +65,19 @@ option = {
     ],
     yAxis: [
         {
-            type: 'value'
+            type: 'value',
+            axisLabel: {
+            show: true,
+            textStyle: {
+                color: '#ffffff'
+            }
+        },
+        axisLine:{
+            lineStyle:{
+                color:'#ffffff',
+
+            }
+        }
         }
     ],
     series: [
