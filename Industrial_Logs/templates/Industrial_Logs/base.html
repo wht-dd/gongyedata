@@ -41,7 +41,7 @@
 {#    <script src="{{STATIC_URL}}js/fullscreen.js"></script>#}
 {#    <script src="{{STATIC_URL}}js/localFullScreen.js"></script>#}
 {#    <script src="{{STATIC_URL}}js/echarts.min.js"></script>#}
-
+<div id="back">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -53,21 +53,21 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
+{#                <li class="nav-item d-none d-sm-inline-block">#}
+{#                    <a href="#" class="nav-link">Contact</a>#}
+{#                </li>  // 上方导航栏弃用部分#}
             </ul>
             <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-                    </div>
-                </div>
-            </form>
+{#            <form class="form-inline ml-3">#}
+{#                <div class="input-group input-group-sm">#}
+{#                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">#}
+{#                    <div class="input-group-append">#}
+{#                        <button class="btn btn-navbar" type="submit">#}
+{#              <i class="fas fa-search"></i>#}
+{#            </button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </form>  // 上方导航栏弃用部分(搜索框)#}
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Notifications Dropdown Menu -->
@@ -318,6 +318,8 @@
             <strong>Copyright &copy; 2020 All rights reserved.</strong>
     </footer>
   </div>
+</div>
+
   <!-- ./wrapper -->
 <script>
         function btnClick(event) {
