@@ -58,7 +58,16 @@ def topics(request):
     aa=TemHum.objects.last()
     aa1=aa.temperature
     aa2=aa.humidity
-    context = {'topics': topics,'ss': ss,'aa1':aa1,'aa2':aa2}
+
+    result = SensorCount.objects.all()
+    dict = {}
+    dict["kind"] = list()
+    dict["count"] = list()
+    for row in result:
+        dict["kind"].append(row.kind)
+        dict['count'].append({"value": row.count, "name": row.kind})
+
+    context = {'topics': topics,'ss': ss,'aa1':aa1,'aa2':aa2,'kind':dict["kind"],'count':dict["count"]}
     return render(request, 'Industrial_Logs/topics.html', context)
 
 @login_required
