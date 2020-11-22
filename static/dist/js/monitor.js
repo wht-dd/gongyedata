@@ -36,26 +36,26 @@ var COLOR = {
     }
 };
 
-function renderLegend() {
-    drawLegend(COLOR.MACHINE.TYPE_A, 10, 'A机型');
-    drawLegend(COLOR.MACHINE.TYPE_B, 50, 'B机型');
-    drawLegend(COLOR.MACHINE.TYPE_C, 75, 'C机型');
-    drawLegend(COLOR.MACHINE.TYPE_D, 100, 'D机型');
-    drawLegend(COLOR.MACHINE.TYPE_E, 125, 'E机型');
-    drawLegend(COLOR.MACHINE.TYPE_F, 150, 'F机型');
-    drawLegend(COLOR.MACHINE.TYPE_G, 175, 'G机型');
-}
+// function renderLegend() {
+//     drawLegend(COLOR.MACHINE.TYPE_A, 10, 'A机型');
+//     drawLegend(COLOR.MACHINE.TYPE_B, 50, 'B机型');
+//     drawLegend(COLOR.MACHINE.TYPE_C, 75, 'C机型');
+//     drawLegend(COLOR.MACHINE.TYPE_D, 100, 'D机型');
+//     drawLegend(COLOR.MACHINE.TYPE_E, 125, 'E机型');
+//     drawLegend(COLOR.MACHINE.TYPE_F, 150, 'F机型');
+//     drawLegend(COLOR.MACHINE.TYPE_G, 175, 'G机型');
+// }
 
-function drawLegend(pointColor, pointY, text) {
-    var ctx = $("#layer03_left_01 canvas").get(0).getContext("2d");
-    ctx.beginPath();
-    ctx.arc(20, pointY, 6, 0, 2 * Math.PI);
-    ctx.fillStyle = pointColor;
-    ctx.fill();
-    ctx.font = '20px';
-    ctx.fillStyle = '#FEFFFE';
-    ctx.fillText(text, 40, pointY + 3);
-}
+// function drawLegend(pointColor, pointY, text) {
+//     var ctx = $("#layer03_left_01 canvas").get(0).getContext("2d");
+//     ctx.beginPath();
+//     ctx.arc(20, pointY, 6, 0, 2 * Math.PI);
+//     ctx.fillStyle = pointColor;
+//     ctx.fill();
+//     ctx.font = '20px';
+//     ctx.fillStyle = '#FEFFFE';
+//     ctx.fillText(text, 40, pointY + 3);
+// }
 
 
 //存储
