@@ -155,11 +155,11 @@ option = {
             }
         }
     },
-    visualMap: {
-        show: false,
-        dimension: 0,
-
-    },
+//    visualMap: {
+//        show: false,
+//        dimension: 0,
+//
+//    },
     series: [
         {
             name: 'pm10',
