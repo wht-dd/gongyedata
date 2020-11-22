@@ -103,6 +103,13 @@ function realTemAndHum_data() {
                         animation: false
                     }
                 },
+                 legend: {
+                    data: ['温度','湿度'],
+                    textStyle: {
+                            color: '#ffffff',
+                        },
+                    left:'center',
+                },
 
 
                 xAxis: {
@@ -142,13 +149,13 @@ function realTemAndHum_data() {
                 },
 
                 series: [{
-                    name: '模拟数据1',
+                    name: '温度',
                     type: 'line',
                     showSymbol: false,
                     hoverAnimation: false,
                     data: data
                 }, {
-                    name: '模拟数据2',
+                    name: '湿度',
                     type: 'line',
                     showSymbol: false,
                     hoverAnimation: false,

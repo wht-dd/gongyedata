@@ -5,7 +5,12 @@ var colors = ['#5793f3', '#d14a61', '#675bba'];
 
 option = {
     color: colors,
-
+    title: {
+        text: '温湿度-压力',
+        textStyle: {
+                color: '#ffffff'
+        }
+    },
     tooltip: {
         trigger: 'none',
         axisPointer: {
@@ -13,7 +18,12 @@ option = {
         }
     },
     legend: {
-        data:['温度', '湿度']
+        data:['温度', '湿度'],
+        left:'right',
+        textStyle: {
+                color: '#ffffff'
+        }
+
     },
     grid: {
         top: 70,
@@ -69,12 +79,12 @@ option = {
             axisLabel: {
             show: true,
             textStyle: {
-                color: '#ffffff'
+                color: '#9287e7',
             }
         },
         axisLine:{
             lineStyle:{
-                color:'#ffffff',
+                color:'#9287e7',
 
             }
         }
@@ -82,14 +92,14 @@ option = {
     ],
     series: [
         {
-            name: '2015 降水量',
+            name: '温度',
             type: 'line',
             xAxisIndex: 1,
             smooth: true,
             data: data.p1,
         },
         {
-            name: '2016 降水量',
+            name: '湿度',
             type: 'line',
             smooth: true,
             data: data.p2
