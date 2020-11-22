@@ -74,7 +74,7 @@ option = {
         },
         axisLine:{
             lineStyle:{
-                color:'#ffffff',
+                color:'#9287e7',
 
             }
         }

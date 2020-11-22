@@ -102,7 +102,7 @@ option = {
     },
     tooltip: {
         trigger: 'axis',
-
+        formatter: 'PM浓度:{c}μg/m³<br>温度:{b}°C'
     },
     toolbox: {
         show: true,
