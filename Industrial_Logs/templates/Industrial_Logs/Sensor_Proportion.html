@@ -3,14 +3,14 @@
 {% block header %}
 {% endblock header %}
 {% block content %}
+
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=d9f80d3c19df612f7f88fb984f37b68a"></script>
     <script src="{{STATIC_URL}}dist/js/OtherCharts.js"></script>
     <div id="back" class="main" style="height:90%;">
         <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">传感器信息</h1>
-        <div style="border:2px solid #666;width:100%;height: 80%;float:left" id="sensor_proportion_1"  class="chart-container"></div>
+
+        <iframe style="border:2px solid #666;width:80%;height: 80%;float:left" id="sensor_proportion_1"  class="chart-container" src="https://maplab.amap.com/share/mapv/65c8e17174910a178e181b8a56b788d0"></iframe>
+
     </div>
-    <script>
-    $(function () {
-        proportion({{ kind |safe}},{{ count |safe}})
-    })
-    </script>
+
 {% endblock content %}
