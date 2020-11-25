@@ -183,3 +183,135 @@ function realTemAndHum_data() {
     myChart.setOption(option);
     
 }
+
+
+
+function map0() {
+
+$.get("/static/dist/json/洛龙区.json",function(map){
+    var myChart = echarts.init(document.getElementById('sensor_proportion_2'));
+
+    echarts.registerMap("luoyang",map);
+    var option = {
+            title: {
+                text: '洛阳理工学院 ',
+                left: 'left'
+            },
+
+            toolbox: {
+                show: true,
+                left: 'right',
+                top: 'top',
+                feature: {
+                    dataView: {readOnly: false},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            series : [ {
+                map : "luoyang",
+                type : "map",
+                aspectScale: 1.0,
+                roam: true,//鼠标滚轮缩放
+                itemStyle: {
+                    normal: {
+                        borderWidth:1,
+                        borderColor:'#ffffff',//区域边框色
+                        areaColor: 'rgba(128, 128, 128, 0.1)',//区域背景色:透明
+
+                        label: {
+
+                            textStyle: {
+                                color: '#ffffff',//文字颜色
+                                fontSize:18      //文字大小
+                            }
+                        }
+                    },
+
+                },
+
+            } ]
+        };
+        myChart.setOption(option);
+    });
+    }
+
+
+ function map() {
+
+$.get("/static/dist/json/洛龙区.json",function(map){
+    var data = [
+         {name: '洛阳理工学院', value: 1}
+    ];
+    var geoCoordMap = {
+
+       '洛阳理工学院':[112.427988,34.618912],
+    };
+
+    var convertData = function (data) {
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+            var geoCoord = geoCoordMap[data[i].name];
+            if (geoCoord) {
+                res.push({
+                    name: data[i].name,
+                    value: geoCoord.concat(data[i].value)
+                });
+            }
+        }
+        return res;
+    };
+
+    echarts.registerMap("luoyang",map);
+	var myChart = echarts.init(document.getElementById('sensor_proportion_2'));
+    var option = {
+            title: {
+                text: '洛阳理工学院 ',
+                left: 'left'
+            },
+
+            toolbox: {
+                show: true,
+                left: 'right',
+                top: 'top',
+                feature: {
+                    dataView: {readOnly: false},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+
+			geo: {
+                map: 'luoyang',
+                roam:true,//鼠标滚轮缩放
+                aspectScale:1,
+                itemStyle: {
+                    normal: {
+                        borderWidth:1,
+                        borderColor:'#ffffff',//区域边框色
+                        areaColor: 'rgba(128, 128, 128, 0.1)',//区域背景色:透明
+
+
+                    },
+
+                },
+            },
+
+         series : [
+            {
+                name: '传感器',
+                type: 'scatter',
+                coordinateSystem: 'geo', // series坐标系类型
+                data: convertData(data),
+
+            },
+
+        ]
+
+    }
+
+
+    myChart.setOption(option);
+
+    });
+    }

@@ -8,9 +8,15 @@
     <script src="{{STATIC_URL}}dist/js/OtherCharts.js"></script>
     <div id="back" class="main" style="height:90%;">
         <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">传感器信息</h1>
-
-        <iframe style="border:2px solid #666;width:80%;height: 80%;float:left" id="sensor_proportion_1"  class="chart-container" src="https://maplab.amap.com/share/mapv/65c8e17174910a178e181b8a56b788d0"></iframe>
-
+        <!-- 调用api -->
+        <!--  <iframe style="border:2px solid #666;width:80%;height: 80%;float:left" id="sensor_proportion_1"  class="chart-container" src="https://maplab.amap.com/share/mapv/65c8e17174910a178e181b8a56b788d0"></iframe>
+         -->
+        <div style="border:2px solid #666;width:80%;height: 80%;float:left" id="sensor_proportion_2"  class="chart-container"></div>
     </div>
+    <script>
 
+    $(function () {
+        map();
+    })
+    </script>
 {% endblock content %}
