@@ -185,58 +185,6 @@ function realTemAndHum_data() {
 }
 
 
-
-function map0() {
-
-$.get("/static/dist/json/洛龙区.json",function(map){
-    var myChart = echarts.init(document.getElementById('sensor_proportion_2'));
-
-    echarts.registerMap("luoyang",map);
-    var option = {
-            title: {
-                text: '洛阳理工学院 ',
-                left: 'left'
-            },
-
-            toolbox: {
-                show: true,
-                left: 'right',
-                top: 'top',
-                feature: {
-                    dataView: {readOnly: false},
-                    restore: {},
-                    saveAsImage: {}
-                }
-            },
-            series : [ {
-                map : "luoyang",
-                type : "map",
-                aspectScale: 1.0,
-                roam: true,//鼠标滚轮缩放
-                itemStyle: {
-                    normal: {
-                        borderWidth:1,
-                        borderColor:'#ffffff',//区域边框色
-                        areaColor: 'rgba(128, 128, 128, 0.1)',//区域背景色:透明
-
-                        label: {
-
-                            textStyle: {
-                                color: '#ffffff',//文字颜色
-                                fontSize:18      //文字大小
-                            }
-                        }
-                    },
-
-                },
-
-            } ]
-        };
-        myChart.setOption(option);
-    });
-    }
-
-
  function map() {
 
 $.get("/static/dist/json/洛龙区.json",function(map){
