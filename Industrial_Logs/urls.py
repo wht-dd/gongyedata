@@ -43,4 +43,5 @@ urlpatterns = [
     # 2020.11.24 新增传感器信息页面
     url(r'^Sensor_inf/$', views.Sensor_inf, name='Sensor_inf'),
 
+
 ]

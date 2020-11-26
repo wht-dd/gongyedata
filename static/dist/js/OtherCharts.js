@@ -423,6 +423,7 @@ option = {
     myChart.setOption(option);
 
 }
+
 //湿度/压力
 function P_TH_1() {
     var myChart = echarts.init(document.getElementById("P_TH_1"));
