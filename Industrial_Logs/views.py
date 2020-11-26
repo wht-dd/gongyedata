@@ -1,21 +1,25 @@
 ﻿import json
 import datetime
-from django.shortcuts import render,HttpResponse
+import pprint
+
+from django.shortcuts import render, HttpResponse
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import gydb
 from .models import Topic
-from .models import DevTem,DeviceInfo,TemHum, Bme280Sof, Sds011Sof,SensorCount
+from .models import DevTem, DeviceInfo, TemHum, Bme280Sof, Sds011Sof, SensorCount
 from .forms import TopicForm, EntryForm, Entry
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
+
 
 @login_required
 # Create your views here.
 def index(request):
     """学习笔记的主页"""
     return render(request, 'Industrial_Logs/index.html')
+
 
 @login_required
 # Create your views here.
@@ -27,10 +31,12 @@ def Sensor_inf(request):
 def BME280(request):
     return render(request, 'Industrial_Logs/BME280.html')
 
+
 @login_required
 # Create your views here.
 def SDS011(request):
     return render(request, 'Industrial_Logs/SDS011.html')
+
 
 @login_required
 # Create your views here.
@@ -41,7 +47,7 @@ def Sensor_Proportion(request):
     dict["count"] = list()
     for row in result:
         dict["kind"].append(row.kind)
-        dict['count'].append({"value":row.count,"name":row.kind})
+        dict['count'].append({"value": row.count, "name": row.kind})
     return render(request, 'Industrial_Logs/Sensor_Proportion.html', dict)
 
 
@@ -50,19 +56,21 @@ def Sensor_Proportion(request):
 def PTH_PM(request):
     return render(request, 'Industrial_Logs/PTH_PM.html')
 
+
 @login_required
 # Create your views here.
 def realTemAndHum(request):
     return render(request, 'Industrial_Logs/real_TemAndHum.html')
+
 
 @login_required
 def topics(request):
     """显示所有的主题"""
     topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     ss = DeviceInfo.objects.count()
-    aa=TemHum.objects.last()
-    aa1=aa.temperature
-    aa2=aa.humidity
+    aa = TemHum.objects.last()
+    aa1 = aa.temperature
+    aa2 = aa.humidity
 
     result = SensorCount.objects.all()
     dict = {}
@@ -72,24 +80,27 @@ def topics(request):
         dict["kind"].append(row.kind)
         dict['count'].append({"value": row.count, "name": row.kind})
 
-    context = {'topics': topics,'ss': ss,'aa1':aa1,'aa2':aa2,'kind':dict["kind"],'count':dict["count"]}
+    context = {'topics': topics, 'ss': ss, 'aa1': aa1, 'aa2': aa2, 'kind': dict["kind"], 'count': dict["count"]}
     return render(request, 'Industrial_Logs/topics.html', context)
+
 
 @login_required
 def fullscreen(request):
     """显示所有的主题"""
     fullscreen = Topic.objects.filter(owner=request.user).order_by('date_added')
     ss = DeviceInfo.objects.count()
-    aa=TemHum.objects.last()
-    aa1=aa.temperature
-    aa2=aa.humidity
-    context = {'fullscreen': fullscreen,'ss': ss,'aa1':aa1,'aa2':aa2}
+    aa = TemHum.objects.last()
+    aa1 = aa.temperature
+    aa2 = aa.humidity
+    context = {'fullscreen': fullscreen, 'ss': ss, 'aa1': aa1, 'aa2': aa2}
     return render(request, 'Industrial_Logs/fullscreen.html', context)
+
 
 @login_required
 # Create your views here.
 def realtem_hum(request):
     return render(request, 'Industrial_Logs/realtem_hum.html')
+
 
 @login_required
 # Create your views here.
@@ -102,22 +113,24 @@ def data_collection(request):
 def realdev_tem(request):
     return render(request, 'Industrial_Logs/realdev_tem.html')
 
+
 @login_required
 # 压力-温湿度页面
 def P_TH(request):
     return render(request, 'Industrial_Logs/P_TH.html')
 
+
 def get_dev_temp(request):
-    date=datetime.datetime.now().strftime('%Y-%m-%d')
-    result=DevTem.objects.filter(date=date).order_by('-time').first()
-    dic={}
-    dic["City"]=result.city
-    dic["Region"]=result.region
-    dic["Date"]=result.date
-    dic["Time"]=result.time
-    dic["dev_tem"]=result.dev_tem
-    dic["Dencode"]=result.dencode
-    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+    date = datetime.datetime.now().strftime('%Y-%m-%d')
+    result = DevTem.objects.filter(date=date).order_by('-time').first()
+    dic = {}
+    dic["City"] = result.city
+    dic["Region"] = result.region
+    dic["Date"] = result.date
+    dic["Time"] = result.time
+    dic["dev_tem"] = result.dev_tem
+    dic["Dencode"] = result.dencode
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
 
 @login_required
@@ -137,17 +150,16 @@ def cgq(request):
         i += 1
     return render(request, 'Industrial_Logs/cgq.html', {'tt': tt, 'tx': tx, 'ty': json.dumps(ty)})
 
+
 @login_required
 def topic(request, topic_id):
     """显示单个主题及其所有的条目"""
     topic = Topic.objects.get(id=topic_id)
-    if topic.owner != request.user: 
+    if topic.owner != request.user:
         raise Http404
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'Industrial_Logs/topic.html', context)
-
-
 
 
 @login_required
@@ -166,6 +178,7 @@ def new_topic(request):
             return HttpResponseRedirect(reverse('Industrial_Logs:topics'))
     context = {'form': form}
     return render(request, 'Industrial_Logs/new_topic.html', context)
+
 
 @login_required
 def new_entry(request, topic_id):
@@ -199,7 +212,7 @@ def edit_entry(request, entry_id):
     if request.method != 'POST':
         # 初次请求，使用当前条目填充表单
         form = EntryForm(instance=entry)
-    else: 
+    else:
         # POST提交的数据，对数据进行处理
         form = EntryForm(instance=entry, data=request.POST)
         if form.is_valid():
@@ -208,6 +221,7 @@ def edit_entry(request, entry_id):
                                             args=[topic.id]))
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'Industrial_Logs/edit_entry.html', context)
+
 
 def url(request):
     t = gydb.objects.all()[:30]
@@ -223,9 +237,10 @@ def url(request):
         i += 1
     return render(request, 'Industrial_Logs/show.html', {'tt': tt, 'tx': tx, 'ty': json.dumps(ty)})
 
+
 @csrf_exempt
 @login_required
-def getBme280Sof(request,sensorid=2266,rows=3000):
+def getBme280Sof(request, sensorid=2266, rows=3000):
     if request.method == 'POST':
         rows = request.POST.get('rows', 3000)
         sensorid = request.POST.get('sensor_id', 2266)
@@ -239,7 +254,7 @@ def getBme280Sof(request,sensorid=2266,rows=3000):
         """, params=[sensorid, rows])
         result = cur.fetchall()
 
-        dic={}
+        dic = {}
         dic["pressure"] = list()
         dic["temperature"] = list()
         dic["humidity"] = list()
@@ -252,8 +267,10 @@ def getBme280Sof(request,sensorid=2266,rows=3000):
             dic["timestamp"].append(row[1])
             dic["sensor_id"].append(row[0])
         # print(dic)
-    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
+
+"""/static/img/bg.jpg"""
 
 
 @csrf_exempt
@@ -273,7 +290,7 @@ def getSds011Sof(request, sensorid=1471, rows=3000):
         desc  limit %s;
         """, params=[sensorid, rows])
         result = cur.fetchall()
-        dic={}
+        dic = {}
         dic["p1"] = list()
         dic["p2"] = list()
         dic["timestamp"] = list()
@@ -284,13 +301,12 @@ def getSds011Sof(request, sensorid=1471, rows=3000):
             dic["timestamp"].append(row[1])
             dic["sensor_id"].append(row[0])
     # print(dic)
-    return HttpResponse(json.dumps(dic,ensure_ascii=False))
-
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
 
 @csrf_exempt
 @login_required
-def getSensor_information(request,sensorid=2266,rows=3000):
+def getSensor_information(request, sensorid=2266, rows=3000):
     if request.method == 'POST':
         rows = request.POST.get('rows', 3000)
         sensorid = request.POST.get('sensor_id', 2266)
@@ -304,7 +320,7 @@ def getSensor_information(request,sensorid=2266,rows=3000):
         """, params=[sensorid, rows])
         result = cur.fetchall()
 
-        dic={}
+        dic = {}
         dic["pressure"] = list()
         dic["temperature"] = list()
         dic["humidity"] = list()
@@ -317,7 +333,46 @@ def getSensor_information(request,sensorid=2266,rows=3000):
             dic["timestamp"].append(row[1])
             dic["sensor_id"].append(row[0])
         # print(dic)
-    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
+
+@csrf_exempt
+@login_required
+def getRealData(request, sensorid=1471, rows=30):
+    print("我被访问了，我是实时数据展示接口")
+    """温度湿度实时数据"""
+    # if request.method == 'POST':
+    #     rows = request.POST.get('rows', 30)
+    #     sensorid = request.POST.get('sensor_id', 1471)
+
+    with connection.cursor() as cur:
+        cur.execute("""
+        select temp,hum,create_time
+        from tb_temp_hum limit 1200;
+        """)
+        result = cur.fetchall()
+        dic = {}
+        dic["temp"] = list()
+        dic["hum"] = list()
+        dic["create_time"] = list()
+        for row in result:
+            dic["temp"].append(row[0])
+            dic["hum"].append(row[1])
+            dic["create_time"].append(row[2])
+            # temp = row[0]
+            # hum = row[1]
+            # create_time = row[2]
+
+    # json_data =json.dumps(dic)
+    print("*" * 60)
+    print("*" * 60)
+    print("*" * 60)
+    # print(type(json_data))
+    # print("*"*60)
+    pprint.pprint(dic)
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+    # return render(request,'Industrial_Logs/real_TemAndHum.html',{'dic':dic})
+
 
 @csrf_exempt
 @login_required
@@ -334,7 +389,7 @@ def getBmeSds(request, rows=3000):
         limit %s;
         """, params=[rows])
         result = cur.fetchall()
-        dic={}
+        dic = {}
         dic["p1"] = list()
         dic["p2"] = list()
         dic["timestamp"] = list()
@@ -349,7 +404,8 @@ def getBmeSds(request, rows=3000):
             dic["p2"].append(row[2])
             dic["timestamp"].append(row[0])
     # print(dic)
-    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
 
 @csrf_exempt
 @login_required
@@ -367,7 +423,7 @@ def getPTH_PM(request, rows=5000):
         limit %s;
         """, params=[rows])
         result = cur.fetchall()
-        dic={}
+        dic = {}
         dic["p1"] = list()
         dic["p2"] = list()
         dic["temperature"] = list()
@@ -376,7 +432,8 @@ def getPTH_PM(request, rows=5000):
             dic["p1"].append(row[1])
             dic["p2"].append(row[2])
     # print(dic)
-    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
 
 @csrf_exempt
 @login_required
@@ -390,7 +447,7 @@ def getHPM(request, rows=3000):
         limit %s;
         """, params=[rows])
         result = cur.fetchall()
-        dic={}
+        dic = {}
         dic["p1"] = list()
         dic["p2"] = list()
         dic["humidity"] = list()
@@ -398,8 +455,9 @@ def getHPM(request, rows=3000):
             dic["humidity"].append(row[0])
             dic["p1"].append(row[1])
             dic["p2"].append(row[2])
-    # print(dic)
-    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+    print(dic)
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
 
 @csrf_exempt
 @login_required
@@ -413,7 +471,7 @@ def getPPM(request, rows=3000):
         limit %s;
         """, params=[rows])
         result = cur.fetchall()
-        dic={}
+        dic = {}
         dic["p1"] = list()
         dic["p2"] = list()
         dic["pressure"] = list()
@@ -422,4 +480,39 @@ def getPPM(request, rows=3000):
             dic["p1"].append(row[1])
             dic["p2"].append(row[2])
     # print(dic)
-    return HttpResponse(json.dumps(dic,ensure_ascii=False))
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
+
+@csrf_exempt
+@login_required
+def getRealData(request, rows=1200):
+    """获取实时温度与湿度数据"""
+    # if request.method == 'POST':
+    #     rows = request.POST.get('rows', 3000)
+
+    print("*" * 80)
+    print("*" * 80)
+    print("我是实时数据接口，我被访问了")
+    print("*" * 80)
+    print("*" * 80)
+
+    with connection.cursor() as cur:
+        cur.execute("""
+        select temp,hum,create_time  from tb_temp_hum
+        limit %s;
+        """, params=[rows])
+        result = cur.fetchall()
+        dic = {}
+        dic["temp"] = list()
+        dic["hum"] = list()
+        dic["create_time"] = list()
+        for row in result:
+            dic["temp"].append(row[0])
+            dic["hum"].append(row[1])
+            dic["create_time"].append(row[2])
+
+    # print(dic)
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
+
+
