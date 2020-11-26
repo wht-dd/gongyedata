@@ -190,7 +190,7 @@ function realTemAndHum_data(data) {
                         data: data["temp"]
                     }]
                 });
-            }, 1000);
+            }, 5000);
 
     myChart.setOption(option);
     
