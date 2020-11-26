@@ -1,4 +1,4 @@
-﻿"""定义learning_logs的URL模式"""
+"""定义learning_logs的URL模式"""
 from django.urls import path
 from django.conf.urls import url
 from . import views
@@ -34,9 +34,13 @@ urlpatterns = [
     #2020年11月16日    仅获取数据
     path('getBme280Sof', views.getBme280Sof),
     #2020年11月17日    仅获取数据
-    path(r'^getSds011Sof/$', views.getSds011Sof),
-    path(r'getRealData', views.getRealData),
-
-
+    path('getSds011Sof', views.getSds011Sof),
+    #2020年11月19日    获取关联数据
+    path('getBmeSds', views.getBmeSds),
+    path('getPTH_PM', views.getPTH_PM),
+    path('getHPM', views.getHPM),
+    path('getPPM', views.getPPM),
+    # 2020.11.24 新增传感器信息页面
+    url(r'^Sensor_inf/$', views.Sensor_inf, name='Sensor_inf'),
 
 ]
