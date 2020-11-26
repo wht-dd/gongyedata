@@ -15,10 +15,11 @@
 
     {#实时温度，湿度查询#}
         {#console.log({{ dic }})#}
+    $(function () {
         $.ajax({
             url: "/getRealData",
             type: "POST",
-            async: false,
+            async: true,
             cache: false,
             dataType: "json", //返回数据格式为json
             success: function (data) {//请求成功完成后要执行的方法
@@ -26,6 +27,8 @@
                 realTemAndHum_data(data);
             }
         });
+    })
+
 
     </script>
 {% endblock content %}

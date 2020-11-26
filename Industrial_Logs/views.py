@@ -424,35 +424,47 @@ def getPPM(request, rows=3000):
     # print(dic)
     return HttpResponse(json.dumps(dic,ensure_ascii=False))
 
+
+
+
+
 @csrf_exempt
 @login_required
-def getRealData(request, rows=1200):
+def getRealData(request, rows=300):
     """获取实时温度与湿度数据"""
-    # if request.method == 'POST':
-    #     rows = request.POST.get('rows', 3000)
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 300)
 
-    print("*" * 80)
-    print("*" * 80)
-    print("我是实时数据接口，我被访问了")
-    print("*" * 80)
-    print("*" * 80)
+    if request.method == 'GET':
+        rows = request.GET.get('rows', 1)
+    import pymysql
 
-    with connection.cursor() as cur:
+    # 打开数据库连接
+    db = pymysql.connect(host="211.84.112.23",
+                         port=8050,
+                         user="root",
+                         password="123456",
+                         db="db_sensor")
+
+    with db.cursor() as cur:
         cur.execute("""
-        select temp,hum,create_time  from tb_temp_hum
+        select temp,hum,create_time  from tb_temp_hum  ORDER BY create_time desc 
         limit %s;
-        """, params=[rows])
+        """,args=[rows])
         result = cur.fetchall()
         dic = {}
         dic["temp"] = list()
         dic["hum"] = list()
         dic["create_time"] = list()
         for row in result:
-            dic["temp"].append(row[0])
-            dic["hum"].append(row[1])
+            dic["temp"].append(row[1])
+            dic["hum"].append(row[0])
             dic["create_time"].append(row[2])
-
+        dic["temp"].reverse()
+        dic["hum"].reverse()
+        dic["create_time"].reverse()
     # print(dic)
+    db.close()
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
 

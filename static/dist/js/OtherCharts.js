@@ -45,63 +45,59 @@ function proportion(datax,datay) {
 }
 
 //温湿度实时折线图
-function realTemAndHum_data() {
+function realTemAndHum_data(data) {
     var myChart = echarts.init(document.getElementById("realTemAndHum_1"));
-    var data = [];
-    var data2 = [];
-    var now = +new Date(2014, 11, 29);
-    var oneDay = 24 * 3600 * 1000;
-    var value = Math.random() * 1000;
+    // var data = [];
+    // var data2 = [];
+    // var now = +new Date(2014, 11, 29);
+    // var oneDay = 24 * 3600 * 1000;
+    // var value = Math.random() * 1000;
+    //
+    // function randomData() {
+    //     now = new Date(+now + oneDay);
+    //     value = value + Math.random() * 21 - 10;
+    //     return {
+    //         name: now.toString(),
+    //         value: [
+    //             [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+    //             Math.round(value)
+    //         ]
+    //     }
+    // }
+    //
+    //
+    // function randomData2() {
+    //     now = new Date(+now + oneDay);
+    //     value = value + Math.random() * 21 - 10;
+    //     return {
+    //         name: now.toString(),
+    //         value: [
+    //             [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+    //             Math.round(value + 100)
+    //         ]
+    //     }
+    // }
 
-    function randomData() {
-        now = new Date(+now + oneDay);
-        value = value + Math.random() * 21 - 10;
-        return {
-            name: now.toString(),
-            value: [
-                [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                Math.round(value)
-            ]
-        }
-    }
 
 
-    function randomData2() {
-        now = new Date(+now + oneDay);
-        value = value + Math.random() * 21 - 10;
-        return {
-            name: now.toString(),
-            value: [
-                [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                Math.round(value + 100)
-            ]
-        }
-    }
-
-
-
-    for (var i = 0; i < 1000; i++) {
-        data.push(randomData());
-        data2.push(randomData2());
-    }
+    // for (var i = 0; i < 1000; i++) {
+    //     data.push(randomData());
+    //     data2.push(randomData2());
+    // }
     //指定图表的配置项和数据
             option = {
                 title: {
-                    text: '仿真设备实时温度',
+                    text: '设备实时温度',
                     textStyle: {
                         color: '#ffffff'
                     }
                 },
                 tooltip: {
                     trigger: 'axis',
-                    formatter: function(params) {
-                        params = params[0];
-                        var date = new Date(params.name);
-                        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-                    },
-                    axisPointer: {
-                        animation: false
-                    }
+                    // formatter: "{a},{b},{c},{d},{e}",
+                    // axisPointer: {
+                    //     animation: false
+                    // }
                 },
                  legend: {
                     data: ['温度','湿度'],
@@ -113,7 +109,8 @@ function realTemAndHum_data() {
 
 
                 xAxis: {
-                    type: 'time',
+                    type: 'category',
+                    data:data.create_time,
                     splitLine: {
                         show: false
                     },
@@ -153,29 +150,44 @@ function realTemAndHum_data() {
                     type: 'line',
                     showSymbol: false,
                     hoverAnimation: false,
-                    data: data
+                    data: data.temp
                 }, {
                     name: '湿度',
                     type: 'line',
                     showSymbol: false,
                     hoverAnimation: false,
-                    data: data2
+                    data: data.hum
                 }]
             };
 
             setInterval(function() {
 
-                for (var i = 0; i < 5; i++) {
-                    data.shift();
-                    data.push(randomData());
-                    data2.push(randomData2());
-                }
+                $.ajax({
+            url: "/getRealData",
+            type: "GET",
+            async: true,
+            cache: false,
+            dataType: "json", //返回数据格式为json
+            success: function (Ldata) {//请求成功完成后要执行的方法
+                console.log(Ldata);
+                data["create_time"].shift();
+                data["hum"].shift();
+                data["temp"].shift();
+                data["create_time"].push(Ldata["create_time"]);
+                data["hum"].push(Ldata["hum"]);
+                data["temp"].push(Ldata["temp"]);
+            }
+        });
+
 
                 myChart.setOption({
+                    xAxis:{
+                        data:data["create_time"]
+                    },
                     series: [{
-                        data: data
+                        data: data["hum"]
                     }, {
-                        data: data2
+                        data: data["temp"]
                     }]
                 });
             }, 1000);
