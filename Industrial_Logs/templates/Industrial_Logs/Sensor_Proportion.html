@@ -3,16 +3,84 @@
 {% block header %}
 {% endblock header %}
 {% block content %}
+<style>
+#back {
+    height: 91%;
+    width: 84%;
+}
+h1 {
+    color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;
+}
 
+:-moz-full-screen #back{
+    {#background-color: pink;#}
+    height:100%;
+    width: 100%;
+}
+:-webkit-full-screen #back{
+    {#background-color: pink;#}
+    height:100%;
+    width: 100%;
+}
+:fullscreen #back{
+    {#background-color: pink;#}
+    height:100%;
+    width: 100%;
+
+}
+
+:-moz-full-screen h1{
+    {#background-color: pink;#}
+    display: none;
+}
+:-webkit-full-screen h1{
+    {#background-color: pink;#}
+    display: none;
+}
+:fullscreen h1{
+    {#background-color: pink;#}
+    display: none;
+
+
+}
+
+</style>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=d9f80d3c19df612f7f88fb984f37b68a"></script>
     <script src="{{STATIC_URL}}dist/js/OtherCharts.js"></script>
-    <div id="back" class="main" style="height:90%;">
-        <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">传感器信息</h1>
+    <div id="back" class="main" >
+        <h1>传感器信息</h1>
         <!-- 调用api -->
         <!--  <iframe style="border:2px solid #666;width:80%;height: 80%;float:left" id="sensor_proportion_1"  class="chart-container" src="https://maplab.amap.com/share/mapv/65c8e17174910a178e181b8a56b788d0"></iframe>
          -->
         <div style="border:2px solid #666;width:80%;height: 80%;float:left" id="sensor_proportion_2"  class="chart-container"></div>
     </div>
+    <script>
+var elem = document.getElementById("back");
+
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+     elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) {    /* Firefox */
+     elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+     elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {     /* IE/Edge */
+     elem.msRequestFullscreen();
+  }
+}
+
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+     document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {  /* Firefox */
+     document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+     document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {     /* IE/Edge */
+     document.msExitFullscreen();
+  }
+}
+</script>
     <script>
 
     $(function () {

@@ -19,6 +19,11 @@ def index(request):
 
 @login_required
 # Create your views here.
+def Sensor_inf(request):
+    return render(request, 'Industrial_Logs/Sensor_inf.html')
+
+@login_required
+# Create your views here.
 def BME280(request):
     return render(request, 'Industrial_Logs/BME280.html')
 
