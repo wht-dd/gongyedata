@@ -14,6 +14,7 @@ from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 
 
+
 @login_required
 # Create your views here.
 def index(request):
