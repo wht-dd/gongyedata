@@ -121,7 +121,7 @@ function showD(id) {
         $.ajax({
 				url: "/getPPM",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法

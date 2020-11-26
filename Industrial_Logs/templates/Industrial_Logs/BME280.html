@@ -55,7 +55,7 @@ function show(id){
         $.ajax({
 				url: "/getBme280Sof",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
@@ -67,7 +67,7 @@ function show(id){
         $.ajax({
 				url: "/getSds011Sof",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法

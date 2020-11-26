@@ -69,7 +69,7 @@ function showPM(id) {
         $.ajax({
 				url: "/getPPM",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
@@ -82,7 +82,7 @@ function showPM(id) {
         $.ajax({
 				url: "/getPTH_PM",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
@@ -95,7 +95,7 @@ function showPM(id) {
         $.ajax({
 				url: "/getHPM",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
