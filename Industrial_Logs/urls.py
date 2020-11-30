@@ -44,4 +44,7 @@ urlpatterns = [
     url(r'^Sensor_inf/$', views.Sensor_inf, name='Sensor_inf'),
     #2020年11月26日  实时数据获取
     path("getRealData", views.getRealData,name="getRealData"),
+    # path("test/zhang",views.test_zhang),
+    path("getDataQuarter",views.get_data_quarter),
+    path("getDataHalfYear",views.get_data_halfYear),
 ]
