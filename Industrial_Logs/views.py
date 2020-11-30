@@ -593,7 +593,7 @@ def get_data_halfYear(request):
         """.format(name, "'" + start_time + "'", "'" + end_time + "'")
 
         # 检查sql语句
-        # print(f"sql:{sql}")
+        print(f"sql:{sql}")
 
         cur.execute(sql)
         result = cur.fetchall()

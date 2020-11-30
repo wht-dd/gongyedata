@@ -4,31 +4,31 @@
 {% endblock header %}
 {% block content %}
     <script src="{{STATIC_URL}}dist/js/bme280.js"></script>
+
     <div id="back" class="main" style="height:90%;">
         <h1 style="width:85%; color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">时间-压力/温度/湿度/PM(同比）</h1>
         <div style=" border:2px solid red; width:80%; height: 95%;margin:0px 40px" id=""  class="chart-container">
             <div style=" float:left;border:2px solid red;width:70%; height: 100%;margin:0px" id="box1"  class="chart-container" name="box">
-                <div style="border:2px solid #666;width:100%; height: 50%;float:left;" id=""  class="chart-container"></div>压力
-                <div style="border:2px solid #666;width:100%; height: 50%;float:left" id=""  class="chart-container"></div>
+                <div style="border:2px solid #666;width:100%; height: 50%;float:left;" id="HalfYearP1"  class="chart-container"></div>
+                <div style="border:2px solid #666;width:100%; height: 50%;float:left" id="HalfYearP2"  class="chart-container"></div>
             </div>
             <div style=" float:left;border:2px solid red;width:70%; height: 100%;margin:0px;display: none" id="box2"  class="chart-container" name="box">
-                <div style="border:2px solid #666;width:100%; height: 50%;float:left;" id=""  class="chart-container"></div>
-                温度
-                <div style="border:2px solid #666;width:100%; height: 50%;float:left" id=""  class="chart-container"></div>
+                <div style="border:2px solid #666;width:100%; height: 50%;float:left;" id="HalfYearT1"  class="chart-container"></div>
+                <div style="border:2px solid #666;width:100%; height: 50%;float:left" id="HalfYearT2"  class="chart-container"></div>
             </div>
             <div style=" float:left;border:2px solid red;width:70%; height: 100%;margin:0px; display: none" id="box3"  class="chart-container" name="box">
-                <div style="border:2px solid #666;width:100%; height: 50%;float:left;" id=""  class="chart-container"></div>湿度
-                <div style="border:2px solid #666;width:100%; height: 50%;float:left" id=""  class="chart-container"></div>
+                <div style="border:2px solid #666;width:100%; height: 50%;float:left;" id="HalfYearH1"  class="chart-container"></div>
+                <div style="border:2px solid #666;width:100%; height: 50%;float:left" id="HalfYearH2"  class="chart-container"></div>
             </div>
             <div style=" float:left;border:2px solid red;width:70%; height: 100%;margin:0px; display: none" id="box4"  class="chart-container" name="box">
-                <div style="border:2px solid #666;width:100%; height: 50%;float:left;" id=""  class="chart-container"></div>PM
-                <div style="border:2px solid #666;width:100%; height: 50%;float:left" id=""  class="chart-container"></div>
+                <div style="border:2px solid #666;width:100%; height: 50%;float:left;" id="HalfYearPM1"  class="chart-container"></div>
+                <div style="border:2px solid #666;width:100%; height: 50%;float:left" id="HalfYearPM2"  class="chart-container"></div>
             </div>
             <div style=" float:right;border:2px solid red;width:29%; height: 100%;margin:0px;" id=""  class="chart-container">
 {#                <a href="#" style="border:2px solid #666;width:100%;height: 23%;float:left;display:inline-block" onclick="show(1)">#}
                 <div style="border:2px solid #666;width:100%;height: 23%;" id="chart_BME280_0"  class="chart-container" onclick="show(1)">时间-压力</div>
-                <div style="border:2px solid #666;width:100%;height: 23%;" id="chart_BME280_2"  class="chart-container" onclick="show(2)">时间-温度</div>
-                <div style="border:2px solid #666;width:100%;height: 23%;" id="chart_BME280_1"  class="chart-container" onclick="show(3)">时间-湿度</div>
+                <div style="border:2px solid #666;width:100%;height: 23%;" id="chart_BME280_1"  class="chart-container" onclick="show(2)">时间-温度</div>
+                <div style="border:2px solid #666;width:100%;height: 23%;" id="chart_BME280_2"  class="chart-container" onclick="show(3)">时间-湿度</div>
                 <div style="border:2px solid #666;width:100%;height: 23%;" id="chart_BME280_3"  class="chart-container" onclick="show(4)">时间-PM</div>
             </div>
         </div>
@@ -38,6 +38,17 @@
 {#        <div style="border:2px solid #666;width:100%;height: 50%;float:left;margin-top: 2%" id="chart_BME280_3" class="chart-container"></div>#}
     </div>
 <script>
+ var  width = $("#HalfYearP1").width();
+var  height = $("#HalfYearP1").height();
+$("#HalfYearP2").css("width", width).css("height", height);
+$("#HalfYearT1").css("width", width).css("height", height);
+$("#HalfYearT2").css("width", width).css("height", height);
+$("#HalfYearH1").css("width", width).css("height", height);
+$("#HalfYearH2").css("width", width).css("height", height);
+$("#HalfYearPM1").css("width", width).css("height", height);
+$("#HalfYearPM2").css("width", width).css("height", height);
+
+
 function show(id){
     var boxs = document.getElementsByName("box")
     for (var i = 0 ; i < boxs.length ; i++){
@@ -52,31 +63,187 @@ function show(id){
 </script>
     <script>
     $(function () {
-        $.ajax({
-				url: "/getBme280Sof",
+          //显示2018年上半年的压力随时间的变化
+          $.ajax({
+				url: "/getDataHalfYear",
 				type: "POST",
+                data: {
+				    "name": "pressure",
+                    "start_time": "2018-01-01",
+                    "end_time": "2018-06-30"
+                },
                 async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
-				    console.log(data);
-				    chartBME280_1(data);
-				    chartBME280_2(data);
+                    console.log("pressure")
+                    console.log(data);
+                    showHalfYearP1(data);      //显示2018年上半年的压力随时间的变化
+                    chartBME280_0(data);       //右边小图，默认为2018年上半年的压力随时间变化
 				}
         });
-        $.ajax({
-				url: "/getSds011Sof",
+          //显示2019年上半年的压力随时间的变化
+          $.ajax({
+				url: "/getDataHalfYear",
 				type: "POST",
+                data: {
+				    "name": "pressure",
+                    "start_time": "2019-01-01",
+                    "end_time": "2019-06-30"
+                },
                 async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
-				    console.log(data);
-				    chartBME280_3(data);
+                    console.log("pressure")
+                    console.log(data);
+                    showHalfYearP2(data);      //显示2018年上半年的压力随时间的变化
+				}
+        });
+          //显示2018年上半年的温度随时间的变化
+          $.ajax({
+				url: "/getDataHalfYear",
+				type: "POST",
+                data: {
+				    "name": "temperature",
+                    "start_time": "2018-01-01",
+                    "end_time": "2018-06-30"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("temperature")
+                    console.log(data);
+                    showHalfYearT1(data);      //显示2018年上半年的温度随时间的变化
+                    chartBME280_1(data);       //右边小图，默认为2018年上半年的温度随时间变化
+				}
+        });
+          //显示2019年上半年的压力随时间的变化
+          $.ajax({
+				url: "/getDataHalfYear",
+				type: "POST",
+                data: {
+				    "name": "temperature",
+                    "start_time": "2019-01-01",
+                    "end_time": "2019-06-30"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("temperature")
+                    console.log(data);
+                    showHalfYearT2(data);      //显示2018年上半年的温度随时间的变化
+				}
+        });
+           //显示2018年上半年的压力随时间的变化
+          $.ajax({
+				url: "/getDataHalfYear",
+				type: "POST",
+                data: {
+				    "name": "humidity",
+                    "start_time": "2018-01-01",
+                    "end_time": "2018-06-30"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("humidity")
+                    console.log(data);
+                    showHalfYearH1(data);      //显示2018年上半年的湿度随时间的变化
+                     chartBME280_2(data);       //右边小图，默认为2018年上半年的湿度随时间变化
+				}
+        });
+          //显示2019年上半年的压力随时间的变化
+          $.ajax({
+				url: "/getDataHalfYear",
+				type: "POST",
+                data: {
+				    "name": "humidity",
+                    "start_time": "2019-01-01",
+                    "end_time": "2019-06-30"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("humidity")
+                    console.log(data);
+                    showHalfYearH2(data);      //显示2019年上半年的湿度随时间的变化
+				}
+        });
+          //显示2018年上半年的PM10随时间的变化
+          $.ajax({
+				url: "/getDataHalfYear",
+				type: "POST",
+                data: {
+				    "name": "P1",
+                    "start_time": "2018-01-01",
+                    "end_time": "2018-06-30"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("P1")
+                    console.log(data);
+                    showHalfYearPM1(data);      //显示2018年上半年的PM10随时间的变化
+                     chartBME280_3(data);       //右边小图，默认为2018年上半年的PM10随时间变化
+				}
+        });
+          //显示2019年上半年的PM10随时间的变化
+          $.ajax({
+				url: "/getDataHalfYear",
+				type: "POST",
+                data: {
+				    "name": "P1",
+                    "start_time": "2019-01-01",
+                    "end_time": "2019-06-30"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("P1")
+                    console.log(data);
+                    showHalfYearPM2(data);      //显示2019年上半年的PM10随时间的变化
 				}
         });
 
+          //侧边小图
 
-    })
+
+
+
+        {#  $.ajax({#}
+		{#		url: "/getBme280Sof",#}
+		{#		type: "POST",#}
+        {#        async: true,#}
+        {#        cache:false,#}
+		{#		dataType: "json", //返回数据格式为json#}
+		{#		success: function(data) {//请求成功完成后要执行的方法#}
+		{#		    console.log(data);#}
+		{#		    chartBME280_1(data);#}
+		{#		    chartBME280_2(data);#}
+		{#		}#}
+        {#});#}
+        {#$.ajax({#}
+		{#		url: "/getSds011Sof",#}
+		{#		type: "POST",#}
+        {#        async: true,#}
+        {#        cache:false,#}
+		{#		dataType: "json", //返回数据格式为json#}
+		{#		success: function(data) {//请求成功完成后要执行的方法#}
+		{#		    console.log(data);#}
+		{#		    chartBME280_3(data);#}
+		{#		}#}
+        {#});#}
+
+
+
+    });
+
     </script>
 {% endblock content %}

@@ -30,6 +30,12 @@
         </div>
     </div>
 <script>
+var  width = $("#P_TH_0").width();
+var  height = $("#P_TH_0").height();
+$("#P_TH_1").css("width", width).css("height", height);
+$("#PTH_PM_0").css("width", width).css("height", height);
+$("#PTH_PM_1").css("width", width).css("height", height);
+
 function show(id) {
     var boxs = document.getElementsByName("box")
     for (var i = 0; i < boxs.length; i++) {
