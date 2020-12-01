@@ -4,7 +4,7 @@
     <script src="{{STATIC_URL}}dist/js/OtherCharts.js"></script>
 
 
-      <div id="back" class="main" style="height:90%;">
+      <div id="back" class="main">
         <h1 style="width:85%;color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">温湿度-PM/压力</h1>
         <div style="border:2px solid red; width:80%; height: 95%;margin:0px 40px" id=""  class="chart-container">
             <div style="border:2px solid #666;height: 60%;margin:0px" id="PTH1"  class="chart-container" name="box">
@@ -30,8 +30,16 @@
         </div>
     </div>
 <script>
+var  width = $("#P_TH_0").width();
+var  height = $("#P_TH_0").height();
+console.log(width)
+console.log("hahhh")
+console.log(height)
+$("#P_TH_1").css("width", width).css("height", height);
+$("#PTH_PM_0").css("width", width).css("height", height);
+$("#PTH_PM_1").css("width", width).css("height", height);
 function show(id) {
-    var boxs = document.getElementsByName("box")
+    var boxs = document.getElementsByName("box");
     for (var i = 0; i < boxs.length; i++) {
         if (boxs[i].id == "PTH" + id) {
             boxs[i].style.display = ""
@@ -42,7 +50,7 @@ function show(id) {
     }
 }
 function showP(id) {
-    var box1s = document.getElementsByName("boxP")
+    var box1s = document.getElementsByName("boxP");
     for (var i = 0; i < box1s.length; i++) {
         if (box1s[i].id == "P_TH_" + id) {
             box1s[i].style.display = ""
@@ -53,7 +61,7 @@ function showP(id) {
     }
 }
 function showPM(id) {
-    var box1s = document.getElementsByName("boxPM")
+    var box1s = document.getElementsByName("boxPM");
     for (var i = 0; i < box1s.length; i++) {
         if (box1s[i].id == "PTH_PM_" + id) {
             box1s[i].style.display = ""
@@ -69,7 +77,7 @@ function showPM(id) {
         $.ajax({
 				url: "/getPPM",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
@@ -82,7 +90,7 @@ function showPM(id) {
         $.ajax({
 				url: "/getPTH_PM",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
@@ -95,7 +103,7 @@ function showPM(id) {
         $.ajax({
 				url: "/getHPM",
 				type: "POST",
-                async: false,
+                async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法

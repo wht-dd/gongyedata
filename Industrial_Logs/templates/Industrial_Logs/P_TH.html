@@ -2,13 +2,55 @@
 {% endblock header %} P_TH{% block content %}
 
     <script src="{{STATIC_URL}}dist/js/P_TH.js"></script>
+    <style>
+#back {
+    height: 91%;
+    width: 84%;
+}
+h1 {
+    color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;
+}
 
-    <div id="back" class="main" style="height:90%;">
+:-moz-full-screen #back{
+    {#background-color: pink;#}
+    height:100%;
+    width: 100%;
+}
+:-webkit-full-screen #back{
+    {#background-color: pink;#}
+    height:100%;
+    width: 100%;
+}
+:fullscreen #back{
+    {#background-color: pink;#}
+    height:100%;
+    width: 100%;
+
+}
+
+:-moz-full-screen h1{
+    {#background-color: pink;#}
+    display: none;
+}
+:-webkit-full-screen h1{
+    {#background-color: pink;#}
+    display: none;
+}
+:fullscreen h1{
+    {#background-color: pink;#}
+    display: none;
+
+
+}
+
+</style>
+
+    <div id="back" class="main">
         <h1 style="width:85%; color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">时间-压力/温度/湿度/PM(环比）</h1>
-        <div style=" border:2px solid red; width:80%; height: 95%;margin:0px 40px" id=""  class="chart-container">
+        <div style=" border:2px solid red; width:80%; height: 85%;margin:0px 40px" id=""  class="chart-container">
             <div style=" border:2px solid red; height: 65%;margin:0px" id="box1"  class="chart-container" name="box">春
                 <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showC(0)">温度</button>
-                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showC(1)">温度</button>
+                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showC(1)">湿度</button>
                 <button style="float:right; margin:10px 5px 0px 15px; color:white;display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showC(2)">压力</button>
                 <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showC(3)">PM</button>
                 <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="C_0"  class="chart-container" name="boxC">春/温度</div>
@@ -50,7 +92,7 @@
             <div style=" border:2px solid red; height: 35%;margin:0px" id=""  class="chart-container">
                 <div style="border:2px solid #666;width:33%; height: 100%;float:left;margin:0px;" id=""  class="chart-container" onclick="show(2)">夏季</div>
                 <div style="border:2px solid #666;width:33%; height: 100%;float:left;margin:0px;" id=""  class="chart-container" onclick="show(3)">秋季</div>
-                <div style="border:2px solid #666;width:33%; height: 100%;float:left;margin:0px;" id=""  class="chart-container" onclick="show(4)">冬季</div>
+                <div style="border:2px solid #666;width:32%; height: 100%;float:left;margin:0px;" id=""  class="chart-container" onclick="show(4)">冬季</div>
             </div>
         </div>
     </div>
