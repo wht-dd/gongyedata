@@ -60,8 +60,31 @@
 {#        <div style="border:2px solid #666;width:80%;height: 80%;float:left" id="P_TH_1"  class="chart-container"></div>#}
 {#    </div>#}
     <script>
+    var  width = $("#C_0").width();
+var  height = $("#C_0").height();
+$("#C_1").css("width", width).css("height", height);
+$("#C_2").css("width", width).css("height", height);
+$("#C_3").css("width", width).css("height", height);
+$("#X_0").css("width", width).css("height", height);
+$("#X_1").css("width", width).css("height", height);
+$("#X_2").css("width", width).css("height", height);
+$("#X_3").css("width", width).css("height", height);
+$("#Q_0").css("width", width).css("height", height);
+$("#Q_1").css("width", width).css("height", height);
+$("#Q_2").css("width", width).css("height", height);
+$("#Q_3").css("width", width).css("height", height);
+$("#D_0").css("width", width).css("height", height);
+$("#D_1").css("width", width).css("height", height);
+$("#D_2").css("width", width).css("height", height);
+$("#D_3").css("width", width).css("height", height);
+
+
+{#$("#PTH_PM_0").css("width", width).css("height", height);#}
+{#$("#PTH_PM_1").css("width", width).css("height", height);#}
+
+
 function show(id){
-var boxs = document.getElementsByName("box")
+var boxs = document.getElementsByName("box");
 for (var i = 0 ; i < boxs.length ; i++){
 if (boxs[i].id == "box"+id ){
 boxs[i].style.display=""
@@ -118,17 +141,316 @@ function showD(id) {
 </script>
     <script>
     $(function () {
+        //春
         $.ajax({
-				url: "/getPPM",
+				url: "/getDataQuarter",
 				type: "POST",
+                data: {
+				    "name": "pressure",
+                    "year": "2018",
+                    "quarter": "1"
+                },
                 async: true,
                 cache:false,
 				dataType: "json", //返回数据格式为json
 				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("pressure")
                     console.log(data);
-                    P_TH_1(data);
+                    showQuarter1P(data);      //显示2018年第一季度的压力随时间的变化
 				}
         });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "temperature",
+                    "year": "2018",
+                    "quarter": "1"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("temperature")
+				    console.log(data);
+                    showQuarter1T(data);      //显示2018年第一季度的温度随时间的变化
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "humidity",
+                    "year": "2018",
+                    "quarter": "1"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("humidity")
+				    console.log(data);
+                    showQuarter1H(data);      //显示2018年第一季度的湿度随时间的变化
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "   P1",
+                    "year": "2018",
+                    "quarter": "1"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("P1")
+				    console.log(data);
+                    showQuarter1PM(data);      //显示2018年第一季度的PM随时间的变化
+				}
+        });
+        //夏
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "pressure",
+                    "year": "2018",
+                    "quarter": "2"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("pressure")
+                    console.log(data);
+                    showQuarter2P(data);      //显示2018年第二季度的压力随时间的变化
+
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "temperature",
+                    "year": "2018",
+                    "quarter": "2"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("temperature")
+				    console.log(data);
+                    showQuarter2T(data);      //显示2018年第二季度的温度随时间的变化
+                    showQuarter2(data);      //下面小图中的夏季，默认显示2018年第二季度的温度随时间的变化小
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "humidity",
+                    "year": "2018",
+                    "quarter": "2"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("humidity")
+				    console.log(data);
+                    showQuarter2H(data);      //显示2018年第二季度的湿度随时间的变化
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "   P1",
+                    "year": "2018",
+                    "quarter": "2"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("P1")
+				    console.log(data);
+                    showQuarter2PM(data);      //显示2018年第二季度的PM随时间的变化
+				}
+        });
+        //秋
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "pressure",
+                    "year": "2018",
+                    "quarter": "3"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("pressure")
+                    console.log(data);
+                    showQuarter3P(data);      //显示2018年第三季度的压力随时间的变化
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "temperature",
+                    "year": "2018",
+                    "quarter": "3"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("temperature")
+				    console.log(data);
+                    showQuarter3T(data);      //显示2018年第三季度的温度随时间的变化
+                    showQuarter3(data);      //下面小图中的秋季，默认显示2018年第三季度的温度随时间的变化小
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "humidity",
+                    "year": "2018",
+                    "quarter": "3"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("humidity")
+				    console.log(data);
+                    showQuarter3H(data);      //显示2018年第三季度的湿度随时间的变化
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "   P1",
+                    "year": "2018",
+                    "quarter": "3"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("P1")
+				    console.log(data);
+                    showQuarter3PM(data);      //显示2018年第三季度的PM随时间的变化
+				}
+        });
+        //冬
+         $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "pressure",
+                    "year": "2018",
+                    "quarter": "4"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("pressure")
+                    console.log(data);
+                    showQuarter4P(data);      //显示2018年第四季度的压力随时间的变化
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "temperature",
+                    "year": "2018",
+                    "quarter": "4"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("temperature")
+				    console.log(data);
+                    showQuarter4T(data);      //显示2018年第四季度的温度随时间的变化
+                    showQuarter4(data);      //下面小图中的冬季，默认显示2018年第三季度的温度随时间的变化小
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "humidity",
+                    "year": "2018",
+                    "quarter": "4"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("humidity")
+				    console.log(data);
+                    showQuarter4H(data);      //显示2018年第四季度的湿度随时间的变化
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "   P1",
+                    "year": "2018",
+                    "quarter": "4"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("P1")
+				    console.log(data);
+                    showQuarter4PM(data);      //显示2018年第四季度的PM随时间的变化
+				}
+        });
+        $.ajax({
+				url: "/getDataQuarter",
+				type: "POST",
+                data: {
+				    "name": "   P1",
+                    "year": "2018",
+                    "quarter": "4"
+                },
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log("P1")
+				    console.log(data);
+                    showQuarter4PM(data);      //显示2018年第四季度的PM随时间的变化
+				}
+        });
+
+
+        {#$.ajax({#}
+        {#        {#       url: "/getPPM",#}
+        {#        {#       type: "POST",#}
+        {#        {#       async: true,#}
+        {#        {#       cache:false,#}
+        {#        {#       dataType: "json", //返回数据格式为json#}
+        {#        {#       success: function(data) {//请求成功完成后要执行的方法#}
+        {#        {#            console.log(data);#}
+        {#        {#            P_TH_0(data);#}
+        {#        {#       }#}
+        {#        {# });#}
     })
     </script>
 {% endblock content %}
