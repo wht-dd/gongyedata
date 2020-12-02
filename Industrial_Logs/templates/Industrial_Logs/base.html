@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="{{STATIC_URL}}plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{STATIC_URL}}dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}font-awesome/css/font-awesome.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- 我的css和js -->
     <link href="{{STATIC_URL}}css/playground.css" media="all" rel="stylesheet" type="text/css" />
+{#    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">#}
     <style>
         #container{
             padding: 0;
@@ -23,13 +25,12 @@
     </style>
 
 </head>
-
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" style="overflow:-Scroll; overflow-x:hidden; overflow-y:hidden;">
     <!-- map -->
 
     <!-- jQuery -->
 {#    <script src="{{STATIC_URL}}plugins/jquery/jquery.min.js"></script>#}
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="{{STATIC_URL}}plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
@@ -42,7 +43,7 @@
 {#    <script src="{{STATIC_URL}}js/fullscreen.js"></script>#}
 {#    <script src="{{STATIC_URL}}js/localFullScreen.js"></script>#}
 {#    <script src="{{STATIC_URL}}js/echarts.min.js"></script>#}
-
+{#<div id="back">#}
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -54,21 +55,21 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
+{#                <li class="nav-item d-none d-sm-inline-block">#}
+{#                    <a href="#" class="nav-link">Contact</a>#}
+{#                </li>  // 上方导航栏弃用部分#}
             </ul>
             <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-                    </div>
-                </div>
-            </form>
+{#            <form class="form-inline ml-3">#}
+{#                <div class="input-group input-group-sm">#}
+{#                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">#}
+{#                    <div class="input-group-append">#}
+{#                        <button class="btn btn-navbar" type="submit">#}
+{#              <i class="fas fa-search"></i>#}
+{#            </button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </form>  // 上方导航栏弃用部分(搜索框)#}
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Notifications Dropdown Menu -->
@@ -116,7 +117,7 @@
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="{% url 'Industrial_Logs:topics' %}" class="nav-link active">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     仪表盘
                                     <span class="right badge badge-danger" id="btn" onclick="btnClick(event);" >显示</span>
@@ -125,7 +126,7 @@
                         </li>
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="fa fa-microchip"></i>
                                 <p>
                                     传感器
                                     <i class="right fas fa-angle-left"></i>
@@ -155,7 +156,8 @@
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:Sensor_Proportion' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
+{#                                        <i class="fa fa-pie-chart"></i>#}
+                                        <i class="fa fa-pie-chart"></i>
                                         <p>传感器信息</p>
                                     </a>
                                 </li>
@@ -167,7 +169,7 @@
 
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="fa fa-sitemap"></i>
                                 <p>
                                     Hadoop平台
                                     <i class="right fas fa-angle-left"></i>
@@ -175,37 +177,37 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
+                                    <a href="{% url 'Industrial_Logs:hadoop_info' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa fa-file"></i>
                                         <p>原始数据容量</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa fa-file-archive-o"></i>
                                         <p>预处理后容量</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa fa-battery-three-quarters"></i>
                                         <p>HDFS的状态</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa fa-cube"></i>
                                         <p>Namenode</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa fa-cubes"></i>
                                         <p>Datanode</p>
                                     </a>
                                 </li>
@@ -216,7 +218,7 @@
 
                         <li class="nav-item has-treeview menu-open" >
                             <a href="#" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="fa fa-industry"></i>
                                 <p>
                                     历史数据分析
                                     <i class="right fas fa-angle-left"></i>
@@ -226,22 +228,22 @@
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:BME280' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>时间-压力/温湿度/PM</p>
+                                        <i class="fa fa-bar-chart"></i>
+                                        <p>压力/温湿度/PM(同比)</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:PTH_PM' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>温湿度-PM</p>
+                                        <i class="fa fa-area-chart"></i>
+                                        <p>温湿度-PM/压力</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:P_TH' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>压力-温湿度</p>
+                                        <i class="fa fa-thermometer-three-quarters"></i>
+                                        <p>压力/温湿度/PM(环比)</p>
                                     </a>
                                 </li>
 
@@ -270,23 +272,24 @@
 {#                            </ul>#}
 {#                        </li>#}
                         <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                             <a href="{% url 'Industrial_Logs:realTemAndHum' %}" class="nav-link ">
+                                <i class="fa fa-line-chart"></i>
                                 <p>
+
                                     实时数据展示
-                                    <i class="right fas fa-angle-left"></i>
+{#                                    <i class="right fas fa-angle-left"></i>#}
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realTemAndHum' %}" class="nav-link ">
-                                        <!-- 添加active类菜单高亮 -->
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>温湿度实时数据</p>
-                                    </a>
-                                </li>
-
-                            </ul>
+{#                            <ul class="nav nav-treeview">#}
+{#                                <li class="nav-item">#}
+{#                                    <a href="{% url 'Industrial_Logs:realTemAndHum' %}" class="nav-link ">#}
+{#                                        <!-- 添加active类菜单高亮 -->#}
+{#                                        <i class="fa fa-line-chart"></i>#}
+{#                                        <p>温湿度实时数据</p>#}
+{#                                    </a>#}
+{#                                </li>#}
+{##}
+{#                            </ul>#}
 
                         </li>
 
@@ -298,12 +301,11 @@
         </aside>
 
 
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Main content -->
-            <div class="content">
-                <div id="container" onclick="fullScreen(this);" class="container-fluid">
+            <div class="content" >
+                <div id="container" ondblclick="fullScreen(this);" class="container-fluid">
                     {% block header %} {% endblock header %} {%block content%} {%endblock%}
                 </div>
                 <!-- /.container-fluid -->
@@ -319,6 +321,8 @@
             <strong>Copyright &copy; 2020 All rights reserved.</strong>
     </footer>
   </div>
+{#</div>#}
+
   <!-- ./wrapper -->
 <script>
         function btnClick(event) {
