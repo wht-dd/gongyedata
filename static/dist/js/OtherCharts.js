@@ -84,6 +84,7 @@ function realTemAndHum_data(data) {
     //     data.push(randomData());
     //     data2.push(randomData2());
     // }
+
     //指定图表的配置项和数据
             option = {
                 title: {
@@ -150,14 +151,80 @@ function realTemAndHum_data(data) {
                     type: 'line',
                     showSymbol: false,
                     hoverAnimation: false,
-                    data: data.temp
+                    data: data.temp,
+
+                    markPoint:{
+                        symbol:'circle',
+						symbolSize: 10,
+						large: false,
+                        effect: { show: false },
+                        itemStyle:{
+                                        color:'red'
+                                        },
+						data :
+						(function(){
+                            var data1 = [];
+                            var len = 300;
+                            console.log(len);
+                            for(var i=0;i<len;i++) {
+                             console.log(i);
+                                if(data["nt"][i]!=0){
+                                    data1.push({
+                                        name : i,
+//                                        value : data["nt"][i],
+                                        xAxis: data["create_time"][i],
+                                        yAxis: data["temp"][i]
+
+                                    });
+                                    }
+                            }
+                            console.log(data1);
+                            return data1;
+                        })()
+					}
+
+
+
                 }, {
                     name: '湿度',
                     type: 'line',
                     showSymbol: false,
                     hoverAnimation: false,
-                    data: data.hum
-                }]
+                    data: data.hum,
+                    markPoint:{
+                        symbol:'circle',
+						symbolSize: 10,
+						large: true,
+                        effect: { show: true },
+                        itemStyle:{
+                                        color:'#253A5D'
+                                        },
+						data :
+                          (function(){
+                            var data1 = [];
+                            var len = 300;
+                            console.log(len);
+                            for(var i=0;i<len;i++) {
+                             console.log(i);
+                                if(data["nh"][i]!=0){
+                                    data1.push({
+                                        name : i,
+
+                                        xAxis: data["create_time"][i],
+                                        yAxis: data["hum"][i]
+
+                                    });
+                                    }
+                            }
+                            console.log(data1);
+                            return data1;
+                        })()
+					}
+                },
+
+
+
+                ]
             };
 
             setInterval(function() {
@@ -169,37 +236,58 @@ function realTemAndHum_data(data) {
             cache: false,
             dataType: "json", //返回数据格式为json
             success: function (Ldata) {//请求成功完成后要执行的方法
+
+
                 console.log(Ldata);
-                console.log(data);
+                if(Ldata["nt"]!=0){
+
+                    var src = "http://data.huiyi8.com/2017/gha/03/17/1702.mp3";
+			        new Audio(src).play();
+			        alert("警告，温度超出阈值！\n"+"在"+Ldata["create_time"]+"温度为"+Ldata["temp"]);
+
+
+
+
+                };
                 data["create_time"].shift();
                 data["hum"].shift();
                 data["temp"].shift();
-                console.log(data);
-                data["create_time"].push(Ldata["create_time"][0]);
-                data["hum"].push(Ldata["hum"][0]);
-                data["temp"].push(Ldata["temp"][0]);
-                console.log(data);
+                data["nt"].shift();
+                data['nh'].shift();
+                data["create_time"].push(Ldata["create_time"]);
+                data["hum"].push(Ldata["hum"]);
+                data["temp"].push(Ldata["temp"]);
+                data["nt"].push(Ldata["nt"]);
+                data['nh'].push(Ldata['nh']);
+
             }
         });
 
 
-                myChart.setOption({
+
+
+            myChart.setOption(
+{
                     xAxis:{
                         data:data["create_time"]
                     },
+
+
                     series: [{
-                        data: data["temp"]
-                    }, {
+                        data: data["temp"],
+
+                    },
+                    {
                         data: data["hum"]
                     }]
-                });
-            }, 5000);
+
+
+                }
+);
+            }, 10000);
 
     myChart.setOption(option);
-    window.addEventListener("resize",function(){
-	myChart.resize();
-});
-
+    
 }
 
 
