@@ -47,4 +47,5 @@ urlpatterns = [
     # path("test/zhang",views.test_zhang),
     path("getDataQuarter",views.get_data_quarter),
     path("getDataHalfYear",views.get_data_halfYear),
+
 ]

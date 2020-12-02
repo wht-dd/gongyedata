@@ -444,7 +444,6 @@ def getPPM(request, rows=3000):
 import pymysql
 
 
-
 @csrf_exempt
 @login_required
 def getRealData(request, rows=300):

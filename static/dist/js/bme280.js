@@ -71,6 +71,7 @@ function showHalfYearP1(data) {
 
         };
     myChart.setOption(option);
+
     window.addEventListener("resize",function(){
 	myChart.resize();
 });

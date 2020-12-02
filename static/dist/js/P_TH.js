@@ -78,6 +78,7 @@ window.addEventListener("resize",function(){
 });
 
 }
+
 //2018年春季湿度随时间的变化
 function showQuarter1H(data) {
     var myChart = echarts.init(document.getElementById("C_1"));   //c-1是春季的湿度所在的div的id名

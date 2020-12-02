@@ -200,6 +200,7 @@ function realTemAndHum_data(data) {
 	myChart.resize();
 });
 
+
 }
 
 
