@@ -120,6 +120,11 @@ def realdev_tem(request):
 def P_TH(request):
     return render(request, 'Industrial_Logs/P_TH.html')
 
+@login_required
+# hadoop信息页面
+def hadoop_info(request):
+    return render(request, 'Industrial_Logs/hadoop_info.html')
+
 
 def get_dev_temp(request):
     date = datetime.datetime.now().strftime('%Y-%m-%d')
