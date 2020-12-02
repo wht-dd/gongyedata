@@ -170,12 +170,15 @@ function realTemAndHum_data(data) {
             dataType: "json", //返回数据格式为json
             success: function (Ldata) {//请求成功完成后要执行的方法
                 console.log(Ldata);
+                console.log(data);
                 data["create_time"].shift();
                 data["hum"].shift();
                 data["temp"].shift();
-                data["create_time"].push(Ldata["create_time"]);
-                data["hum"].push(Ldata["hum"]);
-                data["temp"].push(Ldata["temp"]);
+                console.log(data);
+                data["create_time"].push(Ldata["create_time"][0]);
+                data["hum"].push(Ldata["hum"][0]);
+                data["temp"].push(Ldata["temp"][0]);
+                console.log(data);
             }
         });
 
@@ -185,9 +188,9 @@ function realTemAndHum_data(data) {
                         data:data["create_time"]
                     },
                     series: [{
-                        data: data["hum"]
-                    }, {
                         data: data["temp"]
+                    }, {
+                        data: data["hum"]
                     }]
                 });
             }, 5000);
