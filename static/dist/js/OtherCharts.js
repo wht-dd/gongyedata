@@ -237,6 +237,7 @@ function realTemAndHum_data(data) {
             dataType: "json", //返回数据格式为json
             success: function (Ldata) {//请求成功完成后要执行的方法
 
+
                 console.log(Ldata);
                 if(Ldata["nt"]!=0){
 
