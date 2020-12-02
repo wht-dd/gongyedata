@@ -11,6 +11,7 @@ from .forms import TopicForm, EntryForm, Entry
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 from pprint import pprint
+import overtake
 
 
 
@@ -119,6 +120,12 @@ def realdev_tem(request):
 # 压力-温湿度页面
 def P_TH(request):
     return render(request, 'Industrial_Logs/P_TH.html')
+
+
+@login_required
+# hadoop信息页面
+def hadoop_info(request):
+    return render(request, 'Industrial_Logs/hadoop_info.html')
 
 
 def get_dev_temp(request):
@@ -453,6 +460,9 @@ def getRealData(request, rows=300):
 
     if request.method == 'GET':
         rows = request.GET.get('rows', 1)
+
+    import pymysql
+
     # 打开数据库连接
     db = pymysql.connect(host="211.84.112.23",
                          port=8050,
@@ -470,16 +480,42 @@ def getRealData(request, rows=300):
         dic["temp"] = list()
         dic["hum"] = list()
         dic["create_time"] = list()
+        dic["nt"] = list()
+        dic['nh'] = list()
+        over = overtake.overtake(20, 18, 24, 20)
+        # if rows == 1:
+        #
+        #     for row in result:
+        #         dic["temp"].append(row[0])
+        #         dic["hum"].append(row[1])
+        #         dic["create_time"].append(row[2])
+        #         dic['']
+        #     nt = over.isovert(row[0])
+        #     dic["nt"]
+        #     dic["temp"].reverse()
+        #     dic["hum"].reverse()
+        #     dic["create_time"].reverse()
+        #     print(dic)
+        #     return HttpResponse(json.dumps(dic, ensure_ascii=False))
+        # else:
         for row in result:
-            dic["temp"].append(row[1])
-            dic["hum"].append(row[0])
+            dic["temp"].append(row[0])
+            dic["hum"].append(row[1])
             dic["create_time"].append(row[2])
+            nt = over.isovert(row[0])
+            nh = over.isoverh(row[1])
+            dic["nt"].append(nt)
+            dic['nh'].append(nh)
         dic["temp"].reverse()
         dic["hum"].reverse()
         dic["create_time"].reverse()
-    print(dic)
-    db.close()
-    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+        dic["nt"].reverse()
+        dic['nh'].reverse()
+        print(dic)
+        db.close()
+        return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
+    # print(dic)
 
 
 @csrf_exempt

@@ -47,5 +47,7 @@ urlpatterns = [
     # path("test/zhang",views.test_zhang),
     path("getDataQuarter",views.get_data_quarter),
     path("getDataHalfYear",views.get_data_halfYear),
+    # 2020年12月1日  实时数据获取
+    path("hadoop_info", views.hadoop_info, name="hadoop_info"),
 
 ]
