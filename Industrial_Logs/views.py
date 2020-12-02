@@ -441,6 +441,8 @@ def getPPM(request, rows=3000):
             dic["p2"].append(row[2])
     # print(dic)
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
+import pymysql
+
 
 
 @csrf_exempt
@@ -452,8 +454,6 @@ def getRealData(request, rows=300):
 
     if request.method == 'GET':
         rows = request.GET.get('rows', 1)
-    import pymysql
-
     # 打开数据库连接
     db = pymysql.connect(host="211.84.112.23",
                          port=8050,
