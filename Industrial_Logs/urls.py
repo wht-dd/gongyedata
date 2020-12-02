@@ -6,7 +6,7 @@ app_name = 'Industrial_Logs'
 
 urlpatterns = [
     # 主页
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.topics, name='index'),
     url(r'^topics/$', views.topics, name='topics'),
     url(r'^cgq/$', views.cgq, name='cgq'),
     url(r'^topics/(?P<topic_id>\d+)/$', views.topic, name='topic'),
@@ -42,6 +42,9 @@ urlpatterns = [
     path('getPPM', views.getPPM),
     # 2020.11.24 新增传感器信息页面
     url(r'^Sensor_inf/$', views.Sensor_inf, name='Sensor_inf'),
-
-
+    #2020年11月26日  实时数据获取
+    path("getRealData", views.getRealData,name="getRealData"),
+    # path("test/zhang",views.test_zhang),
+    path("getDataQuarter",views.get_data_quarter),
+    path("getDataHalfYear",views.get_data_halfYear),
 ]

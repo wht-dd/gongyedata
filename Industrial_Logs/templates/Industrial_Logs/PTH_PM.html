@@ -2,21 +2,22 @@
     <script src="{{STATIC_URL}}dist/js/P_TH.js"></script>
     <script src="{{STATIC_URL}}dist/js/PTH_PM.js"></script>
     <script src="{{STATIC_URL}}dist/js/OtherCharts.js"></script>
+        <link rel="stylesheet" href="{{STATIC_URL}}css/pageStyle.css" charset="utf-8">
 
 
       <div id="back" class="main">
-        <h1 style="width:85%;color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">温湿度-PM/压力</h1>
-        <div style="border:2px solid red; width:80%; height: 95%;margin:0px 40px" id=""  class="chart-container">
+        <h1>温湿度-PM/压力</h1>
+        <div style="border:2px solid red;" id="all"   class="chart-container">
             <div style="border:2px solid #666;height: 60%;margin:0px" id="PTH1"  class="chart-container" name="box">
-                <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showP(1)">湿度</button>
-                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; height:30px; background: #0e5b44;border-radius: 10px" onclick="showP(0)">温度</button>
+{#                <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showP(1)">湿度</button>#}
+{#                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; height:30px; background: #0e5b44;border-radius: 10px" onclick="showP(0)">温度</button>#}
                 <div style="margin: 50px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="P_TH_0"  class="chart-container" name="boxP">温度/压力</div>
                 <div style="margin: 50px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="P_TH_1"  class="chart-container"name="boxP">湿度/压力</div>
             </div>
 
             <div style="border:2px solid #666;height: 60%;margin:0px; display:none" id="PTH2"  class="chart-container" name="box">
-                <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showPM(1)">湿度</button>
-                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; height:30px; background: #0e5b44;border-radius: 10px" onclick="showPM(0)">温度</button>
+{#                <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showPM(1)">湿度</button>#}
+{#                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; height:30px; background: #0e5b44;border-radius: 10px" onclick="showPM(0)">温度</button>#}
                 <div style="margin: 50px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="PTH_PM_0"  class="chart-container" name="boxPM">温度/PM</div>
                 <div style="margin: 50px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display:none" id="PTH_PM_1"  class="chart-container" name="boxPM">湿度/PM</div>
             </div>
@@ -32,14 +33,12 @@
 <script>
 var  width = $("#P_TH_0").width();
 var  height = $("#P_TH_0").height();
-console.log(width)
-console.log("hahhh")
-console.log(height)
 $("#P_TH_1").css("width", width).css("height", height);
 $("#PTH_PM_0").css("width", width).css("height", height);
 $("#PTH_PM_1").css("width", width).css("height", height);
+
 function show(id) {
-    var boxs = document.getElementsByName("box");
+    var boxs = document.getElementsByName("box")
     for (var i = 0; i < boxs.length; i++) {
         if (boxs[i].id == "PTH" + id) {
             boxs[i].style.display = ""
@@ -50,7 +49,7 @@ function show(id) {
     }
 }
 function showP(id) {
-    var box1s = document.getElementsByName("boxP");
+    var box1s = document.getElementsByName("boxP")
     for (var i = 0; i < box1s.length; i++) {
         if (box1s[i].id == "P_TH_" + id) {
             box1s[i].style.display = ""
@@ -61,7 +60,7 @@ function showP(id) {
     }
 }
 function showPM(id) {
-    var box1s = document.getElementsByName("boxPM");
+    var box1s = document.getElementsByName("boxPM")
     for (var i = 0; i < box1s.length; i++) {
         if (box1s[i].id == "PTH_PM_" + id) {
             box1s[i].style.display = ""

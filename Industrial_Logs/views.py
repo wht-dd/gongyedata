@@ -1,7 +1,5 @@
 ﻿import json
 import datetime
-import pprint
-
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
@@ -12,6 +10,7 @@ from .models import DevTem, DeviceInfo, TemHum, Bme280Sof, Sds011Sof, SensorCoun
 from .forms import TopicForm, EntryForm, Entry
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
+from pprint import pprint
 
 
 
@@ -26,6 +25,7 @@ def index(request):
 # Create your views here.
 def Sensor_inf(request):
     return render(request, 'Industrial_Logs/Sensor_inf.html')
+
 
 @login_required
 # Create your views here.
@@ -271,9 +271,6 @@ def getBme280Sof(request, sensorid=2266, rows=3000):
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
 
-"""/static/img/bg.jpg"""
-
-
 @csrf_exempt
 @login_required
 def getSds011Sof(request, sensorid=1471, rows=3000):
@@ -335,44 +332,6 @@ def getSensor_information(request, sensorid=2266, rows=3000):
             dic["sensor_id"].append(row[0])
         # print(dic)
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
-
-
-@csrf_exempt
-@login_required
-def getRealData(request, sensorid=1471, rows=30):
-    print("我被访问了，我是实时数据展示接口")
-    """温度湿度实时数据"""
-    # if request.method == 'POST':
-    #     rows = request.POST.get('rows', 30)
-    #     sensorid = request.POST.get('sensor_id', 1471)
-
-    with connection.cursor() as cur:
-        cur.execute("""
-        select temp,hum,create_time
-        from tb_temp_hum limit 1200;
-        """)
-        result = cur.fetchall()
-        dic = {}
-        dic["temp"] = list()
-        dic["hum"] = list()
-        dic["create_time"] = list()
-        for row in result:
-            dic["temp"].append(row[0])
-            dic["hum"].append(row[1])
-            dic["create_time"].append(row[2])
-            # temp = row[0]
-            # hum = row[1]
-            # create_time = row[2]
-
-    # json_data =json.dumps(dic)
-    print("*" * 60)
-    print("*" * 60)
-    print("*" * 60)
-    # print(type(json_data))
-    # print("*"*60)
-    pprint.pprint(dic)
-    return HttpResponse(json.dumps(dic, ensure_ascii=False))
-    # return render(request,'Industrial_Logs/real_TemAndHum.html',{'dic':dic})
 
 
 @csrf_exempt
@@ -456,7 +415,7 @@ def getHPM(request, rows=3000):
             dic["humidity"].append(row[0])
             dic["p1"].append(row[1])
             dic["p2"].append(row[2])
-    print(dic)
+    # print(dic)
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
 
@@ -486,34 +445,166 @@ def getPPM(request, rows=3000):
 
 @csrf_exempt
 @login_required
-def getRealData(request, rows=1200):
+def getRealData(request, rows=300):
     """获取实时温度与湿度数据"""
-    # if request.method == 'POST':
-    #     rows = request.POST.get('rows', 3000)
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 300)
 
-    print("*" * 80)
-    print("*" * 80)
-    print("我是实时数据接口，我被访问了")
-    print("*" * 80)
-    print("*" * 80)
+    if request.method == 'GET':
+        rows = request.GET.get('rows', 1)
+    import pymysql
 
-    with connection.cursor() as cur:
+    # 打开数据库连接
+    db = pymysql.connect(host="211.84.112.23",
+                         port=8050,
+                         user="root",
+                         password="123456",
+                         db="db_sensor")
+
+    with db.cursor() as cur:
         cur.execute("""
-        select temp,hum,create_time  from tb_temp_hum
+        select temp,hum,create_time  from tb_temp_hum  ORDER BY create_time desc 
         limit %s;
-        """, params=[rows])
+        """, args=[rows])
         result = cur.fetchall()
         dic = {}
         dic["temp"] = list()
         dic["hum"] = list()
         dic["create_time"] = list()
         for row in result:
-            dic["temp"].append(row[0])
-            dic["hum"].append(row[1])
+            dic["temp"].append(row[1])
+            dic["hum"].append(row[0])
             dic["create_time"].append(row[2])
-
-    # print(dic)
+        dic["temp"].reverse()
+        dic["hum"].reverse()
+        dic["create_time"].reverse()
+    print(dic)
+    db.close()
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
 
+@csrf_exempt
+@login_required
+def getTimeData(request, column='pressure', start_time="2018-01-01", end_time="2018-06-30", rows=3000):
+    """查询 start_time 到 end_time 时间段内 column 列数据的变化趋势，rows 为查询数据的数量"""
+    if request.method == 'POST':
+        # rows = request.POST.get('rows', 3000)
+        column = request.POST.get("column")
+        start_time = request.POST.get("start_time")
+        end_time = request.POST.get("end_time")
+        rows = request.POST.get("rows")
 
+        print(f"column:{column}")
+        print(f"start_time:{start_time}")
+        print(f"end_time:{end_time}")
+        print(f"rows:{rows}")
+
+    with connection.cursor() as cur:
+        # cur.execute("""
+        # select AVG(%s) data1,date_format(`timestamp`,'%%Y-%%m-%%d') days  from bme_sds
+        # WHERE `timestamp`>= %s and `timestamp` <= %s GROUP BY `timestamp` ORDER BY `timestamp`;
+        # """, (column, start_time, end_time))
+
+        sql = """
+                select round(AVG(pressure),2) pressure,date_format(`timestamp`,'%Y-%m-%d') days 
+                from bme_sds WHERE `timestamp`>='2018-01-01' and `timestamp` <='2018-06-30' GROUP BY `timestamp` ORDER BY `timestamp` ;
+                """
+
+        # sql = """select round(AVG({}),2) pressure,date_format(`timestamp`,'%Y-%m-%d') days
+        # from bme_sds WHERE `timestamp`>={} and `timestamp` <={} GROUP BY `timestamp` ORDER BY `timestamp` ;"""
+        # sql=sql.format(column,start_time,end_time)
+        # print(f"sql:{sql}")
+
+        cur.execute(sql)
+
+        # sql = "select round(AVG({0}),2) data1,date_format(`timestamp`,'%Y-%m-%d') days from bme_sds WHERE `timestamp`>={1} and `timestamp` <={2} GROUP BY `timestamp` ORDER BY `timestamp` ;"
+        # cur.execute(sql.format(column,start_time,end_time))
+        result = cur.fetchall()
+        dic = {}
+        dic["column"] = list()
+        dic["timestamp"] = list()
+        for row in result:
+            dic["column"].append(row[0])
+            dic["timestamp"].append(row[1])
+
+        print(dic)
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
+@csrf_exempt
+@login_required
+def test_zhang(request):
+    """测试发送ajax请求"""
+    return render(request, "Industrial_Logs/zhang.html")
+
+
+@csrf_exempt
+@login_required
+def get_data_quarter(request):
+    """
+    按照季度查询数据
+    从 post 请求中获取到需要查询的列名、年份、季度
+    将查询结果以 json 形式返回
+    """
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        year = request.POST.get("year")
+        quarter = request.POST.get("quarter")
+
+    with connection.cursor() as cur:
+        sql = """
+        select `timestamp`,AVG({})
+        from bme_sds
+        where YEAR(`timestamp`)={} and QUARTER(`timestamp`)={}
+        GROUP BY `timestamp`
+        ORDER BY `timestamp`;
+        """.format(name, year, quarter)
+
+        # 检查sql语句
+        print(f"sql:{sql}")
+
+        cur.execute(sql)
+        result = cur.fetchall()
+
+        data = {'time': [], 'column': []}
+
+        for row in result:
+            # 将 datetime.datetime 类型转换为 str类型
+            data['time'].append(row[0].strftime('%Y-%m-%d'))
+            data['column'].append(round(row[1], 2))
+        # pprint(data)
+    return HttpResponse(json.dumps(data, ensure_ascii=False))
+
+@csrf_exempt
+@login_required
+def get_data_halfYear(request):
+    """
+    查询半年的数据，如 2018-01-01 ~ 2018-06-30
+    从 post 请求中获取到需要查询的列名、起始时间、截止时间
+    将查询结果以 json 形式返回
+    """
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        start_time = request.POST.get("start_time")
+        end_time = request.POST.get("end_time")
+
+    with connection.cursor() as cur:
+        sql = """select `timestamp`,AVG({}) from bme_sds 
+        where `timestamp`>= {} and `timestamp`<= {} 
+        GROUP BY `timestamp` ORDER BY `timestamp`;
+        """.format(name, "'" + start_time + "'", "'" + end_time + "'")
+
+        # 检查sql语句
+        print(f"sql:{sql}")
+
+        cur.execute(sql)
+        result = cur.fetchall()
+
+        data = {'time': [], 'column': []}
+
+        for row in result:
+            # 将 datetime.datetime 类型转换为 str类型
+            data['time'].append(row[0].strftime('%Y-%m-%d'))
+            data['column'].append(round(row[1], 2))
+
+        # pprint(data)
+    return HttpResponse(json.dumps(data, ensure_ascii=False))
