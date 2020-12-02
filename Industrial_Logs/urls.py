@@ -6,7 +6,7 @@ app_name = 'Industrial_Logs'
 
 urlpatterns = [
     # 主页
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.topics, name='index'),
     url(r'^topics/$', views.topics, name='topics'),
     url(r'^cgq/$', views.cgq, name='cgq'),
     url(r'^topics/(?P<topic_id>\d+)/$', views.topic, name='topic'),

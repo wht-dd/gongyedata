@@ -4,13 +4,16 @@
 {% endblock header %}
 {% block content %}
     <script src="{{ STATIC_URL }}dist/js/OtherCharts.js"></script>
-    <div id="back" class="main" style="height:90%;">
+    <link rel="stylesheet" href="{{STATIC_URL}}css/pageStyle.css" charset="utf-8">
+    <div id="back" class="main" >
         <h1 style="color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">
             设备实时温湿度实时数据</h1>
-        <div style="border:2px solid #666;width:100%;height: 80%;float:left" id="realTemAndHum_1"
+        <div id="all">
+        <div style="border:2px solid #666;width:100%;height: 100%;float:left" id="realTemAndHum_1"
              class="chart-container"></div>
-
+        </div>
     </div>
+
     <script>
 
     {#实时温度，湿度查询#}

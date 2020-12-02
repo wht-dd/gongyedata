@@ -196,7 +196,10 @@ function realTemAndHum_data(data) {
             }, 5000);
 
     myChart.setOption(option);
-    
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 

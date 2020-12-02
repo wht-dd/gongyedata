@@ -71,6 +71,10 @@ function showHalfYearP1(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //2019年上半年压力随时间的变化
@@ -146,6 +150,10 @@ function showHalfYearP2(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //2018年上半年温度随时间的变化
@@ -221,6 +229,10 @@ function showHalfYearT1(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //2019年上半年温度随时间的变化
@@ -296,6 +308,10 @@ function showHalfYearT2(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //2018年上半年湿度随时间的变化
@@ -371,6 +387,10 @@ function showHalfYearH1(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //2019年上半年湿度随时间的变化
@@ -446,6 +466,10 @@ function showHalfYearH2(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //2018年上半年PM10随时间的变化
@@ -521,6 +545,10 @@ function showHalfYearPM1(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //2019年上半年PM10随时间的变化
@@ -596,6 +624,10 @@ function showHalfYearPM2(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //右边小图，默认为2018年上半年的压力随时间变化
@@ -671,6 +703,10 @@ function chartBME280_0(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //右边小图，默认为2018年上半年的温度随时间变化
@@ -746,6 +782,10 @@ function chartBME280_1(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //右边小图，默认为2018年上半年的湿度随时间变化
@@ -821,6 +861,10 @@ function chartBME280_2(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 //右边小图，默认为2018年上半年的PM10随时间变化
@@ -896,6 +940,10 @@ function chartBME280_3(data) {
 
         };
     myChart.setOption(option);
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 //
 //

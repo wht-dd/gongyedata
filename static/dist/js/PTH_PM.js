@@ -89,6 +89,10 @@ function PTH_PM_0(data) {
 
     myChart.setOption(option);
 
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 
 
@@ -185,6 +189,9 @@ option = {
 };
     myChart2.setOption(option);
 
+window.addEventListener("resize",function(){
+	myChart2.resize();
+});
 }
 
 
@@ -280,6 +287,9 @@ function PTH_PM_11(data) {
 
     myChart11.setOption(option);
 
+window.addEventListener("resize",function(){
+	myChart11.resize();
+});
 }
 
 

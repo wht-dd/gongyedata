@@ -72,6 +72,11 @@ function showQuarter1T(data) {
 
         };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
+
 }
 //2018年春季湿度随时间的变化
 function showQuarter1H(data) {
@@ -147,6 +152,10 @@ function showQuarter1H(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //2018年春季压力随时间的变化
@@ -223,6 +232,10 @@ function showQuarter1P(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 //2018年春季PM10随时间的变化
 function showQuarter1PM(data) {
@@ -298,6 +311,10 @@ function showQuarter1PM(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //2018年夏季温度随时间的变化
@@ -374,6 +391,10 @@ function showQuarter2T(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 //2018年夏季湿度随时间的变化
 function showQuarter2H(data) {
@@ -449,6 +470,10 @@ function showQuarter2H(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //2018年夏季压力随时间的变化
@@ -525,6 +550,10 @@ function showQuarter2P(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 //2018年夏季PM10随时间的变化
 function showQuarter2PM(data) {
@@ -600,6 +629,10 @@ function showQuarter2PM(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //2018年秋季温度随时间的变化
@@ -676,6 +709,10 @@ function showQuarter3T(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 //2018年秋季湿度随时间的变化
 function showQuarter3H(data) {
@@ -751,6 +788,10 @@ function showQuarter3H(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //2018年秋季压力随时间的变化
@@ -827,6 +868,10 @@ function showQuarter3P(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 //2018年秋季PM10随时间的变化
 function showQuarter3PM(data) {
@@ -902,6 +947,10 @@ function showQuarter3PM(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //2018年冬季温度随时间的变化
@@ -978,6 +1027,10 @@ function showQuarter4T(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 //2018年冬季湿度随时间的变化
 function showQuarter4H(data) {
@@ -1053,6 +1106,10 @@ function showQuarter4H(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //2018年冬季压力随时间的变化
@@ -1129,6 +1186,10 @@ function showQuarter4P(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 //2018年冬季PM10随时间的变化
 function showQuarter4PM(data) {
@@ -1204,6 +1265,10 @@ function showQuarter4PM(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 
@@ -1317,6 +1382,9 @@ option = {
 
     myChart11.setOption(option);
 
+window.addEventListener("resize",function(){
+	myChart11.resize();
+});
 }
 
 
@@ -1490,6 +1558,10 @@ function showQuarter2(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //下面小图中的夏季，默认显示2018年第二季度的压力随时间的变化小
@@ -1550,6 +1622,10 @@ function showQuarter3(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 //下面小图中的冬季，默认显示2018年第四季度的压力随时间的变化小
@@ -1610,4 +1686,8 @@ function showQuarter4(data) {
         ]
     };
     myChart.setOption(option);
+
+window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
