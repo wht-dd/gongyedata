@@ -40,10 +40,20 @@ function showHalfYearP1(data) {
         },
             yAxis: {
                 type: 'value',
+                scale:true,
                 axisLabel: {
                     show: true,
                     textStyle: {
                         color: '#ffffff'
+                    },
+                    formatter: function(value,index){
+                        var value;
+                        if (value >=1000) {
+                            value = value/1000+'k';
+                        }else if(value <1000){
+                            value = value;
+                        }
+                        return value
                     }
                 },
                 axisLine: {
@@ -120,10 +130,20 @@ function showHalfYearP2(data) {
         },
             yAxis: {
                 type: 'value',
+                scale:true,
                 axisLabel: {
                     show: true,
                     textStyle: {
                         color: '#ffffff'
+                    },
+                    formatter: function(value,index){
+                        var value;
+                        if (value >=1000) {
+                            value = value/1000+'k';
+                        }else if(value <1000){
+                            value = value;
+                        }
+                        return value
                     }
                 },
                 axisLine: {
@@ -636,10 +656,16 @@ function chartBME280_0(data) {
     var myChart = echarts.init(document.getElementById("chart_BME280_0"));   //chart_BME280_0是2018年上半年的压力随时间所在的div的id名
     option = {
         title: {
-            text: '时间-压力',
+            text: '时间-压力(单位:pa)',
             textStyle: {
                     color: '#ffffff'
             }
+        },
+        grid:{
+            x:40,
+            y:30,
+            x2:35,
+            y2:30,
         },
         tooltip: {
             trigger: 'none',
@@ -673,10 +699,20 @@ function chartBME280_0(data) {
         },
             yAxis: {
                 type: 'value',
+                scale:true,
                 axisLabel: {
                     show: true,
                     textStyle: {
                         color: '#ffffff'
+                    },
+                    formatter: function(value,index){
+                        var value;
+                        if (value >=1000) {
+                            value = value/1000+'k';
+                        }else if(value <1000){
+                            value = value;
+                        }
+                        return value
                     }
                 },
                 axisLine: {
@@ -719,6 +755,12 @@ function chartBME280_1(data) {
             textStyle: {
                     color: '#ffffff'
             }
+        },
+        grid:{
+            x:35,
+            y:30,
+            x2:35,
+            y2:30,
         },
         tooltip: {
             trigger: 'none',
@@ -799,6 +841,12 @@ function chartBME280_2(data) {
                     color: '#ffffff'
             }
         },
+        grid:{
+            x:35,
+            y:30,
+            x2:35,
+            y2:30,
+        },
         tooltip: {
             trigger: 'none',
             axisPointer: {
@@ -877,6 +925,12 @@ function chartBME280_3(data) {
             textStyle: {
                     color: '#ffffff'
             }
+        },
+        grid:{
+            x:35,
+            y:30,
+            x2:35,
+            y2:30,
         },
         tooltip: {
             trigger: 'none',
