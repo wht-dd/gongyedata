@@ -54,7 +54,7 @@ function drawLayer03Right(canvasObj, colorValue, rate) {
 
 }
 
-function left_up() {
+function left_up(data) {
     var myChart = echarts.init(document.getElementById("left_up"));
   option = {
        tooltip: {
@@ -105,8 +105,8 @@ function left_up() {
               }
             },
             data: [
-              { value: 105.20, name: "dfs剩余的容量" },
-              { value: 5.07, name: "dfs已使用的容量" },
+              { value: data["当前容量"], name: "dfs剩余的容量" },
+              { value: data["DFS已使用容量"], name: "dfs已使用的容量" },
 
             ]
           }
@@ -145,7 +145,7 @@ function left_down() {
 
 
 
-function center() {
+function center(data) {
     var myChart = echarts.init(document.getElementById("center"));
         option = {
         title: {
@@ -165,10 +165,10 @@ function center() {
             },
             series: [
                 {
-                    name: '业务指标',
+                    name: 'DFS已经使用的比率',
                     type: 'gauge',
                     detail: {formatter: '{value}%'},
-                    data: [{value: 5.07, name: '使用占比'}]
+                    data: [{value: data["DFS已经使用的比率"], name: '使用占比'}]
                 }
             ]
         };
@@ -177,22 +177,15 @@ function center() {
 
 
 
-function right_up() {
+function right_up(data) {
     var myChart = echarts.init(document.getElementById("right_up"));
    option = {
-   title: {
-            text: '使用容量',
-            textStyle: {
-                    color: '#ffffff'
-            }
-        },
-
-        title: {
-            text: '块',
-            textStyle: {
-                    color: '#ffffff'
-            }
-        },
+       title: {
+           text: '块',
+           textStyle: {
+               color: '#ffffff'
+           }
+       },
 
     tooltip: {
         trigger: 'item',
@@ -214,9 +207,9 @@ function right_up() {
             radius: '55%',
             center: ['50%', '50%'],
             data: [
-                {value: 304, name: '处于复制下的块 '},
-                {value: 0, name: '故障副本的块'},
-                {value: 0, name: '丢失的快'}
+                {value: data["处于复制下的块"], name: '处于复制下的块 '},
+                {value: data["故障副本的块"], name: '故障副本的块'},
+                {value: data["丢失的块"], name: '丢失的块'}
             ].sort(function (a, b) { return a.value - b.value; }),
             roseType: 'radius',
             label: {
@@ -231,7 +224,9 @@ function right_up() {
                 length2: 20
             },
             itemStyle: {
-                color: '#c23531',
+                color: '#24c22a',
+                // color1: '#fffb09',
+                // color2:'#d80400',
                 shadowBlur: 200,
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
             },
