@@ -158,7 +158,7 @@ function realTemAndHum_data(data) {
 						large: false,
                         effect: { show: false },
                         itemStyle:{
-                                        color:'red'
+                                        color:'#ff0002'
                                         },
 						data :
 						(function(){

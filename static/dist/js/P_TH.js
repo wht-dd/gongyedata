@@ -32,7 +32,7 @@ function showQuarter1T(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -55,7 +55,7 @@ function showQuarter1T(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '温度：  ' + params.value;
                         }
@@ -114,7 +114,7 @@ function showQuarter1H(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -137,7 +137,7 @@ function showQuarter1H(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '湿度：  ' + params.value;
                     }
@@ -194,7 +194,7 @@ function showQuarter1P(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -217,7 +217,7 @@ function showQuarter1P(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '压力：  ' + params.value;
                     }
@@ -273,7 +273,7 @@ function showQuarter1PM(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -296,7 +296,7 @@ function showQuarter1PM(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return 'PM10：  ' + params.value;
                     }
@@ -353,7 +353,7 @@ function showQuarter2T(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -376,7 +376,7 @@ function showQuarter2T(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '温度：  ' + params.value;
                     }
@@ -432,7 +432,7 @@ function showQuarter2H(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -455,7 +455,7 @@ function showQuarter2H(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '湿度：  ' + params.value;
                     }
@@ -512,7 +512,7 @@ function showQuarter2P(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -535,7 +535,7 @@ function showQuarter2P(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '压力：  ' + params.value;
                     }
@@ -591,7 +591,7 @@ function showQuarter2PM(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -614,7 +614,7 @@ function showQuarter2PM(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return 'PM10：  ' + params.value;
                     }
@@ -671,7 +671,7 @@ function showQuarter3T(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -694,7 +694,7 @@ function showQuarter3T(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '温度：  ' + params.value;
                     }
@@ -750,7 +750,7 @@ function showQuarter3H(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -773,7 +773,7 @@ function showQuarter3H(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '湿度：  ' + params.value;
                     }
@@ -830,7 +830,7 @@ function showQuarter3P(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -853,7 +853,7 @@ function showQuarter3P(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '压力：  ' + params.value;
                     }
@@ -909,7 +909,7 @@ function showQuarter3PM(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -932,7 +932,7 @@ function showQuarter3PM(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return 'PM10：  ' + params.value;
                     }
@@ -989,7 +989,7 @@ function showQuarter4T(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -1012,7 +1012,7 @@ function showQuarter4T(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '温度：  ' + params.value;
                     }
@@ -1068,7 +1068,7 @@ function showQuarter4H(data) {
             },
                axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -1091,7 +1091,7 @@ function showQuarter4H(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '湿度：  ' + params.value;
                     }
@@ -1148,7 +1148,7 @@ function showQuarter4P(data) {
                 },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -1171,7 +1171,7 @@ function showQuarter4P(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '压力：  ' + params.value;
                     }
@@ -1227,7 +1227,7 @@ function showQuarter4PM(data) {
             },
                 axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -1250,7 +1250,7 @@ function showQuarter4PM(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return 'PM10：  ' + params.value;
                     }
