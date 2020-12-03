@@ -49,5 +49,7 @@ urlpatterns = [
     path("getDataHalfYear",views.get_data_halfYear),
     # 2020年12月1日  实时数据获取
     path("hadoop_info", views.hadoop_info, name="hadoop_info"),
+    # 2020.12.3  hdfs信息获取
+    path("get_HDFS_info", views.get_HDFS_info),
 
 ]
