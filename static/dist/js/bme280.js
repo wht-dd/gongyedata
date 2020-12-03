@@ -31,7 +31,7 @@ function showHalfYearP1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -54,7 +54,7 @@ function showHalfYearP1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '压力：  ' + params.value;
                         }
@@ -111,7 +111,7 @@ function showHalfYearP2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -134,7 +134,7 @@ function showHalfYearP2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '压力：  ' + params.value;
                         }
@@ -190,7 +190,7 @@ function showHalfYearT1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -213,7 +213,7 @@ function showHalfYearT1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '温度：  ' + params.value;
                         }
@@ -269,7 +269,7 @@ function showHalfYearT2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -292,7 +292,7 @@ function showHalfYearT2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '温度：  ' + params.value;
                         }
@@ -348,7 +348,7 @@ function showHalfYearH1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -371,7 +371,7 @@ function showHalfYearH1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '湿度：  ' + params.value;
                         }
@@ -427,7 +427,7 @@ function showHalfYearH2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -450,7 +450,7 @@ function showHalfYearH2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '湿度：  ' + params.value;
                         }
@@ -506,7 +506,7 @@ function showHalfYearPM1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -529,7 +529,7 @@ function showHalfYearPM1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return 'PM10：  ' + params.value;
                         }
@@ -585,7 +585,7 @@ function showHalfYearPM2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -608,7 +608,7 @@ function showHalfYearPM2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return 'PM10：  ' + params.value;
                         }
@@ -664,7 +664,7 @@ function chartBME280_0(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -687,7 +687,7 @@ function chartBME280_0(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '压力：  ' + params.value;
                         }
@@ -743,7 +743,7 @@ function chartBME280_1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -766,7 +766,7 @@ function chartBME280_1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '温度：  ' + params.value;
                         }
@@ -822,7 +822,7 @@ function chartBME280_2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -845,7 +845,7 @@ function chartBME280_2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '湿度：  ' + params.value;
                         }
@@ -901,7 +901,7 @@ function chartBME280_3(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -924,7 +924,7 @@ function chartBME280_3(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return 'PM10：  ' + params.value;
                         }
