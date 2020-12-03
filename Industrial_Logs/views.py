@@ -1,16 +1,18 @@
 ﻿import json
 import datetime
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render, HttpResponse
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import gydb
 from .models import Topic
-from .models import DevTem,DeviceInfo,TemHum, Bme280Sof, Sds011Sof,SensorCount
+from .models import DevTem, DeviceInfo, TemHum, Bme280Sof, Sds011Sof, SensorCount
 from .forms import TopicForm, EntryForm, Entry
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
+from pprint import pprint
 import overtake
+
 
 
 @login_required
@@ -118,6 +120,7 @@ def realdev_tem(request):
 # 压力-温湿度页面
 def P_TH(request):
     return render(request, 'Industrial_Logs/P_TH.html')
+
 
 @login_required
 # hadoop信息页面
@@ -422,6 +425,7 @@ def getHPM(request, rows=3000):
     # print(dic)
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
+
 @csrf_exempt
 @login_required
 def getPPM(request, rows=3000):
@@ -445,7 +449,6 @@ def getPPM(request, rows=3000):
     # print(dic)
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
 import pymysql
-
 
 
 @csrf_exempt
@@ -513,8 +516,6 @@ def getRealData(request, rows=300):
         return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
     # print(dic)
-
-
 
 
 @csrf_exempt

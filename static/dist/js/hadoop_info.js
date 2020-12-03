@@ -112,7 +112,7 @@ function left_up() {
           }
         ]
       }
- 
+
 
     myChart.setOption(option);
 }

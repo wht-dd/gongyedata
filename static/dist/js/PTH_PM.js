@@ -284,7 +284,6 @@ function PTH_PM_11(data) {
             }
         ]
     };
-
     myChart11.setOption(option);
 
 window.addEventListener("resize",function(){

@@ -31,7 +31,7 @@ function showHalfYearP1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -40,10 +40,20 @@ function showHalfYearP1(data) {
         },
             yAxis: {
                 type: 'value',
+                scale:true,
                 axisLabel: {
                     show: true,
                     textStyle: {
                         color: '#ffffff'
+                    },
+                    formatter: function(value,index){
+                        var value;
+                        if (value >=1000) {
+                            value = value/1000+'k';
+                        }else if(value <1000){
+                            value = value;
+                        }
+                        return value
                     }
                 },
                 axisLine: {
@@ -54,7 +64,7 @@ function showHalfYearP1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '压力：  ' + params.value;
                         }
@@ -71,6 +81,7 @@ function showHalfYearP1(data) {
 
         };
     myChart.setOption(option);
+
     window.addEventListener("resize",function(){
 	myChart.resize();
 });
@@ -110,7 +121,7 @@ function showHalfYearP2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -119,10 +130,20 @@ function showHalfYearP2(data) {
         },
             yAxis: {
                 type: 'value',
+                scale:true,
                 axisLabel: {
                     show: true,
                     textStyle: {
                         color: '#ffffff'
+                    },
+                    formatter: function(value,index){
+                        var value;
+                        if (value >=1000) {
+                            value = value/1000+'k';
+                        }else if(value <1000){
+                            value = value;
+                        }
+                        return value
                     }
                 },
                 axisLine: {
@@ -133,7 +154,7 @@ function showHalfYearP2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '压力：  ' + params.value;
                         }
@@ -189,7 +210,7 @@ function showHalfYearT1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -212,7 +233,7 @@ function showHalfYearT1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '温度：  ' + params.value;
                         }
@@ -268,7 +289,7 @@ function showHalfYearT2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -291,7 +312,7 @@ function showHalfYearT2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '温度：  ' + params.value;
                         }
@@ -347,7 +368,7 @@ function showHalfYearH1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -370,7 +391,7 @@ function showHalfYearH1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '湿度：  ' + params.value;
                         }
@@ -426,7 +447,7 @@ function showHalfYearH2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -449,7 +470,7 @@ function showHalfYearH2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '湿度：  ' + params.value;
                         }
@@ -505,7 +526,7 @@ function showHalfYearPM1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -528,7 +549,7 @@ function showHalfYearPM1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return 'PM10：  ' + params.value;
                         }
@@ -584,7 +605,7 @@ function showHalfYearPM2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -607,7 +628,7 @@ function showHalfYearPM2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return 'PM10：  ' + params.value;
                         }
@@ -635,10 +656,16 @@ function chartBME280_0(data) {
     var myChart = echarts.init(document.getElementById("chart_BME280_0"));   //chart_BME280_0是2018年上半年的压力随时间所在的div的id名
     option = {
         title: {
-            text: '时间-压力',
+            text: '时间-压力(单位:pa)',
             textStyle: {
                     color: '#ffffff'
             }
+        },
+        grid:{
+            x:40,
+            y:30,
+            x2:35,
+            y2:30,
         },
         tooltip: {
             trigger: 'none',
@@ -663,7 +690,7 @@ function chartBME280_0(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -672,10 +699,20 @@ function chartBME280_0(data) {
         },
             yAxis: {
                 type: 'value',
+                scale:true,
                 axisLabel: {
                     show: true,
                     textStyle: {
                         color: '#ffffff'
+                    },
+                    formatter: function(value,index){
+                        var value;
+                        if (value >=1000) {
+                            value = value/1000+'k';
+                        }else if(value <1000){
+                            value = value;
+                        }
+                        return value
                     }
                 },
                 axisLine: {
@@ -686,7 +723,7 @@ function chartBME280_0(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '压力：  ' + params.value;
                         }
@@ -719,6 +756,12 @@ function chartBME280_1(data) {
                     color: '#ffffff'
             }
         },
+        grid:{
+            x:35,
+            y:30,
+            x2:35,
+            y2:30,
+        },
         tooltip: {
             trigger: 'none',
             axisPointer: {
@@ -742,7 +785,7 @@ function chartBME280_1(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -765,7 +808,7 @@ function chartBME280_1(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '温度：  ' + params.value;
                         }
@@ -798,6 +841,12 @@ function chartBME280_2(data) {
                     color: '#ffffff'
             }
         },
+        grid:{
+            x:35,
+            y:30,
+            x2:35,
+            y2:30,
+        },
         tooltip: {
             trigger: 'none',
             axisPointer: {
@@ -821,7 +870,7 @@ function chartBME280_2(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -844,7 +893,7 @@ function chartBME280_2(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return '湿度：  ' + params.value;
                         }
@@ -877,6 +926,12 @@ function chartBME280_3(data) {
                     color: '#ffffff'
             }
         },
+        grid:{
+            x:35,
+            y:30,
+            x2:35,
+            y2:30,
+        },
         tooltip: {
             trigger: 'none',
             axisPointer: {
@@ -900,7 +955,7 @@ function chartBME280_3(data) {
             },
             axisPointer: {
                 label: {
-                    color:'red',
+                    color:'#ff0002',
                     formatter: function (params) {
                         return '时间：  ' + params.value;
                     }
@@ -923,7 +978,7 @@ function chartBME280_3(data) {
                 },
                 axisPointer: {
                     label: {
-                        color:'red',
+                        color:'#ff0002',
                         formatter: function (params) {
                             return 'PM10：  ' + params.value;
                         }
