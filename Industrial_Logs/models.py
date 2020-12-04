@@ -146,3 +146,39 @@ class BmeSds(models.Model):
     class Meta:
         managed = False
         db_table = 'bme_sds'
+
+class HdfsInformation(models.Model):
+    使用已配置容量 = models.CharField(max_length=30, blank=True, null=True)
+    当前容量 = models.CharField(max_length=30, blank=True, null=True)
+    dfs剩余的容量 = models.CharField(db_column='DFS剩余的容量', max_length=30, blank=True, null=True)
+    # Field name made lowercase.
+    dfs已使用容量 = models.CharField(db_column='DFS已使用容量', max_length=30, blank=True, null=True)
+    dfs已经使用的比率 = models.CharField(db_column='DFS已经使用的比率', max_length=30, blank=True, null=True)
+    处于复制下的块 = models.CharField(max_length=30, blank=True, null=True)
+    故障副本的块 = models.CharField(max_length=30, blank=True, null=True)
+    丢失的块 = models.CharField(max_length=30, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'hdfs_information'
+
+
+class HdfsTotal(models.Model):
+    集群状态健康 = models.CharField(max_length=30, blank=True, null=True)
+    集群总共文件大小 = models.CharField(max_length=30, blank=True, null=True)
+    field_集群有多少个目录 = models.CharField(db_column='集群有多少个目录', max_length=30, blank=True, null=True)
+    #Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
+    集群有多少个文件 = models.CharField(max_length=30, blank=True, null=True)
+    多少个数据块 = models.CharField(max_length=30, blank=True, null=True)
+    field_备份因子 = models.CharField(db_column='备份因子', max_length=30, blank=True, null=True)
+    # Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
+    最少复制的块数 = models.CharField(max_length=30, blank=True, null=True)
+    没备份的块有几个 = models.CharField(max_length=30, blank=True, null=True)
+    集群有多少数据节点 = models.CharField(max_length=30, blank=True, null=True)
+    集群有多少机架 = models.CharField(max_length=30, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'hdfs_total'
+
+

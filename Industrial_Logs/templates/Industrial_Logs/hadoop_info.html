@@ -1,7 +1,6 @@
 {% extends "Industrial_Logs/base.html" %}
 {% load bootstrap3 %}
 {% block header %}
-hadoop 信息
 {% endblock header %}
 {% block content %}
 
@@ -11,36 +10,45 @@ hadoop 信息
         <h1 style="width:85%; color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">hadoop 信息</h1>
 
      <div id="layer02" class="layer" style="height:15%;">
+{#            健康状态#}
             <div id="layer02_01" style="width:20%;">
                 <div class="layer02-data">
-                    <span style="font-size:16px;">健康</span>
+                    <span style="font-size:16px;" id="health_State">健康</span>
                 </div>
                 <canvas width="200" height="100"></canvas>
             </div>
+
+{#            集群目录个数#}
             <div id="layer02_02" style="width:20%;">
                 <div class="layer02-data">
-                    <span style="font-size:26px;">24</span>
+                    <span style="font-size:26px;" id="cluster_Dict"></span>
                     <span style="font-size:16px;">个</span>
                 </div>
                 <canvas width="200" height="100"></canvas>
             </div>
+
+{#            备份因子#}
             <div id="layer02_03" style="width:21%;">
                 <div class="layer02-data">
-                    <span style="font-size:26px;">1</span>
+                    <span style="font-size:26px;" id="backup_Factor"></span>
                     <span style="font-size:16px;">个</span>
                 </div>
                 <canvas width="200" height="100"></canvas>
             </div>
+
+{#         最少复制的块#}
             <div id="layer02_04" style="width:12%;">
                 <div class="layer02-data">
-                    <span style="font-size:26px;">0</span>
+                    <span style="font-size:26px;" id="min_Copy_block"></span>
                     <span style="font-size:16px;">块</span>
                 </div>
                 <canvas width="120" height="100"></canvas>
             </div>
+
+{#            集群节点个数#}
             <div id="layer02_05" style="width:12%;">
                 <div class="layer02-data">
-                    <span style="font-size:26px;">1</span>
+                    <span style="font-size:26px;" id="cluster_Node"></span>
                     <span style="font-size:16px;">个</span>
                 </div>
                 <canvas width="120" height="100"></canvas>
@@ -68,30 +76,51 @@ hadoop 信息
     </div>
    <script>
         $(function () {
-            //顶层数据
+            //顶层数据, 实例化顶层数据展示图
             drawLayer02Label($("#layer02_01 canvas").get(0), "集群健康状态", 80, 200);
             drawLayer02Label($("#layer02_02 canvas").get(0), "集群目录", 80, 300);
             drawLayer02Label($("#layer02_03 canvas").get(0), "备份因子", 80, 400);
             drawLayer02Label($("#layer02_04 canvas").get(0), "最少复制的块数", 50, 200);
             drawLayer02Label($("#layer02_05 canvas").get(0), "集群节点个数", 40, 200);
 
-            //左上
-            left_up();
-            //左下
-            left_down();
-
-            //中心图
-            center();
-
-            //右上
-            right_up();
-
-            //右下
-            right_down();
-
-
-
-   
         })
+    </script>
+    <script>
+    $(function () {
+        $.ajax({
+				url: "/get_HDFS_info",
+				type: "POST",
+                async: true,
+                cache:false,
+				dataType: "json", //返回数据格式为json
+				success: function(data) {//请求成功完成后要执行的方法
+                    console.log(data);
+                    //左上
+                    left_up(data);
+                    //左下
+                    left_down();
+
+                    //中心图
+                    center(data);
+
+                    //右上
+                    right_up(data);
+
+                    //右下
+                    right_down();
+
+                    var cluster_dict = data["集群有多少个目录"][0];
+                    $("#cluster_Dict").text(cluster_dict);  //集群目录
+                    $("#health_State").text(data["集群状态健康"][0]);  //健康状态
+                    $("#backup_Factor").text(data["备份因子"][0]);  //备份因子
+                    $("#min_Copy_block").text(data["最少复制的块数"][0]);  //最少复制的块数
+                    $("#cluster_Node").text(data["集群有多少数据节点"][0]);  //集群节点个数
+
+
+				}
+        });
+        {#var cluster_dict = 11;#}
+        {#$("#cluster_dict").text(cluster_dict);#}
+    })
     </script>
 {% endblock content %}
