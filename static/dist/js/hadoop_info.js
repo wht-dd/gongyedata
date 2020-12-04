@@ -179,13 +179,13 @@ function center(data) {
 
 function right_up(data) {
     var myChart = echarts.init(document.getElementById("right_up"));
-   option = {
+ option = {
        title: {
            text: '块',
            textStyle: {
                color: '#ffffff'
            }
-       },
+    },
 
     tooltip: {
         trigger: 'item',
@@ -202,7 +202,7 @@ function right_up(data) {
     },
     series: [
         {
-            name: '块状况',
+            name: '访问来源',
             type: 'pie',
             radius: '55%',
             center: ['50%', '50%'],
@@ -210,6 +210,7 @@ function right_up(data) {
                 {value: data["处于复制下的块"], name: '处于复制下的块 '},
                 {value: data["故障副本的块"], name: '故障副本的块'},
                 {value: data["丢失的块"], name: '丢失的块'}
+
             ].sort(function (a, b) { return a.value - b.value; }),
             roseType: 'radius',
             label: {
@@ -225,12 +226,9 @@ function right_up(data) {
             },
             itemStyle: {
                 color: '#24c22a',
-                // color1: '#fffb09',
-                // color2:'#d80400',
                 shadowBlur: 200,
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
             },
-
             animationType: 'scale',
             animationEasing: 'elasticOut',
             animationDelay: function (idx) {
