@@ -2,55 +2,56 @@
 {% endblock header %} P_TH{% block content %}
 
     <script src="{{STATIC_URL}}dist/js/P_TH.js"></script>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/pageStyle.css" charset="utf-8">
 
-    <div id="back" class="main" style="height:90%;">
-        <h1 style="width:85%; color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;">时间-压力/温度/湿度/PM(环比）</h1>
-        <div style=" border:2px solid red; width:80%; height: 95%;margin:0px 40px" id=""  class="chart-container">
-            <div style=" border:2px solid red; height: 65%;margin:0px" id="box1"  class="chart-container" name="box">春
+    <div id="back" class="main">
+        <h1 style="width:85%; color:wheat;text-align: center;font-family:cursive;font-weight:700;top:-20px;position: relative;top: 10px;margin-left: auto;margin-right: auto;">时间-压力/温度/湿度/PM(环比）</h1>
+        <div style="width:80%; height: 85%;margin-left: auto;margin-right: auto;" id="all"  class="chart-container">
+            <div style="height: 65%;margin:0px" id="box1"  class="chart-container" name="box">春
                 <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showC(0)">温度</button>
-                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showC(1)">温度</button>
+                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showC(1)">湿度</button>
                 <button style="float:right; margin:10px 5px 0px 15px; color:white;display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showC(2)">压力</button>
                 <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block;width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showC(3)">PM</button>
                 <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="C_0"  class="chart-container" name="boxC">春/温度</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="C_1"  class="chart-container"name="boxC">春/湿度</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="C_1"  class="chart-container" name="boxC">春/湿度</div>
                 <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="C_2"  class="chart-container" name="boxC">春/压力</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="C_3"  class="chart-container"name="boxC">春/PM</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="C_3"  class="chart-container" name="boxC">春/PM</div>
             </div>
-            <div style=" border:2px solid red; height: 65%;margin:0px; display: none" id="box2"  class="chart-container" name="box">夏
+            <div style=" height: 65%;margin:0px; display: none" id="box2"  class="chart-container" name="box">夏
                 <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showX(0)">温度</button>
-                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showX(1)">温度</button>
+                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showX(1)">湿度</button>
                 <button style="float:right; margin:10px 5px 0px 15px; color:white;display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showX(2)">压力</button>
                 <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showX(3)">PM</button>
-            <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="X_0"  class="chart-container" name="boxX">夏/温度</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="X_1"  class="chart-container"name="boxX">夏/湿度</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="X_2"  class="chart-container" name="boxX">夏/压力</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="X_3"  class="chart-container"name="boxX">夏/PM</div>
+            <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="X_0"  class="chart-container" name="boxX"onclick="show(1)">夏/温度</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="X_1"  class="chart-container" name="boxX" onclick="show(1)">夏/湿度</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="X_2"  class="chart-container" name="boxX" onclick="show(1)">夏/压力</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="X_3"  class="chart-container" name="boxX" onclick="show(1)">夏/PM</div>
             </div>
-            <div style=" border:2px solid red; height: 65%;margin:0px; display: none" id="box3"  class="chart-container" name="box">秋
+            <div style="height: 65%;margin:0px; display: none" id="box3"  class="chart-container" name="box">秋
                 <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showQ(0)">温度</button>
-                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showQ(1)">温度</button>
+                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showQ(1)">湿度</button>
                 <button style="float:right; margin:10px 5px 0px 15px; color:white;display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showQ(2)">压力</button>
                 <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showQ(3)">PM</button>
-            <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="Q_0"  class="chart-container" name="boxQ">秋/温度</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="Q_1"  class="chart-container"name="boxQ">秋/湿度</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="Q_2"  class="chart-container" name="boxQ">秋/压力</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="Q_3"  class="chart-container"name="boxQ">秋/PM</div>
+            <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="Q_0"  class="chart-container" name="boxQ" onclick="show(1)">秋/温度</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="Q_1"  class="chart-container"  name="boxQ" onclick="show(1)">秋/湿度</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="Q_2"  class="chart-container" name="boxQ" onclick="show(1)">秋/压力</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="Q_3"  class="chart-container" name="boxQ" onclick="show(1)">秋/PM</div>
             </div>
-            <div style=" border:2px solid red; height: 65%;margin:0px; display: none" id="box4"  class="chart-container" name="box">冬
+            <div style="height: 65%;margin:0px; display: none" id="box4"  class="chart-container" name="box">冬
                 <button style="float:right; margin:10px 30px 0px 15px; color:white;display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showD(0)">温度</button>
-                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showD(1)">温度</button>
+                <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showD(1)">湿度</button>
                 <button style="float:right; margin:10px 5px 0px 15px; color:white;display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px;" onclick="showD(2)">压力</button>
                 <button style="float:right;  margin:10px 5px 0px 15px; color:white; display:inline-block; width:50px; height:30px; background: #0e5b44;border-radius: 10px" onclick="showD(3)">PM</button>
-            <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="D_0"  class="chart-container" name="boxD">冬/温度</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="D_1"  class="chart-container"name="boxD">冬/湿度</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="D_2"  class="chart-container" name="boxD">冬/压力</div>
-                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="D_3"  class="chart-container"name="boxD">冬/PM</div>
+            <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;" id="D_0"  class="chart-container" name="boxD" onclick="show(1)">冬/温度</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="D_1"  class="chart-container" name="boxD" onclick="show(1)">冬/湿度</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="D_2"  class="chart-container" name="boxD" onclick="show(1)">冬/压力</div>
+                <div style="margin: 30px 0px 0px 0px; border:2px solid #666; width:99%;height: 85%;display: none" id="D_3"  class="chart-container" name="boxD" onclick="show(1)">冬/PM</div>
             </div>
 
-            <div style=" border:2px solid red; height: 35%;margin:0px" id=""  class="chart-container">
-                <div style="border:2px solid #666;width:33%; height: 100%;float:left;margin:0px;" id=""  class="chart-container" onclick="show(2)">夏季</div>
-                <div style="border:2px solid #666;width:33%; height: 100%;float:left;margin:0px;" id=""  class="chart-container" onclick="show(3)">秋季</div>
-                <div style="border:2px solid #666;width:33%; height: 100%;float:left;margin:0px;" id=""  class="chart-container" onclick="show(4)">冬季</div>
+            <div style="height: 35%;margin:0px" id=""  class="chart-container">
+                <div style="border:2px solid #666;width:33%; height: 100%;float:left;margin:0px;" id="X"  class="chart-container" onclick="show(2)">夏季</div>
+                <div style="border:2px solid #666;width:33%; height: 100%;float:left;margin:0px;" id="Q"  class="chart-container" onclick="show(3)">秋季</div>
+                <div style="border:2px solid #666;width:32%; height: 100%;float:left;margin:0px;" id="D"  class="chart-container" onclick="show(4)">冬季</div>
             </div>
         </div>
     </div>
@@ -61,7 +62,7 @@
 {#    </div>#}
     <script>
     var  width = $("#C_0").width();
-var  height = $("#C_0").height();
+    var  height = $("#C_0").height();
 $("#C_1").css("width", width).css("height", height);
 $("#C_2").css("width", width).css("height", height);
 $("#C_3").css("width", width).css("height", height);

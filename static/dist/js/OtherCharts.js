@@ -84,7 +84,6 @@ function realTemAndHum_data(data) {
     //     data.push(randomData());
     //     data2.push(randomData2());
     // }
-
     //指定图表的配置项和数据
             option = {
                 title: {
@@ -159,7 +158,7 @@ function realTemAndHum_data(data) {
 						large: false,
                         effect: { show: false },
                         itemStyle:{
-                                        color:'red'
+                                        color:'#ff0002'
                                         },
 						data :
 						(function(){
@@ -287,7 +286,9 @@ function realTemAndHum_data(data) {
             }, 10000);
 
     myChart.setOption(option);
-    
+    window.addEventListener("resize",function(){
+	myChart.resize();
+});
 }
 
 

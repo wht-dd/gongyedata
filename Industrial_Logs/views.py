@@ -1,16 +1,18 @@
 ﻿import json
 import datetime
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render, HttpResponse
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import gydb
 from .models import Topic
-from .models import DevTem,DeviceInfo,TemHum, Bme280Sof, Sds011Sof,SensorCount
+from .models import DevTem, DeviceInfo, TemHum, Bme280Sof, Sds011Sof, SensorCount
 from .forms import TopicForm, EntryForm, Entry
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
+from pprint import pprint
 import overtake
+
 
 
 @login_required
@@ -118,6 +120,7 @@ def realdev_tem(request):
 # 压力-温湿度页面
 def P_TH(request):
     return render(request, 'Industrial_Logs/P_TH.html')
+
 
 @login_required
 # hadoop信息页面
@@ -422,6 +425,7 @@ def getHPM(request, rows=3000):
     # print(dic)
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
+
 @csrf_exempt
 @login_required
 def getPPM(request, rows=3000):
@@ -445,7 +449,6 @@ def getPPM(request, rows=3000):
     # print(dic)
     return HttpResponse(json.dumps(dic, ensure_ascii=False))
 import pymysql
-
 
 
 @csrf_exempt
@@ -513,8 +516,6 @@ def getRealData(request, rows=300):
         return HttpResponse(json.dumps(dic, ensure_ascii=False))
 
     # print(dic)
-
-
 
 
 @csrf_exempt
@@ -642,3 +643,53 @@ def get_data_halfYear(request):
 
         # pprint(data)
     return HttpResponse(json.dumps(data, ensure_ascii=False))
+
+@csrf_exempt
+@login_required
+def get_HDFS_info(request, rows=5000):
+    if request.method == 'POST':
+        rows = request.POST.get('rows', 5000)
+
+    with connection.cursor() as cur:
+        cur.execute("""
+       select a.使用已配置容量,a.当前容量,a.DFS已使用容量,a.DFS已经使用的比率,a.处于复制下的块,a.故障副本的块,a.丢失的块, b.集群状态健康,b.集群有多少个目录,b.多少个数据块,b.备份因子,b.最少复制的块数,b.集群有多少数据节点
+       from hdfs_information as a, hdfs_total as b;
+        """)
+        result = cur.fetchall()
+        dic = {}
+        # a表
+        dic["使用已配置容量"] = list()
+        dic["当前容量"] = list()
+        dic["DFS已使用容量"] = list()
+        dic["DFS已经使用的比率"] = list()
+        dic["处于复制下的块"] = list()
+        dic["故障副本的块"] = list()
+        dic["丢失的块"] = list()
+        # b表
+        dic["集群状态健康"] = list()
+        dic["集群有多少个目录"] = list()
+        dic["多少个数据块"] = list()
+        dic["备份因子"] = list()
+        dic["最少复制的块数"] = list()
+        dic["集群有多少数据节点"] = list()
+        for row in result:
+            dic["使用已配置容量"].append(row[0][:-3])
+            dic["当前容量"].append(row[1][:-3])
+            dic["DFS已使用容量"].append(row[2][:-3])
+            dic["DFS已经使用的比率"].append(row[3][:-1])
+            dic["处于复制下的块"].append(row[4])
+            dic["故障副本的块"].append(row[5])
+            dic["丢失的块"].append(row[6])
+            # b表
+            dic["集群状态健康"].append(row[7])
+            dic["集群有多少个目录"].append(row[8])
+            dic["多少个数据块"].append(row[9])
+            dic["备份因子"].append(row[10])
+            dic["最少复制的块数"].append(row[11])
+            dic["集群有多少数据节点"].append(row[12])
+    # print(dic)
+    return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
+
+
+
