@@ -124,9 +124,10 @@
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link ">
-                                <i class="fa fa-microchip"></i>
+                                <i class="fa fa-microchip nav-icon"></i>
                                 <p>
                                     传感器
                                     <i class="right fas fa-angle-left"></i>
@@ -157,11 +158,10 @@
                                     <a href="{% url 'Industrial_Logs:Sensor_Proportion' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
 {#                                        <i class="fa fa-pie-chart"></i>#}
-                                        <i class="fa fa-pie-chart"></i>
-                                        <p>传感器信息</p>
+                                        <i class="fa fa-pie-chart nav-icon"></i>
+                                        <p>传感器位置</p>
                                     </a>
                                 </li>
-
 
                             </ul>
 
@@ -169,7 +169,7 @@
 
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link ">
-                                <i class="fa fa-sitemap"></i>
+                                <i class="fa fa-sitemap nav-icon"></i>
                                 <p>
                                     Hadoop平台
                                     <i class="right fas fa-angle-left"></i>
@@ -179,38 +179,11 @@
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:hadoop_info' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="fa fa-file"></i>
-                                        <p>原始数据容量</p>
+                                        <i class="fa fa-file nav-icon"></i>
+                                        <p>Hadoop平台信息</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
-                                        <!-- 添加active类菜单高亮 -->
-                                        <i class="fa fa-file-archive-o"></i>
-                                        <p>预处理后容量</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
-                                        <!-- 添加active类菜单高亮 -->
-                                        <i class="fa fa-battery-three-quarters"></i>
-                                        <p>HDFS的状态</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
-                                        <!-- 添加active类菜单高亮 -->
-                                        <i class="fa fa-cube"></i>
-                                        <p>Namenode</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'Industrial_Logs:realdev_tem' %}" class="nav-link ">
-                                        <!-- 添加active类菜单高亮 -->
-                                        <i class="fa fa-cubes"></i>
-                                        <p>Datanode</p>
-                                    </a>
-                                </li>
+
 
                             </ul>
 
@@ -218,7 +191,7 @@
 
                         <li class="nav-item has-treeview menu-open" >
                             <a href="#" class="nav-link ">
-                                <i class="fa fa-industry"></i>
+                                <i class="fa fa-industry nav-icon"></i>
                                 <p>
                                     历史数据分析
                                     <i class="right fas fa-angle-left"></i>
@@ -228,22 +201,22 @@
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:BME280' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="fa fa-bar-chart"></i>
-                                        <p>时间-压力/温湿度/PM（同比）</p>
+                                        <i class="fa fa-bar-chart nav-icon"></i>
+                                        <p>压力/温湿度/PM（同比）</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:PTH_PM' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="fa fa-area-chart"></i>
+                                        <i class="fa fa-area-chart nav-icon"></i>
                                         <p>温湿度-PM/压力</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'Industrial_Logs:P_TH' %}" class="nav-link ">
                                         <!-- 添加active类菜单高亮 -->
-                                        <i class="fa fa-thermometer-three-quarters"></i>
-                                        <p>时间-压力/温湿度/PM（环比）</p>
+                                        <i class="fa fa-thermometer-three-quarters nav-icon"></i>
+                                        <p>压力/温湿度/PM（环比）</p>
                                     </a>
                                 </li>
 
@@ -273,7 +246,7 @@
 {#                        </li>#}
                         <li class="nav-item has-treeview menu-open">
                              <a href="{% url 'Industrial_Logs:realTemAndHum' %}" class="nav-link ">
-                                <i class="fa fa-line-chart"></i>
+                                <i class="fa fa-line-chart nav-icon"></i>
                                 <p>
 
                                     实时数据展示
