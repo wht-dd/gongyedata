@@ -202,7 +202,7 @@ function right_up(data) {
     },
     series: [
         {
-            name: '访问来源',
+            name: '块状况',
             type: 'pie',
             radius: '55%',
             center: ['50%', '50%'],
